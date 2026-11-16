@@ -1,2 +1,30 @@
-# c2c-bike-trend-tracker
-4-Platform Used Motorcycle Competitor Trend &amp; RAW Data Tracker (Reitwagen, Passo, Batumae, K Car)
+# 4대 오토바이 플랫폼 중고 매물 일별 동향 & RAW 데이터 트래커
+
+매일 한국시간(KST) **오전 08:00 정각**에 **GitHub Actions 클라우드 스케줄러**가 로컬 PC 없이 자동으로 실행되어 오토바이 중고 플랫폼들의 등록대수·신규등록·판매소진 및 포트폴리오(배기량 300cc 기준, 브랜드/제조사, 판매가격, 지역, 인기모델)를 동일 조건(Apple-to-Apple)으로 수집·기록합니다.
+
+## 추적 대상 플랫폼 (4개사 비교 양식)
+1. **라이트바겐** (`https://www.reitwagen.co.kr/`)
+   - 외부 파쏘 크롤링(`PASSO`)·신차(`BRANDNEW`)·직영인증(`BAREE_CERTIFIED`)을 분리한 **순수 라이트바겐 자체 등록 중고매물(`BAREE`)** 기준
+2. **파쏘 바이크** (`http://bike.passo.co.kr/bike/`)
+   - 신차 프로모션(`product_state=1`) 및 상사/센터(`family_idx>0`)를 제외한 **개인 직거래 중고매물(`state=0 & product_state=2 & family_idx=0`) 100% 전수** 기준 (센터 포함 전체 중고대수 병기)
+3. **바튜매 (네이버 카페)** (`https://cafe.naver.com/bikecargogo`)
+   - 제휴업체 일일 반복 도배 게시판(272·302)을 제외한 **개인 판매 게시판(351: 125cc초과, 352: 125cc이하) 및 안전결제 장터(133·144)의 최근 30일 활성 매물 전수** 기준
+   - **네이버 로그인 없이** 공개 목록 API(`ArticleListV2dot1.json`)로 매일 100% 자동 수집되며, 안전결제 `cost` 필드 및 제목 내 가격 표기분으로 가격 통계를 산출합니다. (선택사항: GitHub Repository Secrets에 `NAVER_NID_AUT`, `NAVER_NID_SES` 추가 시 본문 내부 가격까지 추가 보강)
+4. **케이카 (K Car)**
+   - 현재 오토바이 서비스 미운영 상태이므로 대시보드 및 CSV에 **별도 비교 칸만 잡아두고 숫자는 일절 기재하지 않음(`-` 처리)**
+
+## 주요 분석 항목
+- **상시 모수 추이**: 전체 등록대수 및 일자별 변화 추이 (`전체` / `300cc 이하 (~299cc)` / `300cc 이상 (300cc~)` 전환)
+- **기간 연동 실적**: 달력 선택 기간 내 **신규등록대수 · 신규판매대수(소진/완료) · 판매회전율(%)**
+- **포트폴리오 5대 비교**:
+  1. **배기량 구분 비중** (`300cc 이하` vs `300cc 이상`)
+  2. **브랜드 / 제조사 Top 8** (혼다, 야마하, BMW, 할리데이비슨, 가와사키, 스즈키, 두카티, 베스파 등)
+  3. **판매가격대 분포** (`300만원 미만`, `300~600만원`, `600~1,000만원`, `1,000~2,000만원`, `2,000만원 이상`)
+  4. **지역(시·도) 분포**
+  5. **인기 모델 Top 10**
+
+## 주요 산출물
+- **통합 웹 대시보드**: [`index.html`](./index.html) / [`competitor_trend.html`](./competitor_trend.html)
+- **일자별 요약 누적 CSV**: [`competitor_trend.csv`](./competitor_trend.csv)
+- **개별 바이크 상세 RAW 데이터**: [`raw_data/raw_bikes_latest.csv`](./raw_data/raw_bikes_latest.csv)
+- **일별 고유 매물 ID 스냅샷**: [`snapshots/`](./snapshots/)
