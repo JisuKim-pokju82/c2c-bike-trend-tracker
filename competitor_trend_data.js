@@ -1,9 +1,9 @@
-// Auto-generated 4-Platform Used Motorcycle Apple-to-Apple Intelligence Bundle (2026-11-16 18:38:19)
-window.COMPETITOR_TREND_LAST_UPDATED = "2026-11-16 18:38:19";
+// Auto-generated 4-Platform Used Motorcycle Apple-to-Apple Intelligence Bundle (2026-11-16 18:40:51)
+window.COMPETITOR_TREND_LAST_UPDATED = "2026-11-16 18:40:51";
 window.COMPETITOR_TREND_DATA = [
     {
         "date":  "2026-11-16",
-        "updatedAt":  "2026-11-16 18:38:19",
+        "updatedAt":  "2026-11-16 18:40:51",
         "rawBikeCount":  6837,
         "reitwagenCount":  11532,
         "reitwagenUnder300Count":  4455,
@@ -15,12 +15,12 @@ window.COMPETITOR_TREND_DATA = [
         "reitwagenTurnoverPct":  0,
         "reitwagenAvgPrice":  1051,
         "reitwagenDiff":  0,
-        "passoCount":  10110,
+        "passoCount":  10109,
         "passoUnder300Count":  2824,
-        "passoOver300Count":  7286,
-        "passoAllUsedCount":  10110,
-        "passoOnSaleCount":  10110,
-        "passoNewCount":  357,
+        "passoOver300Count":  7285,
+        "passoAllUsedCount":  10109,
+        "passoOnSaleCount":  10109,
+        "passoNewCount":  356,
         "passoSoldCount":  0,
         "passoTurnoverPct":  0,
         "passoAvgPrice":  1254,
@@ -28,9 +28,9 @@ window.COMPETITOR_TREND_DATA = [
         "batumaeCount":  5237,
         "batumaeUnder300Count":  1019,
         "batumaeOver300Count":  4218,
-        "batumaeTraded30dCount":  731,
+        "batumaeTraded30dCount":  729,
         "batumaeOnSaleCount":  5237,
-        "batumaeNewCount":  339,
+        "batumaeNewCount":  341,
         "batumaeSoldCount":  1,
         "batumaeTurnoverPct":  0.02,
         "batumaeAvgPrice":  1011,
@@ -48,7 +48,7 @@ window.COMPETITOR_TREND_DATA = [
     }
 ];
 window.COMPETITOR_PORTFOLIO_DATA = {
-    "updatedAt":  "2026-11-16 18:38:19",
+    "updatedAt":  "2026-11-16 18:40:51",
     "reitwagen":  {
                       "sampleSize":  800,
                       "pricedSampleSize":  800,
@@ -179,7 +179,7 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                   "sampleSize":  800,
                   "pricedSampleSize":  800,
                   "under300Count":  2824,
-                  "over300Count":  7286,
+                  "over300Count":  7285,
                   "under300Ratio":  27.9,
                   "over300Ratio":  72.1,
                   "avgPriceManwon":  1254,
@@ -246,11 +246,11 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                                         "count":  13
                                     },
                                     {
-                                        "name":  "1000 RR",
+                                        "name":  "슈퍼 커브",
                                         "count":  12
                                     },
                                     {
-                                        "name":  "슈퍼 커브",
+                                        "name":  "1000 RR",
                                         "count":  12
                                     },
                                     {
@@ -262,7 +262,7 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                                         "count":  10
                                     },
                                     {
-                                        "name":  "스즈끼 버그만",
+                                        "name":  "MT 03",
                                         "count":  9
                                     }
                                 ],
@@ -277,11 +277,11 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                                     },
                                     {
                                         "name":  "BMW",
-                                        "count":  89
+                                        "count":  88
                                     },
                                     {
                                         "name":  "야마하",
-                                        "count":  85
+                                        "count":  86
                                     },
                                     {
                                         "name":  "스즈키",
@@ -303,7 +303,7 @@ window.COMPETITOR_PORTFOLIO_DATA = {
               },
     "batumae":  {
                     "sampleSize":  5237,
-                    "pricedSampleSize":  1338,
+                    "pricedSampleSize":  1340,
                     "under300Count":  1019,
                     "over300Count":  4218,
                     "under300Ratio":  19.5,
@@ -312,14 +312,14 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                     "priceBands":  {
                                        "300만원 미만":  214,
                                        "300~600만원":  310,
-                                       "600~1,000만원":  329,
-                                       "1,000~2,000만원":  318,
+                                       "600~1,000만원":  330,
+                                       "1,000~2,000만원":  319,
                                        "2,000만원 이상":  167
                                    },
                     "topRegions":  [
                                        {
                                            "name":  "경기",
-                                           "count":  1094
+                                           "count":  1093
                                        },
                                        {
                                            "name":  "서울",
@@ -335,7 +335,7 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                                        },
                                        {
                                            "name":  "충남",
-                                           "count":  160
+                                           "count":  161
                                        },
                                        {
                                            "name":  "대구",
@@ -347,7 +347,7 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                                        },
                                        {
                                            "name":  "강원",
-                                           "count":  122
+                                           "count":  121
                                        }
                                    ],
                     "topModels":  [
@@ -399,7 +399,7 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                                       },
                                       {
                                           "name":  "BMW",
-                                          "count":  844
+                                          "count":  843
                                       },
                                       {
                                           "name":  "야마하",
@@ -407,7 +407,7 @@ window.COMPETITOR_PORTFOLIO_DATA = {
                                       },
                                       {
                                           "name":  "할리데이비슨",
-                                          "count":  501
+                                          "count":  502
                                       },
                                       {
                                           "name":  "가와사키",
@@ -433,6 +433,25 @@ window.COMPETITOR_PORTFOLIO_DATA = {
              }
 };
 window.COMPETITOR_RAW_PREVIEW = [
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "라이트바겐",
+        "bikeId":  "RW118698",
+        "cc":  1202,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "할리데이비슨",
+        "model":  "아이언 1200",
+        "fullTitle":  "할리데이비슨 아이언 1200",
+        "year":  "2020",
+        "mileageKm":  10999,
+        "priceManwon":  1250,
+        "priceBand":  "1,000~2,000만원",
+        "sido":  "서울",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 18:38",
+        "url":  "https://www.reitwagen.co.kr/products/detail/118698"
+    },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "라이트바겐",
@@ -489,25 +508,6 @@ window.COMPETITOR_RAW_PREVIEW = [
         "status":  "판매중",
         "registeredAt":  "2026-11-16 18:37",
         "url":  "https://www.reitwagen.co.kr/products/detail/117065"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "라이트바겐",
-        "bikeId":  "RW118698",
-        "cc":  1202,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "할리데이비슨",
-        "model":  "아이언 1200",
-        "fullTitle":  "할리데이비슨 아이언 1200",
-        "year":  "2020",
-        "mileageKm":  10999,
-        "priceManwon":  1250,
-        "priceBand":  "1,000~2,000만원",
-        "sido":  "서울",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 18:36",
-        "url":  "https://www.reitwagen.co.kr/products/detail/118698"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -4616,7 +4616,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSzfJZd4A5ZDzLBrL8ySsQ1",
+        "bikeId":  "PS1145717",
         "cc":  948,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "가와사키",
@@ -4630,12 +4630,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:38",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145717\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSlQ1ZuLkIr-soTqk1S4jzN",
+        "bikeId":  "PS1145718",
         "cc":  659,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "아프릴리아",
@@ -4649,12 +4649,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:38",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145718\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS2QXef5rOZUDzDfO31JKct",
+        "bikeId":  "PS1145719",
         "cc":  895,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -4668,12 +4668,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:38",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145719\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSWvRH0bACf-XkQVsxqcpPx",
+        "bikeId":  "PS1145720",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -4687,7 +4687,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:38",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145720\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -4749,7 +4749,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PScK_eXSOONsZ4EqIH7aUEs",
+        "bikeId":  "PS1143656",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -4763,12 +4763,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1143656\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSMukW56oJwD4vqcfXyUbBT",
+        "bikeId":  "PS1099053",
         "cc":  1649,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -4782,12 +4782,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1099053\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSO3qRXeRf1TqmxpUvXuqRi",
+        "bikeId":  "PS1095724",
         "cc":  1300,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -4801,7 +4801,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1095724\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -4825,7 +4825,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSjVsGLWCDrTuZpbIa7Helf",
+        "bikeId":  "PS1097806",
         "cc":  890,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -4839,12 +4839,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1097806\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSQui3lTKlyptFKxi7ZOFW7",
+        "bikeId":  "PS1118081",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -4858,12 +4858,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1118081\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSxgd6niPn-s24O8PxM-H57",
+        "bikeId":  "PS1120480",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "야마하",
@@ -4877,12 +4877,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1120480\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSIAhp5jKIgQL58JBICAcx1",
+        "bikeId":  "PS1120671",
         "cc":  155,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "야마하",
@@ -4896,12 +4896,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1120671\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSNdq-2v1YGyoHPutZsTfS0",
+        "bikeId":  "PS1127738",
         "cc":  890,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -4915,12 +4915,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1127738\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSrOrumHna5_fycyxBCHnAR",
+        "bikeId":  "PS1132485",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -4934,12 +4934,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1132485\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSSbMBHamQ7aJzt22vAyNWP",
+        "bikeId":  "PS1134430",
         "cc":  890,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -4953,12 +4953,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1134430\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSjqv2iqjHVnvpS79R3ed2d",
+        "bikeId":  "PS1145721",
         "cc":  1868,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -4972,7 +4972,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 17:37",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145721\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -4996,45 +4996,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSVLApZaOcXcVu89nEU0ZBq",
-        "cc":  1868,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "할리데이비슨",
-        "model":  "팻보이",
-        "fullTitle":  "할리데이비슨 팻보이",
-        "year":  "2012",
-        "mileageKm":  48482,
-        "priceManwon":  1200,
-        "priceBand":  "1,000~2,000만원",
-        "sido":  "인천",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 17:31",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PSw47jeKWu-ZjTzBdPWILQM",
-        "cc":  1868,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "할리데이비슨",
-        "model":  "로드 글라이드",
-        "fullTitle":  "할리데이비슨 로드 글라이드 스페셜",
-        "year":  "2023",
-        "mileageKm":  41000,
-        "priceManwon":  3500,
-        "priceBand":  "2,000만원 이상",
-        "sido":  "서울",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 17:31",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PSSkypq7LFEOWD2PBA7sKlZ",
+        "bikeId":  "PS1145705",
         "cc":  1330,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "기타",
@@ -5048,107 +5010,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145705\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSolV1hcGKio-yd198z47tA",
-        "cc":  1833,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "혼다",
-        "model":  "골드윙 투어",
-        "fullTitle":  "혼다 골드윙 투어 DCT 에어백",
-        "year":  "2019",
-        "mileageKm":  62268,
-        "priceManwon":  2290,
-        "priceBand":  "2,000만원 이상",
-        "sido":  "경기",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PSc57qW9_oPHPfsRijGbmFU",
-        "cc":  1037,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "스즈키",
-        "model":  "스즈끼 브이",
-        "fullTitle":  "스즈끼 브이 스트롬 1050 XT",
-        "year":  "2022",
-        "mileageKm":  16667,
-        "priceManwon":  950,
-        "priceBand":  "600~1,000만원",
-        "sido":  "경기",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PS5kqp-_DcA7a32vlos0thD",
-        "cc":  955,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "두카티",
-        "model":  "파니갈레 V2",
-        "fullTitle":  "두카티 파니갈레 V2",
-        "year":  "2025",
-        "mileageKm":  11891,
-        "priceManwon":  1790,
-        "priceBand":  "1,000~2,000만원",
-        "sido":  "경기",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PSiZR1o9VoH5VuhOCTBGy3z",
-        "cc":  1584,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "할리데이비슨",
-        "model":  "헤리티지소프테일클래식",
-        "fullTitle":  "할리데이비슨 헤리티지소프테일클래식",
-        "year":  "2018",
-        "mileageKm":  27292,
-        "priceManwon":  2190,
-        "priceBand":  "2,000만원 이상",
-        "sido":  "경기",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PSObMGHMxLmAE4Fjk_i0oEL",
-        "cc":  599,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "야마하",
-        "model":  "YZF R6",
-        "fullTitle":  "야마하 YZF R6",
-        "year":  "2019",
-        "mileageKm":  65637,
-        "priceManwon":  790,
-        "priceBand":  "600~1,000만원",
-        "sido":  "경기",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PS3BS40EaTOGi-yvSM-h0W4",
+        "bikeId":  "PS1145710",
         "cc":  399,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "가와사키",
@@ -5161,32 +5028,13 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sido":  "부산",
         "sellType":  "개인직거래",
         "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "registeredAt":  "2026-11-16 16:39",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145710\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSPV_lAVSPiTkBg8WD-4SPI",
-        "cc":  895,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "BMW",
-        "model":  "900",
-        "fullTitle":  "BMW F 900 R",
-        "year":  "2022",
-        "mileageKm":  14497,
-        "priceManwon":  690,
-        "priceBand":  "600~1,000만원",
-        "sido":  "경기",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "파쏘바이크",
-        "bikeId":  "PSHLI6Rw3f7laQn4b0H5J-r",
+        "bikeId":  "PS1131464",
         "cc":  1746,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -5199,13 +5047,13 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sido":  "경기",
         "sellType":  "개인직거래",
         "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "registeredAt":  "2026-11-16 16:39",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1131464\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSJO9kXX2TK8odCGO344KcQ",
+        "bikeId":  "PS1134081",
         "cc":  1170,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -5218,8 +5066,8 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sido":  "경기",
         "sellType":  "개인직거래",
         "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "registeredAt":  "2026-11-16 16:39",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1134081\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -5237,13 +5085,13 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sido":  "서울",
         "sellType":  "개인직거래",
         "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
+        "registeredAt":  "2026-11-16 16:39",
         "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145711\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSqTb8-HHvMQSFhDX0ZgqOb",
+        "bikeId":  "PS1141065",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -5256,13 +5104,13 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sido":  "경기",
         "sellType":  "개인직거래",
         "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "registeredAt":  "2026-11-16 16:39",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1141065\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS597X-IEwhw_twTMp4ArEh",
+        "bikeId":  "PS1115934",
         "cc":  798,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -5275,13 +5123,146 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sido":  "경기",
         "sellType":  "개인직거래",
         "status":  "판매중",
-        "registeredAt":  "2026-11-16 16:32",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "registeredAt":  "2026-11-16 16:39",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1115934\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSNo3uv5cRDljpeUnNgTBkj",
+        "bikeId":  "PS1145712",
+        "cc":  1868,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "할리데이비슨",
+        "model":  "팻보이",
+        "fullTitle":  "할리데이비슨 팻보이",
+        "year":  "2012",
+        "mileageKm":  48482,
+        "priceManwon":  1200,
+        "priceBand":  "1,000~2,000만원",
+        "sido":  "인천",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 16:39",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145712\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1145713",
+        "cc":  1868,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "할리데이비슨",
+        "model":  "로드 글라이드",
+        "fullTitle":  "할리데이비슨 로드 글라이드 스페셜",
+        "year":  "2023",
+        "mileageKm":  41000,
+        "priceManwon":  3500,
+        "priceBand":  "2,000만원 이상",
+        "sido":  "서울",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 16:38",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145713\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1140789",
+        "cc":  1833,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "혼다",
+        "model":  "골드윙 투어",
+        "fullTitle":  "혼다 골드윙 투어 DCT 에어백",
+        "year":  "2019",
+        "mileageKm":  62268,
+        "priceManwon":  2290,
+        "priceBand":  "2,000만원 이상",
+        "sido":  "경기",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 16:32",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1140789\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1138803",
+        "cc":  1037,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "스즈키",
+        "model":  "스즈끼 브이",
+        "fullTitle":  "스즈끼 브이 스트롬 1050 XT",
+        "year":  "2022",
+        "mileageKm":  16667,
+        "priceManwon":  950,
+        "priceBand":  "600~1,000만원",
+        "sido":  "경기",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 16:32",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1138803\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1134077",
+        "cc":  955,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "두카티",
+        "model":  "파니갈레 V2",
+        "fullTitle":  "두카티 파니갈레 V2",
+        "year":  "2025",
+        "mileageKm":  11891,
+        "priceManwon":  1790,
+        "priceBand":  "1,000~2,000만원",
+        "sido":  "경기",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 16:32",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1134077\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1134537",
+        "cc":  1584,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "할리데이비슨",
+        "model":  "헤리티지소프테일클래식",
+        "fullTitle":  "할리데이비슨 헤리티지소프테일클래식",
+        "year":  "2018",
+        "mileageKm":  27292,
+        "priceManwon":  2190,
+        "priceBand":  "2,000만원 이상",
+        "sido":  "경기",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 16:32",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1134537\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1136345",
+        "cc":  599,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "야마하",
+        "model":  "YZF R6",
+        "fullTitle":  "야마하 YZF R6",
+        "year":  "2019",
+        "mileageKm":  65637,
+        "priceManwon":  790,
+        "priceBand":  "600~1,000만원",
+        "sido":  "경기",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 16:32",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1136345\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1117049",
         "cc":  1170,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -5295,7 +5276,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1117049\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -5319,7 +5300,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSr4DJ6i5hfJq2i_tcBz5WI",
+        "bikeId":  "PS1145699",
         "cc":  749,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -5333,12 +5314,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145699\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSKMul-AHiCwDCSkLwUWBRa",
+        "bikeId":  "PS1145708",
         "cc":  883,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -5352,7 +5333,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145708\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -5376,7 +5357,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS-DoJypGoyIEv3NMqif6ps",
+        "bikeId":  "PS1145709",
         "cc":  895,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -5390,12 +5371,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145709\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSPSHaWzIbkYrNyZAm2EwIL",
+        "bikeId":  "PS1106331",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "스즈키",
@@ -5409,7 +5390,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:18",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1106331\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -5471,7 +5452,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSl5TWKg65WKBqE_JfOhvWu",
+        "bikeId":  "PS1134668",
         "cc":  1000,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "기타",
@@ -5485,12 +5466,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1134668\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSXJx7nTPG-KnUzO-NGOdyY",
+        "bikeId":  "PS1112317",
         "cc":  1000,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "기타",
@@ -5504,12 +5485,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1112317\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSsQTwh7o87P5MkxwybuzMY",
+        "bikeId":  "PS1145706",
         "cc":  300,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "디엔에이(DNA/대림)",
@@ -5523,12 +5504,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:02",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145706\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSgC4gN66IfIdKweFhM82gA",
+        "bikeId":  "PS1139210",
         "cc":  1042,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "이탈젯/기타수입",
@@ -5542,12 +5523,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 16:02",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1139210\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSWkmDwVfStug9vP1AYx7gv",
+        "bikeId":  "PS1145696",
         "cc":  803,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -5561,12 +5542,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:54",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145696\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSR-6zfiv8QqZUKr6LcvMXD",
+        "bikeId":  "PS1136154",
         "cc":  1832,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -5580,12 +5561,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:54",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1136154\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSCscLCV_yE8UuB3ZvEn97a",
+        "bikeId":  "PS1068198",
         "cc":  1811,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "인디언",
@@ -5599,12 +5580,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1068198\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSdIQ_02jzpzc0jRtx_aF1f",
+        "bikeId":  "PS1140275",
         "cc":  636,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "가와사키",
@@ -5618,12 +5599,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1140275\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSjBd_9o_p0hCyQVz8jnjXw",
+        "bikeId":  "PS1145014",
         "cc":  1200,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -5637,12 +5618,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145014\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PShoLXkBTuC2_ysB-5mIWFk",
+        "bikeId":  "PS1145704",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -5656,7 +5637,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145704\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -5680,7 +5661,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS_NBZwODpWPZco44QQHo71",
+        "bikeId":  "PS1145694",
         "cc":  1103,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -5694,12 +5675,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:48",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145694\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSQU0bkeTNCbqGAV8Vpv9VC",
+        "bikeId":  "PS1145695",
         "cc":  803,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -5713,12 +5694,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:48",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145695\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSXpkG7zTw83jUOR6nYBAgY",
+        "bikeId":  "PS1145701",
         "cc":  330,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -5732,12 +5713,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:39",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145701\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145702",
+        "bikeId":  "PSh1Dvm5gGgqtVOQ8NOpfH8",
         "cc":  745,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -5751,7 +5732,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:39",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145702\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -5775,7 +5756,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145693",
+        "bikeId":  "PSOsimM9yJie84G6gTrUaJD",
         "cc":  1868,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -5789,12 +5770,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:38",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145693\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1132052",
+        "bikeId":  "PSlzG9YLUvudEoMhMKt1py5",
         "cc":  499,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "킴코",
@@ -5808,7 +5789,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:38",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1132052\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -5832,7 +5813,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145691",
+        "bikeId":  "PSn3UM0OyZTegX6_LvOBPmJ",
         "cc":  530,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -5846,12 +5827,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:33",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145691\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145692",
+        "bikeId":  "PSBWyIS_8TWweQndaTwKfP8",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "스즈키",
@@ -5865,12 +5846,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:33",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145692\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145146",
+        "bikeId":  "PSWqCUQ_y0mS45EFz9rZDwn",
         "cc":  398,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "스즈키",
@@ -5884,12 +5865,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:24",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145146\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145698",
+        "bikeId":  "PS5yQxdaI42pI5RuPEuBeXA",
         "cc":  1923,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -5903,12 +5884,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:24",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145698\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1070450",
+        "bikeId":  "PSxKKS2AedMGuzn8T1xCShq",
         "cc":  649,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "가와사키",
@@ -5922,12 +5903,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:24",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1070450\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145687",
+        "bikeId":  "PSByHXhXGl9Pa_U-zdNLoVL",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "기타",
@@ -5941,12 +5922,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:18",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145687\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1131679",
+        "bikeId":  "PS0dz9C9bYgJQhMmlSaQVPT",
         "cc":  689,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -5960,12 +5941,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:18",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1131679\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1131758",
+        "bikeId":  "PSY8JskaJIvQN6deeUnxigD",
         "cc":  803,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -5979,12 +5960,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:18",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1131758\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1136731",
+        "bikeId":  "PSqC9INQg4qeRh0bF2g171P",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "기타",
@@ -5998,12 +5979,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:18",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1136731\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145688",
+        "bikeId":  "PSOHvYubioWPbOGUsi95sIr",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "스즈키",
@@ -6017,12 +5998,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:17",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145688\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145689",
+        "bikeId":  "PSXEv_fdrKcirQgI3kuleWx",
         "cc":  798,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "트라이엄프",
@@ -6036,12 +6017,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:17",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145689\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145690",
+        "bikeId":  "PSEJtEeSsGUw1Jar6gT_-5-",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "스즈키",
@@ -6055,12 +6036,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:17",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145690\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145683",
+        "bikeId":  "PSohpsXAkv1I3_UI81xYgPi",
         "cc":  562,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -6074,12 +6055,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:08",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145683\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145684",
+        "bikeId":  "PSQEdww0GSZtN9qaLA0tCbF",
         "cc":  1330,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "기타",
@@ -6093,12 +6074,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:08",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145684\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145685",
+        "bikeId":  "PSXq72DOtjiwt_48cPcTqmP",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -6112,12 +6093,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:08",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145685\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1145686",
+        "bikeId":  "PS0IqoxC1H4RvspbrP_5cs5",
         "cc":  1868,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -6131,12 +6112,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:08",
-        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145686\u0026num=0"
+        "url":  "http://bike.passo.co.kr/bike/"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSQjURZBsenagi7GwHEeSdJ",
+        "bikeId":  "PS1140648",
         "cc":  895,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -6150,12 +6131,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:08",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1140648\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS6yd9OY0fgkVUVY20qz0Z7",
+        "bikeId":  "PS1142728",
         "cc":  1864,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -6169,12 +6150,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1142728\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSNjfA49XL-ko8XpXpoBWEC",
+        "bikeId":  "PS1144605",
         "cc":  776,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "스즈키",
@@ -6188,12 +6169,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1144605\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSSF3f8vV4wNI0DGVafQ4vU",
+        "bikeId":  "PS1117980",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "기타",
@@ -6207,12 +6188,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 15:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1117980\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSTSHb63zKUNRLeWr2jpPzp",
+        "bikeId":  "PS1145681",
         "cc":  350,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -6226,12 +6207,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145681\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSVAiMswlW-KAUTHwqTit7n",
+        "bikeId":  "PS1145682",
         "cc":  348,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -6245,12 +6226,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145682\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSxzPnLWsoDEqbfK24g5O7B",
+        "bikeId":  "PS1097173",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "기타",
@@ -6264,12 +6245,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1097173\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS89gz1WpqyFom9F4i5zfqr",
+        "bikeId":  "PS1139039",
         "cc":  749,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -6283,12 +6264,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:40",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1139039\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSvPpfpcHx9Oy_IR3NuJFTj",
+        "bikeId":  "PS1129995",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "혼다",
@@ -6302,12 +6283,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1129995\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSWqkA1_1UEUGqN4HxRSdHf",
+        "bikeId":  "PS1145678",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "스즈키",
@@ -6321,12 +6302,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145678\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSPudvMYxr4x0cGUrg673Sa",
+        "bikeId":  "PS1145679",
         "cc":  998,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "가와사키",
@@ -6340,12 +6321,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145679\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSeiXJ3SYCJjE0t9ieSWx-1",
+        "bikeId":  "PS1139396",
         "cc":  296,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "KR모터스",
@@ -6359,12 +6340,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 14:08",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1139396\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSPJ0diMxydwEcWUI7-cuh1",
+        "bikeId":  "PS1145403",
         "cc":  649,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -6378,12 +6359,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145403\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSjy-t5dzpI8ejmb1ErG81O",
+        "bikeId":  "PS1145680",
         "cc":  700,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "기타",
@@ -6397,12 +6378,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145680\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSZA-KrXWL2S8A9hImrC2k8",
+        "bikeId":  "PS1139279",
         "cc":  471,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "이탈젯/기타수입",
@@ -6416,12 +6397,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1139279\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSGMj34H-k7jxcGwg91z-lV",
+        "bikeId":  "PS1142205",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -6435,12 +6416,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1142205\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSomuxWuv_63OmxTtAqOho2",
+        "bikeId":  "PS1143816",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "스즈키",
@@ -6454,12 +6435,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1143816\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS33XX_NyPWmw00WkCgh346",
+        "bikeId":  "PS1145091",
         "cc":  749,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -6473,12 +6454,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145091\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSlrznRDVjjNhxAmUDCju4c",
+        "bikeId":  "PS1143016",
         "cc":  803,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -6492,12 +6473,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1143016\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSRqxaP6-XK47XzhTmrXWD7",
+        "bikeId":  "PS1140108",
         "cc":  692,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "허스크바나",
@@ -6511,12 +6492,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1140108\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSXKwwhi0US0KmOLKP7HTS2",
+        "bikeId":  "PS1141053",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "기타",
@@ -6530,12 +6511,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1141053\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS0oRytMVIVuvwg7WWNk_7X",
+        "bikeId":  "PS1140109",
         "cc":  398,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "아프릴리아",
@@ -6549,12 +6530,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1140109\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSSrtuswd8WeBjW6-es5pKv",
+        "bikeId":  "PS1140048",
         "cc":  400,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "기타",
@@ -6568,12 +6549,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1140048\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSZ7ctQiuMzgx24gAOxi2CD",
+        "bikeId":  "PS1114629",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "KTM",
@@ -6587,12 +6568,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1114629\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSCFz5laoL8w4gixVH7MJMX",
+        "bikeId":  "PS1141647",
         "cc":  349,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "존테스",
@@ -6606,12 +6587,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:17",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1141647\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSuouNNP8mDzGnEIIs51gOJ",
+        "bikeId":  "PS1145141",
         "cc":  1868,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -6625,12 +6606,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:17",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145141\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSyPdFlGi95XQBNz_k5R9WH",
+        "bikeId":  "PS1145143",
         "cc":  471,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -6644,12 +6625,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:17",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145143\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSk866FMGANxafVQEiqAnpZ",
+        "bikeId":  "PS1145248",
         "cc":  647,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -6663,12 +6644,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:16",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145248\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSmO0wjXtn7IecC5tjldkI8",
+        "bikeId":  "PS1141756",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "혼다",
@@ -6682,12 +6663,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:16",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1141756\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSSjEUG6cbHzuehcUiTsB6w",
+        "bikeId":  "PS1142515",
         "cc":  373,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "허스크바나",
@@ -6701,12 +6682,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:16",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1142515\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSj0zctMpYJmkJ9xOv_vzNJ",
+        "bikeId":  "PS1145373",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "혼다",
@@ -6720,12 +6701,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:16",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145373\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSvsBIcjOfvX-k_QU074eeh",
+        "bikeId":  "PS1093238",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -6739,12 +6720,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:08",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1093238\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS7QYko76a4LGqWYYb7VI4e",
+        "bikeId":  "PS1136478",
         "cc":  773,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "가와사키",
@@ -6758,12 +6739,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:08",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1136478\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS0mMlfyeBYDm6AcyYPyzrA",
+        "bikeId":  "PS1137697",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "존테스",
@@ -6777,12 +6758,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:08",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1137697\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSg6vB5Y3zIVSrSJwxoVHPr",
+        "bikeId":  "PS1056416",
         "cc":  1198,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -6796,12 +6777,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 13:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1056416\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS-j_Ymh5nQQu0AYWfTGRvN",
+        "bikeId":  "PS1145155",
         "cc":  398,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "트라이엄프",
@@ -6815,12 +6796,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145155\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS25WeevQaoX3w5yneupPEi",
+        "bikeId":  "PS1145676",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -6834,12 +6815,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145676\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSqkQNxp9uFYhn5v9Gtkvsb",
+        "bikeId":  "PS1142250",
         "cc":  649,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -6853,12 +6834,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1142250\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS6b-LoE5EDriBbQxq0wQlv",
+        "bikeId":  "PS1143147",
         "cc":  649,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -6872,12 +6853,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1143147\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSv6Jc5bL6W9wi3HM9a2IIK",
+        "bikeId":  "PS1143888",
         "cc":  998,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -6891,12 +6872,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1143888\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS0iQsoyK2UvYC4jqqOTYYs",
+        "bikeId":  "PS1103496",
         "cc":  530,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -6910,7 +6891,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:55",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1103496\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -7010,7 +6991,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSn9irGqHwqs76St1Jz-jYN",
+        "bikeId":  "PS1143956",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "존테스",
@@ -7024,12 +7005,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:48",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1143956\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSYEE01bTE1npD1A6EqC_GS",
+        "bikeId":  "PS1145152",
         "cc":  348,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -7043,7 +7024,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:48",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145152\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -7295,7 +7276,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSezGJtemLudjEiA1sz4Gjm",
+        "bikeId":  "PS1145675",
         "cc":  1923,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7309,12 +7290,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145675\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1A_a3iZMQ_pQ6tc8BRpsw",
+        "bikeId":  "PS1125936",
         "cc":  1301,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "아프릴리아",
@@ -7328,12 +7309,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1125936\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1UcXEKUaGELsv4LZoQ9Bn",
+        "bikeId":  "PS1092348",
         "cc":  101,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "SYM",
@@ -7347,12 +7328,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:24",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1092348\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PScTqGv-6BRvJoG1AUZ5EdV",
+        "bikeId":  "PS1121466",
         "cc":  1237,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "혼다",
@@ -7366,12 +7347,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:09",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1121466\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS32zObz8aW32PV92kCka4X",
+        "bikeId":  "PS1145674",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -7385,12 +7366,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:08",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145674\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSCIKUa-n1VMeAA9FuOaFRE",
+        "bikeId":  "PS1131869",
         "cc":  1923,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7404,12 +7385,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1131869\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSb5Yf-8d6qelvwe3-wSkhu",
+        "bikeId":  "PS1109876",
         "cc":  1584,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7423,12 +7404,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:03",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1109876\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSUODEuuU5uLYUJcUm91ucW",
+        "bikeId":  "PS1070884",
         "cc":  499,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "킴코",
@@ -7442,12 +7423,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:02",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1070884\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSZo-vqbCMF_DRYBHiyfdw8",
+        "bikeId":  "PS1141785",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "SYM",
@@ -7461,12 +7442,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 12:02",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1141785\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSGHpXy3TEHPRxPiI7t6ynL",
+        "bikeId":  "PS1122898",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -7480,12 +7461,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:54",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1122898\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSati0QbO_ieYRRq-x-H_5F",
+        "bikeId":  "PS1145669",
         "cc":  155,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "야마하",
@@ -7499,12 +7480,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145669\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSsZgS3-gFP4VVyGm5zeTik",
+        "bikeId":  "PS1133464",
         "cc":  803,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -7518,12 +7499,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1133464\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS7_GuVkvpUZVKY-x9HbpZx",
+        "bikeId":  "PS1142232",
         "cc":  1745,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7537,12 +7518,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1142232\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSxE2LmY8jOmkoUdupZBcgv",
+        "bikeId":  "PS1144280",
         "cc":  321,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -7556,12 +7537,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1144280\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSFXCRI7-7u6fVyIybAr_pH",
+        "bikeId":  "PS1129880",
         "cc":  692,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "허스크바나",
@@ -7575,12 +7556,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1129880\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS8NKtVDQJqVafH5WHOL862",
+        "bikeId":  "PS1145670",
         "cc":  400,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "기타",
@@ -7594,12 +7575,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145670\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSqL2-e5hUdzKVHfBoxuEKI",
+        "bikeId":  "PS1145671",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "야마하",
@@ -7613,7 +7594,7 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145671\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -7637,7 +7618,7 @@ window.COMPETITOR_RAW_PREVIEW = [
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSZ65tSt4joz58NbwNwx1n5",
+        "bikeId":  "PS1141008",
         "cc":  1868,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7651,12 +7632,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:53",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1141008\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSQTizfw_gI9wGUuhmv9HNx",
+        "bikeId":  "PS1111943",
         "cc":  1037,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "스즈키",
@@ -7670,12 +7651,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1111943\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSNVU8AEapguQJvBTwV8-SH",
+        "bikeId":  "PS1132934",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "SYM",
@@ -7689,12 +7670,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1132934\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSBjGg0urjZCtZ_8CQ5xo0s",
+        "bikeId":  "PS1132935",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "기타",
@@ -7708,12 +7689,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1132935\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSRUP7aQssu8mqKOLfve-E4",
+        "bikeId":  "PS1132937",
         "cc":  125,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "기타",
@@ -7727,12 +7708,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:47",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1132937\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS4AsVJP6Sh0rtYGdedVafV",
+        "bikeId":  "PS1145667",
         "cc":  941,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "야마하",
@@ -7746,12 +7727,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:33",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145667\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSWI4RH_kJAq5mtC5knTZ8I",
+        "bikeId":  "PS1125979",
         "cc":  1746,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7765,12 +7746,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:33",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1125979\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSbv_2h2UJccbODwIQlzF8_",
+        "bikeId":  "PS1145668",
         "cc":  1745,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7784,12 +7765,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:32",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145668\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSFoZTx-0kgFj5qoSLfxP_T",
+        "bikeId":  "PS1137481",
         "cc":  367,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "존테스",
@@ -7803,12 +7784,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:29",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1137481\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSvGT1ACLiBE0a7decSQHGW",
+        "bikeId":  "PS1142228",
         "cc":  249,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "KR모터스",
@@ -7822,12 +7803,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:28",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1142228\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS5Nc6U1fo9x-wF9lRGPcEu",
+        "bikeId":  "PS1145665",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "혼다",
@@ -7841,12 +7822,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:28",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145665\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS0WW4czamM2Gvh_43Y1Nat",
+        "bikeId":  "PS1124195",
         "cc":  149,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "디엔에이(DNA/대림)",
@@ -7860,12 +7841,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:28",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1124195\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSm_9uv2AbtEtE1BEV2ZTBB",
+        "bikeId":  "PS1145666",
         "cc":  1868,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7879,12 +7860,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:28",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145666\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSv5Az14JjaNQs5AzVuCodw",
+        "bikeId":  "PS1092610",
         "cc":  999,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -7898,12 +7879,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:27",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1092610\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSkzfa-xRRjKK62q_LdYALz",
+        "bikeId":  "PS1099895",
         "cc":  1158,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -7917,12 +7898,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:27",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1099895\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSx_gzLr7EjZIiXMXV6qHNm",
+        "bikeId":  "PS1143862",
         "cc":  1103,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "두카티",
@@ -7936,12 +7917,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:27",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1143862\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSvMfQREzZRp_2tmDO4sCDY",
+        "bikeId":  "PS1145664",
         "cc":  1200,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "트라이엄프",
@@ -7955,12 +7936,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:26",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145664\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSPmyigS0MbFfqNrkyAYeOF",
+        "bikeId":  "PS1140573",
         "cc":  1868,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "할리데이비슨",
@@ -7974,12 +7955,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1140573\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PSOSuZJYJn3_Nc399vLOHLM",
+        "bikeId":  "PS1144124",
         "cc":  124,
         "ccGroup":  "300cc 이하",
         "manufacturer":  "이탈젯/기타수입",
@@ -7993,12 +7974,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1144124\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS_py0WyT0uwFPZnYnf3FT0",
+        "bikeId":  "PS1145663",
         "cc":  1170,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -8012,12 +7993,12 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:23",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145663\u0026num=0"
     },
     {
         "collectedDate":  "2026-11-16",
         "platform":  "파쏘바이크",
-        "bikeId":  "PS1B23iJ8k530O67xgVWhHZ",
+        "bikeId":  "PS1145662",
         "cc":  1649,
         "ccGroup":  "300cc 이상",
         "manufacturer":  "BMW",
@@ -8031,7 +8012,64 @@ window.COMPETITOR_RAW_PREVIEW = [
         "sellType":  "개인직거래",
         "status":  "판매중",
         "registeredAt":  "2026-11-16 11:22",
-        "url":  "http://bike.passo.co.kr/bike/"
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145662\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "파쏘바이크",
+        "bikeId":  "PS1145661",
+        "cc":  1170,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "BMW",
+        "model":  "1200 RT",
+        "fullTitle":  "BMW R 1200 RT",
+        "year":  "2011",
+        "mileageKm":  91000,
+        "priceManwon":  580,
+        "priceBand":  "300~600만원",
+        "sido":  "부산",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 11:21",
+        "url":  "http://bike.passo.co.kr/bike/index.php?part=cybershop\u0026path=cybershop\u0026mode=home#HIS_ID:search=\u0026search_mode=country\u0026order_by=\u0026page=0\u0026idx=1145661\u0026num=0"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "바튜매(네이버카페)",
+        "bikeId":  "BT9785128",
+        "cc":  400,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "가와사키",
+        "model":  "닌자500 79@@km",
+        "fullTitle":  "닌자500 25년식 79@@km 팝니다 (620만)",
+        "year":  "2025",
+        "mileageKm":  0,
+        "priceManwon":  620,
+        "priceBand":  "600~1,000만원",
+        "sido":  "충남",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 18:41",
+        "url":  "https://cafe.naver.com/bikecargogo/9785128"
+    },
+    {
+        "collectedDate":  "2026-11-16",
+        "platform":  "바튜매(네이버카페)",
+        "bikeId":  "BT9785125",
+        "cc":  1200,
+        "ccGroup":  "300cc 이상",
+        "manufacturer":  "할리데이비슨",
+        "model":  "2019 팻밥",
+        "fullTitle":  "할리데이비슨 2019 팻밥 107 S\u0026S, 20xxxkm, 1450만원, 정비내역 보유",
+        "year":  "",
+        "mileageKm":  0,
+        "priceManwon":  1450,
+        "priceBand":  "1,000~2,000만원",
+        "sido":  "기타",
+        "sellType":  "개인직거래",
+        "status":  "판매중",
+        "registeredAt":  "2026-11-16 18:39",
+        "url":  "https://cafe.naver.com/bikecargogo/9785125"
     },
     {
         "collectedDate":  "2026-11-16",
@@ -11794,44 +11832,6 @@ window.COMPETITOR_RAW_PREVIEW = [
         "status":  "판매중",
         "registeredAt":  "2026-11-16 08:56",
         "url":  "https://cafe.naver.com/bikecargogo/9783212"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "바튜매(네이버카페)",
-        "bikeId":  "BT9783208",
-        "cc":  400,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "혼다",
-        "model":  "CBR650R 적은",
-        "fullTitle":  "CBR650R 23년식 적은 키로수 판매합니다",
-        "year":  "2023",
-        "mileageKm":  0,
-        "priceManwon":  0,
-        "priceBand":  "가격미기재",
-        "sido":  "경기",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 08:55",
-        "url":  "https://cafe.naver.com/bikecargogo/9783208"
-    },
-    {
-        "collectedDate":  "2026-11-16",
-        "platform":  "바튜매(네이버카페)",
-        "bikeId":  "BT9783198",
-        "cc":  650,
-        "ccGroup":  "300cc 이상",
-        "manufacturer":  "스즈키",
-        "model":  "브이스트롬 650",
-        "fullTitle":  "17년식 브이스트롬 650 판매.",
-        "year":  "2017",
-        "mileageKm":  0,
-        "priceManwon":  0,
-        "priceBand":  "가격미기재",
-        "sido":  "충북",
-        "sellType":  "개인직거래",
-        "status":  "판매중",
-        "registeredAt":  "2026-11-16 08:44",
-        "url":  "https://cafe.naver.com/bikecargogo/9783198"
     }
 ];
 window.COMPETITOR_RAW_TOTAL_COUNT = 6837;
