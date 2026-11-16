@@ -627,7 +627,7 @@
             <tr>
               <th>구분 항목 (선택 날짜/기간 기준)</th>
               <th style="color:#c2410c;">1. 라이트바겐 (자체중고)</th>
-              <th style="color:#1d4ed8;">2. 파쏘 바이크 (개인중고)</th>
+              <th style="color:#1d4ed8;">2. 파쏘 바이크 (중고전체)</th>
               <th style="color:#047857;">3. 바튜매 (개인·안전결제)</th>
               <th style="color:#64748b;">4. 케이카 (서비스 미운영)</th>
             </tr>
@@ -724,7 +724,8 @@
         </div>
         <div class="note-box">
           <strong>2. 파쏘 바이크 (bike.passo.co.kr)</strong><br />
-          • 전체 등록 매물 중 신차 프로모션(<code>product_state=1</code>)과 매매상사/센터(<code>family_idx&gt;0</code>)를 제외하고, <strong>개인 직거래 중고매물(<code>state=0 &amp; product_state=2 &amp; family_idx=0</code>) 전수</strong>를 배기량 구간별로 100% 수집합니다. (센터 포함 전체 중고대수도 보조지표로 병기)
+          • 신차 프로모션 매물을 제외하고 라이트바겐과 동일한 기준인 <strong>파쏘 중고 오토바이 등록매물 전체</strong>를 실시간 클라우드 인덱스로 수집하여 해외 GitHub Actions 서버에서도 차단 없이 100% 자동 작동합니다.<br />
+          • 매물별 실측 배기량 데이터로 300cc 이하(~299cc)와 300cc 이상(300cc~)을 정확히 구분합니다.
         </div>
         <div class="note-box">
           <strong>3. 바튜매 네이버 카페 (cafe.naver.com/bikecargogo)</strong><br />
