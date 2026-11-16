@@ -35,8 +35,8 @@ $filesToUpload = @(
     "raw_data/raw_bikes_latest.csv",
     "snapshots/reitwagen_$($TodayDate).json",
     "snapshots/reitwagen_latest.json",
-    "snapshots/passo_personal_$($TodayDate).json",
-    "snapshots/passo_personal_latest.json",
+    "snapshots/passo_used_$($TodayDate).json",
+    "snapshots/passo_used_latest.json",
     "snapshots/batumae_$($TodayDate).json",
     "snapshots/batumae_latest.json"
 )

@@ -442,25 +442,10 @@ $rwTurnoverPct = if ($rwTotalCount -gt 0) { [math]::Round(($rwSoldToday / $rwTot
 Write-Host "   -> Reitwagen Total=$rwTotalCount (<=299cc: $rwUnder300Count, >=300cc: $rwOver300Count), NewToday=$rwNewToday, Sample=$($rwNormItems.Count)" -ForegroundColor Green
 
 # ==============================================================================
-# 2. PASSO BIKE (http://bike.passo.co.kr/bike/ - 100% Full Enumeration of Personal Used Bikes)
+# 2. PASSO BIKE (http://bike.passo.co.kr/bike/ - Used Motorcycle Listings)
+#    Uses Cloud-Accessible Real-Time Passo Index (bypasses Passo KR-only IDC geo-timeout on GitHub Actions)
 # ==============================================================================
-Write-Host "2. Collecting Passo Bike Personal Used Listings (100% Full Enumeration by CC Bucket)..." -ForegroundColor Yellow
-
-function Invoke-PassoPage([string]$searchFilter, [int]$pageIdx) {
-    $enc = [uri]::EscapeDataString($searchFilter)
-    $postBody = "part=cybershop&path=cybershop&mode=process&process=list&mainck201508=home&search=$enc&page=$pageIdx&order_by=&search_mode=search_type"
-    $bytes = [System.Text.Encoding]::ASCII.GetBytes($postBody)
-    $req = [System.Net.HttpWebRequest]::Create("http://bike.passo.co.kr/bike/index.php")
-    $req.Method = "POST"
-    $req.ContentType = "application/x-www-form-urlencoded"
-    $req.UserAgent = "Mozilla/5.0"
-    $req.Timeout = 20000
-    $s = $req.GetRequestStream(); $s.Write($bytes, 0, $bytes.Length); $s.Close()
-    $resp = $req.GetResponse()
-    $sr = New-Object System.IO.StreamReader($resp.GetResponseStream(), [System.Text.Encoding]::UTF8)
-    $xmlStr = $sr.ReadToEnd(); $sr.Close(); $resp.Close()
-    return $xmlStr
-}
+Write-Host "2. Collecting Passo Bike Used Listings (Cloud-Accessible Real-Time Feed)..." -ForegroundColor Yellow
 
 $passoAllUsedCount = 0
 $passoUnder300Count = 0
@@ -468,97 +453,81 @@ $passoOver300Count = 0
 $passoTotalCount = 0
 $passoNormItems = New-Object System.Collections.Generic.List[object]
 $passoSeenIds = @{}
-$passoNewByDate = 0
+$passoNewByPostedAt = 0
 
 try {
-    $xmlAllUsed = Invoke-PassoPage "@state:0#@product_state:2#" 0
-    $mAll = [regex]::Match($xmlAllUsed, '<count>(\d+)</count>')
-    if ($mAll.Success) { $passoAllUsedCount = [int]$mAll.Groups[1].Value }
+    $passoTotalCount   = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("PASSO") }).count
+    $passoOver300Count = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("PASSO"); minDisplacement=300 }).count
+    $passoUnder300Count= [Math]::Max(0, $passoTotalCount - $passoOver300Count)
+    $passoAllUsedCount = $passoTotalCount
 
-    foreach ($bucket in @(
-        @{ ccGrp = $KR_UNDER300; repCc = 125; query = "@state:0#@product_state:2#@family_idx:0#@engine:0~299#" },
-        @{ ccGrp = $KR_OVER300;  repCc = 600; query = "@state:0#@product_state:2#@family_idx:0#@engine:300~99999#" }
-    )) {
-        $firstXml = Invoke-PassoPage $bucket.query 0
-        $cntM = [regex]::Match($firstXml, '<count>(\d+)</count>')
-        $bCount = if ($cntM.Success) { [int]$cntM.Groups[1].Value } else { 0 }
-        if ($bucket.ccGrp -eq $KR_UNDER300) { $passoUnder300Count = $bCount } else { $passoOver300Count = $bCount }
+    # Fetch newest 40 pages (800 vehicles) for exact today postedAt count + rich portfolio
+    for ($pg = 0; $pg -lt 40; $pg++) {
+        $res = Invoke-ReitwagenOrpc "search/list" @{
+            page       = $pg
+            skip       = ($pg * 20)
+            sourceType = @("PASSO")
+            sort       = @{ field = "postedAt"; order = "desc" }
+        }
+        if (-not $res.data -or $res.data.Count -eq 0) { break }
+        foreach ($entry in $res.data) {
+            $g = $entry.goods
+            if (-not $g) { continue }
+            $pIdx = if ($entry.url -and $entry.url -match 'idx=(\d+)') { "PS" + $Matches[1] } else { "PS" + [string]$g._id }
+            if ($passoSeenIds.ContainsKey($pIdx)) { continue }
+            $passoSeenIds[$pIdx] = $true
 
-        $maxPages = [Math]::Ceiling($bCount / 50.0)
-        for ($pg = 0; $pg -lt $maxPages; $pg++) {
-            $xmlText = if ($pg -eq 0) { $firstXml } else { Invoke-PassoPage $bucket.query $pg }
-            $gMatch = [regex]::Match($xmlText, '<goods>([\s\S]*?)</goods>')
-            if (-not $gMatch.Success) { break }
-            $itemMatches = [regex]::Matches($gMatch.Groups[1].Value, '<item>([\s\S]*?)</item>')
-            if ($itemMatches.Count -eq 0) { break }
-
-            foreach ($im in $itemMatches) {
-                $blk = $im.Groups[1].Value
-                $idx = [regex]::Match($blk, '<idx>(\d+)</idx>').Groups[1].Value
-                if (-not $idx -or $passoSeenIds.ContainsKey($idx)) { continue }
-                $passoSeenIds[$idx] = $true
-
-                $title   = [regex]::Match($blk, '<title><!\[CDATA\[([\s\S]*?)\]\]></title>').Groups[1].Value.Trim()
-                $maker   = [regex]::Match($blk, '<maker><!\[CDATA\[([\s\S]*?)\]\]></maker>').Groups[1].Value.Trim()
-                $model   = [regex]::Match($blk, '<model><!\[CDATA\[([\s\S]*?)\]\]></model>').Groups[1].Value.Trim()
-                $yr      = [regex]::Match($blk, '<c_out_year>([^<]*)</c_out_year>').Groups[1].Value.Trim()
-                $prcRaw  = [regex]::Match($blk, '<c_sale_price>([^<]*)</c_sale_price>').Groups[1].Value.Trim()
-                $areaRaw = [regex]::Match($blk, '<area>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?</area>').Groups[1].Value.Trim()
-                $updDate = [regex]::Match($blk, '<update_date>([^<]*)</update_date>').Groups[1].Value.Trim()
-                $distRaw = [regex]::Match($blk, '<distance>([^<]*)</distance>').Groups[1].Value
-
-                if ($updDate -eq $TodayShort) { $passoNewByDate++ }
-
-                $prcNum = 0
-                if ($prcRaw -match '^\d+$') { $prcNum = [int]$prcRaw }
-                $kmNum = 0
-                $distClean = ($distRaw -replace '[^\d]', '')
-                if ($distClean) { $kmNum = [int]$distClean }
-
-                $brandNorm = Resolve-Brand $maker "$maker $model $title" ""
-                $modelNorm = Resolve-ModelShort $brandNorm $model $title
-                $sido = Normalize-Region $areaRaw
-                $inferredCc = Infer-DisplacementCc "$model $title" ($bucket.ccGrp -eq $KR_UNDER300 -and $model -match '125|110|100|50')
-                if ($bucket.ccGrp -eq $KR_UNDER300 -and $inferredCc -ge 300) { $inferredCc = 250 }
-                if ($bucket.ccGrp -eq $KR_OVER300  -and $inferredCc -lt 300) { $inferredCc = 500 }
-
-                $fullRegDate = if ($updDate -match '^\d{2}-\d{2}-\d{2}$') { "20$updDate" } else { $updDate }
-
-                $row = [pscustomobject][ordered]@{
-                    collectedDate = $TodayDate
-                    platform      = (U "\uD30C\uC3D8\uBC14\uC774\uD06C")
-                    bikeId        = "PS$idx"
-                    cc            = $inferredCc
-                    ccGroup       = $bucket.ccGrp
-                    manufacturer  = $brandNorm
-                    model         = $modelNorm
-                    fullTitle     = $title
-                    year          = $yr
-                    mileageKm     = $kmNum
-                    priceManwon   = $prcNum
-                    priceBand     = Get-BikePriceBand $prcNum
-                    sido          = $sido
-                    sellType      = $KR_PERSONAL
-                    status        = $KR_ONSALE
-                    registeredAt  = $fullRegDate
-                    url           = "http://bike.passo.co.kr/bike/index.php?part=cybershop&path=cybershop&mode=home#HIS_ID:search=&search_mode=country&order_by=&page=0&idx=$idx&num=0"
-                }
-                $passoNormItems.Add($row)
-                $allRawBikes.Add($row)
+            $postedKst = ""
+            if ($g.postedAt) {
+                try {
+                    $dto = [DateTimeOffset]::Parse([string]$g.postedAt).ToOffset([TimeSpan]::FromHours(9))
+                    $postedKst = $dto.ToString("yyyy-MM-dd HH:mm")
+                    if ($dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $passoNewByPostedAt++ }
+                } catch { $postedKst = [string]$g.postedAt }
             }
+
+            $rawTitle = ([string]$g.title -replace '\([A-Za-z0-9\-\s&]+\)', ' ' -replace '\s+', ' ').Trim()
+            $brand = Resolve-Brand "" $rawTitle ([string]$g.brandId)
+            $model = Resolve-ModelShort $brand "" $rawTitle
+            $cc = if ($null -ne $g.cylinderCapacity -and [int]$g.cylinderCapacity -gt 0) { [int]$g.cylinderCapacity } else { Infer-DisplacementCc $rawTitle $false }
+            $ccGrp = if ($cc -ge 300) { $KR_OVER300 } else { $KR_UNDER300 }
+            $prcMan = [int][math]::Round(([double]$g.salePrice) / 10000.0)
+            $sido = Normalize-Region ([string]$g.locationCategory + " " + [string]$g.address)
+            $pUrl = if ($entry.url) { [string]$entry.url } else { "http://bike.passo.co.kr/bike/" }
+
+            $row = [pscustomobject][ordered]@{
+                collectedDate = $TodayDate
+                platform      = (U "\uD30C\uC3D8\uBC14\uC774\uD06C")
+                bikeId        = $pIdx
+                cc            = $cc
+                ccGroup       = $ccGrp
+                manufacturer  = $brand
+                model         = $model
+                fullTitle     = $rawTitle
+                year          = [string]$g.modelYear
+                mileageKm     = [int]$g.mileage
+                priceManwon   = $prcMan
+                priceBand     = Get-BikePriceBand $prcMan
+                sido          = $sido
+                sellType      = $KR_PERSONAL
+                status        = $KR_ONSALE
+                registeredAt  = $postedKst
+                url           = $pUrl
+            }
+            $passoNormItems.Add($row)
+            $allRawBikes.Add($row)
         }
     }
 } catch { Write-Warning "Passo error: $_" }
 
-$passoTotalCount = $passoUnder300Count + $passoOver300Count
 if ($passoTotalCount -eq 0) { $passoTotalCount = $passoNormItems.Count }
 $passoPortfolio = Build-BikePortfolioSummary $passoNormItems.ToArray() $passoUnder300Count $passoOver300Count
-$passoSnap = Compare-And-SaveSnapshot "passo_personal" @($passoSeenIds.Keys)
-$passoNewToday  = if ($null -ne $passoSnap.NewFromDiff) { $passoSnap.NewFromDiff } else { $passoNewByDate }
+$passoSnap = Compare-And-SaveSnapshot "passo_used" @($passoSeenIds.Keys)
+$passoNewToday  = if ($null -ne $passoSnap.NewFromDiff -and $passoSnap.NewFromDiff -gt $passoNewByPostedAt) { $passoSnap.NewFromDiff } else { $passoNewByPostedAt }
 $passoSoldToday = if ($null -ne $passoSnap.SoldFromDiff) { $passoSnap.SoldFromDiff } else { 0 }
 $passoTurnoverPct = if ($passoTotalCount -gt 0) { [math]::Round(($passoSoldToday / $passoTotalCount) * 100, 2) } else { 0 }
 
-Write-Host "   -> Passo Personal Used Total=$passoTotalCount (<=299cc: $passoUnder300Count, >=300cc: $passoOver300Count | AllUsed=$passoAllUsedCount), NewToday=$passoNewToday, Enumerated=$($passoNormItems.Count)" -ForegroundColor Green
+Write-Host "   -> Passo Used Total=$passoTotalCount (<=299cc: $passoUnder300Count, >=300cc: $passoOver300Count), NewToday=$passoNewToday, Sample=$($passoNormItems.Count)" -ForegroundColor Green
 
 # ==============================================================================
 # 3. BATUMAE NAVER CAFE (https://cafe.naver.com/bikecargogo - CafeId: 10312966)
