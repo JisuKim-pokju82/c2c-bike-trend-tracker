@@ -38,6 +38,7 @@ $filesToUpload = @(
     "database/bike_daily_summary_db.csv",
     "database/bike_vehicle_master_db.csv",
     "database/db_manifest.json",
+    "database/portfolio_by_date.json",
     "snapshots/daangn_bike_$($TodayDate).json",
     "snapshots/daangn_bike_latest.json",
     "snapshots/reitwagen_$($TodayDate).json",

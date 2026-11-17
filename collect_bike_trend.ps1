@@ -28,8 +28,35 @@ $JsPath   = Join-Path $WorkDir "competitor_trend_data.js"
 $NowKst        = [DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))
 $TodayDate     = $NowKst.ToString("yyyy-MM-dd")
 $Timestamp     = $NowKst.ToString("yyyy-MM-dd HH:mm:ss")
+$CacheVer      = $NowKst.ToString("yyyyMMddHHmm")
 $Cutoff30dMs   = $NowKst.AddDays(-30).ToUnixTimeMilliseconds()
 $Cutoff29dDate = $NowKst.AddDays(-29).ToString("yyyy-MM-dd")
+
+$ExistingRecords = @()
+if (Test-Path $JsonPath) {
+    try {
+        $parsedExisting = [System.IO.File]::ReadAllText($JsonPath, [System.Text.Encoding]::UTF8) | ConvertFrom-Json
+        foreach ($elem in @($parsedExisting)) {
+            if ($null -ne $elem -and $null -ne $elem.PSObject.Properties['value']) {
+                foreach ($sub in @($elem.value)) { if ($null -ne $sub -and $sub.date) { $ExistingRecords += $sub } }
+            } elseif ($null -ne $elem -and $elem.date) {
+                $ExistingRecords += $elem
+            }
+        }
+    } catch { $ExistingRecords = @() }
+}
+$PriorRecords = @($ExistingRecords | Where-Object { $_.date -lt $TodayDate } | Sort-Object date)
+$PrevRec = if ($PriorRecords.Count -gt 0) { $PriorRecords[$PriorRecords.Count - 1] } else { $null }
+
+$NewSinceCutoff = $NowKst.AddHours(-24)
+if ($PrevRec -and $PrevRec.updatedAt) {
+    try {
+        $prevDto = [DateTimeOffset]::Parse("$($PrevRec.updatedAt)+09:00")
+        if ($prevDto -ge $NowKst.AddHours(-48) -and $prevDto -le $NowKst.AddHours(-6)) {
+            $NewSinceCutoff = $prevDto
+        }
+    } catch {}
+}
 
 function U([string]$esc) { return [regex]::Unescape($esc) }
 
@@ -38,6 +65,7 @@ $KR_OVER300  = U "300cc \uC774\uC0C1"
 $KR_ONSALE   = U "\uD310\uB9E4\uC911"
 $KR_RESERVED = U "\uC608\uC57D\uC911"
 $KR_TRADED   = U "\uAC70\uB798\uC644\uB8CC"
+$KR_ENDED    = U "\uD310\uB9E4\uC885\uB8CC(\uCD94\uC815)"
 $KR_PERSONAL = U "\uAC1C\uC778\uC9C1\uAC70\uB798"
 $KR_ESCROW   = U "\uC548\uC804\uACB0\uC81C"
 $KR_ETC      = U "\uAE30\uD0C0"
@@ -272,12 +300,17 @@ function Compare-And-SaveSnapshot([string]$platformKey, [string[]]$todayIds) {
     }
 
     $snapObj = [ordered]@{ date = $TodayDate; updatedAt = $Timestamp; count = $todayUnique.Count; ids = $todayUnique }
-    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
     $snapJson = $snapObj | ConvertTo-Json -Depth 4 -Compress
-    [System.IO.File]::WriteAllText($todaySnapPath, $snapJson, $utf8NoBom)
-    [System.IO.File]::WriteAllText($latestSnapMetaPath, $snapJson, $utf8NoBom)
 
-    return [pscustomobject]@{ PrevCount = $prevTotal; NewFromDiff = $newFromDiff; SoldFromDiff = $soldFromDiff }
+    return [pscustomobject]@{
+        Count          = $todayUnique.Count
+        PrevCount      = $prevTotal
+        NewFromDiff    = $newFromDiff
+        SoldFromDiff   = $soldFromDiff
+        TodaySnapPath  = $todaySnapPath
+        LatestSnapPath = $latestSnapMetaPath
+        SnapJson       = $snapJson
+    }
 }
 
 function Build-BikePortfolioSummary([object[]]$items, [int]$exactUnder300 = 0, [int]$exactOver300 = 0) {
@@ -519,7 +552,7 @@ foreach ($a in $daangnSeenMap.Values) {
         try {
             $dto = [DateTimeOffset]::Parse([string]$a.createdAt).ToOffset([TimeSpan]::FromHours(9))
             $createdKst = $dto.ToString("yyyy-MM-dd HH:mm")
-            if ($dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $daangnNewByCreated++ }
+            if ($dto -gt $NewSinceCutoff -or $dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $daangnNewByCreated++ }
         } catch { $createdKst = [string]$a.createdAt }
     }
 
@@ -588,14 +621,14 @@ foreach ($extraRel in $daangnSitemapExtraIds) {
 }
 
 $utf8Bom = New-Object System.Text.UTF8Encoding($true)
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 $daangnUrlCsvPath = Join-Path $RawDir "daangn_bike_urls_$($TodayDate).csv"
-[System.IO.File]::WriteAllLines($daangnUrlCsvPath, $daangnAllUrlLines, $utf8Bom)
 
 $daangnTotalCount  = $daangnUnder300 + $daangnOver300
 $daangnPortfolio   = Build-BikePortfolioSummary $daangnNormItems.ToArray() $daangnUnder300 $daangnOver300
 $daangnSnap        = Compare-And-SaveSnapshot "daangn_bike" $daangnActiveIds.ToArray()
-$daangnNewToday    = $daangnNewByCreated
-$daangnSoldToday   = if ($null -ne $daangnSnap.SoldFromDiff -and $daangnSnap.PrevCount -ge 4500 -and $daangnSnap.SoldFromDiff -gt 0) { $daangnSnap.SoldFromDiff } else { $daangnClosedSample }
+$daangnNewToday    = if ($null -ne $daangnSnap.NewFromDiff -and $daangnSnap.PrevCount -ge 7000 -and $daangnSnap.NewFromDiff -gt $daangnNewByCreated) { $daangnSnap.NewFromDiff } else { $daangnNewByCreated }
+$daangnSoldToday   = if ($null -ne $daangnSnap.SoldFromDiff -and $daangnSnap.PrevCount -ge 7000 -and $daangnSnap.SoldFromDiff -gt 0) { $daangnSnap.SoldFromDiff } else { $daangnClosedSample }
 $daangnTurnoverPct = if ($daangnTotalCount -gt 0) { [math]::Round(($daangnSoldToday / $daangnTotalCount) * 100, 2) } else { 0 }
 
 Write-Host "   -> Daangn Motorcycles Minimum Verified Floor=$daangnTotalCount (<=299cc: $daangnUnder300, >=300cc: $daangnOver300 | Keywords=$($daangnKeywords.Count)), NewToday=$daangnNewToday, RichSample=$($daangnNormItems.Count)" -ForegroundColor Green
@@ -603,18 +636,25 @@ Write-Host "   -> Daangn Motorcycles Minimum Verified Floor=$daangnTotalCount (<
 # ==============================================================================
 # 2. REITWAGEN (https://www.reitwagen.co.kr/ - Native BAREE Used Bikes)
 # ==============================================================================
-Write-Host "2. Collecting Reitwagen Native Used Bikes (ORPC API + Sitemap)..." -ForegroundColor Yellow
+Write-Host "2. Collecting Reitwagen Native Used Bikes (ORPC API)..." -ForegroundColor Yellow
 
 function Invoke-ReitwagenOrpc([string]$endpoint, [hashtable]$payload) {
     $bodyStr = (@{ json = $payload } | ConvertTo-Json -Depth 6 -Compress)
     $bytes = [System.Text.Encoding]::UTF8.GetBytes($bodyStr)
-    $req = [System.Net.HttpWebRequest]::Create("https://api.reitwagen.co.kr/api/orpc/$endpoint")
-    $req.Method = "POST"; $req.ContentType = "application/json"; $req.UserAgent = "Mozilla/5.0"; $req.Timeout = 20000
-    $s = $req.GetRequestStream(); $s.Write($bytes, 0, $bytes.Length); $s.Close()
-    $resp = $req.GetResponse()
-    $sr = New-Object System.IO.StreamReader($resp.GetResponseStream(), [System.Text.Encoding]::UTF8)
-    $txt = $sr.ReadToEnd(); $sr.Close(); $resp.Close()
-    return ($txt | ConvertFrom-Json).json
+    for ($att = 1; $att -le 3; $att++) {
+        try {
+            $req = [System.Net.HttpWebRequest]::Create("https://api.reitwagen.co.kr/api/orpc/$endpoint")
+            $req.Method = "POST"; $req.ContentType = "application/json"; $req.UserAgent = "Mozilla/5.0"; $req.Timeout = 25000
+            $s = $req.GetRequestStream(); $s.Write($bytes, 0, $bytes.Length); $s.Close()
+            $resp = $req.GetResponse()
+            $sr = New-Object System.IO.StreamReader($resp.GetResponseStream(), [System.Text.Encoding]::UTF8)
+            $txt = $sr.ReadToEnd(); $sr.Close(); $resp.Close()
+            return ($txt | ConvertFrom-Json).json
+        } catch {
+            if ($att -eq 3) { throw }
+            Start-Sleep -Milliseconds (1200 * $att)
+        }
+    }
 }
 
 $rwTotalCount = 0; $rwOver300Count = 0; $rwUnder300Count = 0; $rwCertifiedCount = 0
@@ -640,7 +680,7 @@ try {
                 try {
                     $dto = [DateTimeOffset]::Parse([string]$g.postedAt).ToOffset([TimeSpan]::FromHours(9))
                     $postedKst = $dto.ToString("yyyy-MM-dd HH:mm")
-                    if ($dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $rwNewByPostedAt++ }
+                    if ($dto -gt $NewSinceCutoff -or $dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $rwNewByPostedAt++ }
                 } catch { $postedKst = [string]$g.postedAt }
             }
 
@@ -664,20 +704,10 @@ try {
     }
 } catch { Write-Warning "Reitwagen API error: $_" }
 
-$rwSitemapIds = New-Object System.Collections.Generic.List[string]
-try {
-    for ($si = 0; $si -le 1; $si++) {
-        $smXml = (curl.exe -s -L -A "Mozilla/5.0" "https://www.reitwagen.co.kr/server-sitemap/$si.xml") -join "`n"
-        $mLocs = [regex]::Matches($smXml, 'https://www\.reitwagen\.co\.kr/products/detail/(\d+)')
-        foreach ($m in $mLocs) { $rwSitemapIds.Add("RW" + $m.Groups[1].Value) }
-    }
-} catch { Write-Warning "Reitwagen sitemap error: $_" }
-
 $rwPortfolio   = Build-BikePortfolioSummary $rwNormItems.ToArray() $rwUnder300Count $rwOver300Count
-$rwSnapIds     = if ($rwSitemapIds.Count -gt 0) { $rwSitemapIds.ToArray() } else { @($rwSeenIds.Keys) }
-$rwSnap        = Compare-And-SaveSnapshot "reitwagen" $rwSnapIds
-$rwNewToday    = if ($null -ne $rwSnap.NewFromDiff -and $rwSnap.PrevCount -ge 10000 -and $rwSnap.NewFromDiff -gt $rwNewByPostedAt) { $rwSnap.NewFromDiff } else { $rwNewByPostedAt }
-$rwSoldToday   = if ($null -ne $rwSnap.SoldFromDiff -and $rwSnap.PrevCount -ge 10000) { $rwSnap.SoldFromDiff } else { 0 }
+$rwSnap        = Compare-And-SaveSnapshot "reitwagen" @($rwSeenIds.Keys)
+$rwNewToday    = $rwNewByPostedAt
+$rwSoldToday   = if ($PrevRec -and [int]$PrevRec.reitwagenCount -ge 1000) { [Math]::Max(0, ([int]$PrevRec.reitwagenCount + $rwNewToday - $rwTotalCount)) } else { 0 }
 $rwTurnoverPct = if ($rwTotalCount -gt 0) { [math]::Round(($rwSoldToday / $rwTotalCount) * 100, 2) } else { 0 }
 
 Write-Host "   -> Reitwagen Total=$rwTotalCount (<=299cc: $rwUnder300Count, >=300cc: $rwOver300Count), NewToday=$rwNewToday, SoldToday=$rwSoldToday" -ForegroundColor Green
@@ -712,7 +742,7 @@ try {
                 try {
                     $dto = [DateTimeOffset]::Parse([string]$g.postedAt).ToOffset([TimeSpan]::FromHours(9))
                     $postedKst = $dto.ToString("yyyy-MM-dd HH:mm")
-                    if ($dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $passoNewByPostedAt++ }
+                    if ($dto -gt $NewSinceCutoff -or $dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $passoNewByPostedAt++ }
                 } catch { $postedKst = [string]$g.postedAt }
             }
 
@@ -741,7 +771,7 @@ if ($passoTotalCount -eq 0) { $passoTotalCount = $passoNormItems.Count }
 $passoPortfolio   = Build-BikePortfolioSummary $passoNormItems.ToArray() $passoUnder300Count $passoOver300Count
 $passoSnap        = Compare-And-SaveSnapshot "passo_used" @($passoSeenIds.Keys)
 $passoNewToday    = $passoNewByPostedAt
-$passoSoldToday   = if ($null -ne $passoSnap.SoldFromDiff -and $passoSnap.PrevCount -ge 500) { $passoSnap.SoldFromDiff } else { 0 }
+$passoSoldToday   = if ($PrevRec -and [int]$PrevRec.passoCount -ge 1000) { [Math]::Max(0, ([int]$PrevRec.passoCount + $passoNewToday - $passoTotalCount)) } else { 0 }
 $passoTurnoverPct = if ($passoTotalCount -gt 0) { [math]::Round(($passoSoldToday / $passoTotalCount) * 100, 2) } else { 0 }
 
 Write-Host "   -> Passo Used Total=$passoTotalCount (<=299cc: $passoUnder300Count, >=300cc: $passoOver300Count), NewToday=$passoNewToday, SoldToday=$passoSoldToday" -ForegroundColor Green
@@ -797,7 +827,7 @@ foreach ($bm in $batumaeMenus) {
                 $saleStat = if ($a.productSale) { [string]$a.productSale.saleStatus } else { "" }
                 $isSold = ($subj -match '판매\s*완료|거래\s*완료|판완|완료됨|판매\s*중지된') -or ($head -match '완료') -or ($saleStat -eq 'SOLD_OUT')
 
-                if ($wDate -eq $TodayDate) {
+                if ($dtObj -gt $NewSinceCutoff -or $wDate -eq $TodayDate) {
                     $btNewTodayCount++
                     if ($isSold) { $btSoldTaggedToday++ }
                 }
@@ -858,10 +888,7 @@ if ($btPrevFiles.Count -gt 0) {
 
 $btSnapItems = @($btActiveMap.GetEnumerator() | ForEach-Object { [ordered]@{ id = $_.Key; writeDate = $_.Value } })
 $btSnapObj = [ordered]@{ date = $TodayDate; updatedAt = $Timestamp; count = $btActiveMap.Count; items = $btSnapItems }
-$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 $btSnapJson = $btSnapObj | ConvertTo-Json -Depth 4 -Compress
-[System.IO.File]::WriteAllText($btSnapTodayPath, $btSnapJson, $utf8NoBom)
-[System.IO.File]::WriteAllText($btSnapLatestPath, $btSnapJson, $utf8NoBom)
 
 $btTotalCount  = $btUnder300Count + $btOver300Count
 $btPortfolio   = Build-BikePortfolioSummary $btNormItems.ToArray() $btUnder300Count $btOver300Count
@@ -877,8 +904,23 @@ Write-Host "   -> Batumae 30d Active Personal Total=$btTotalCount (<=299cc: $btU
 Write-Host "5. K Car Bike Slot: Reserved as placeholder (Service not active, numbers omitted)." -ForegroundColor DarkGray
 
 # ==============================================================================
-# 6. SAVE DAILY RAW CSV & BUILD CUMULATIVE MASTER DB (database/)
+# 6. 4-PLATFORM COMPLETENESS GUARD & PERSIST SNAPSHOTS + DAILY RAW CSV
 # ==============================================================================
+if ($daangnTotalCount -lt 1000 -or $rwTotalCount -lt 1000 -or $passoTotalCount -lt 1000 -or $btTotalCount -lt 500) {
+    $guardMsg = "Daangn=$daangnTotalCount, Reitwagen=$rwTotalCount, Passo=$passoTotalCount, Batumae=$btTotalCount"
+    throw "[$Timestamp] Incomplete 4-platform motorcycle collection ($guardMsg). Aborting before writing files so clean DB records are preserved."
+}
+
+[System.IO.File]::WriteAllLines($daangnUrlCsvPath, $daangnAllUrlLines, $utf8Bom)
+foreach ($sn in @($daangnSnap, $rwSnap, $passoSnap)) {
+    if ($null -ne $sn -and $sn.Count -gt 0) {
+        [System.IO.File]::WriteAllText($sn.TodaySnapPath, $sn.SnapJson, $utf8NoBom)
+        [System.IO.File]::WriteAllText($sn.LatestSnapPath, $sn.SnapJson, $utf8NoBom)
+    }
+}
+[System.IO.File]::WriteAllText($btSnapTodayPath, $btSnapJson, $utf8NoBom)
+[System.IO.File]::WriteAllText($btSnapLatestPath, $btSnapJson, $utf8NoBom)
+
 $rawCsvToday  = Join-Path $RawDir "raw_bikes_$($TodayDate).csv"
 $rawCsvLatest = Join-Path $RawDir "raw_bikes_latest.csv"
 $rawHeader = U "\uC218\uC9D1\uC77C\uC790,\uD50C\uB7AB\uD3FC,\uB9E4\uBB3CID,\uBC30\uAE30\uB7C9_cc,\uBC30\uAE30\uB7C9\uAD6C\uBD84,\uBE0C\uB79C\uB4DC_\uC81C\uC870\uC0AC,\uBAA8\uB378\uBA85,\uC804\uCCB4\uB9E4\uBB3C\uBA85,\uC5F0\uC2DD,\uC8FC\uD589\uAC70\uB9AC_km,\uD310\uB9E4\uAC00\uACA9_\uB9CC\uC6D0,\uAC00\uACA9\uB300\uAD6C\uAC04,\uC9C0\uC5ED_\uC2DC\uB3C4,\uAC70\uB798\uC720\uD615,\uD310\uB9E4\uC0C1\uD0DC,\uB4F1\uB85D\uC77C\uC2DC,\uC0C1\uC138URL"
@@ -897,18 +939,9 @@ foreach ($v in $allRawBikes) {
 [System.IO.File]::WriteAllLines($rawCsvLatest, $rawLines, $utf8Bom)
 
 # ==============================================================================
-# 7. MERGE DAILY RECORD & BUILD DATE-SPECIFIC PORTFOLIOS + ARCHIVE MANIFEST
+# 7. MERGE DAILY SUMMARY DB + DEDUPLICATED CUMULATIVE MASTER DB + INCREMENTAL BUNDLE
 # ==============================================================================
-$records = @()
-if (Test-Path $JsonPath) {
-    try {
-        $existingRaw = [System.IO.File]::ReadAllText($JsonPath, [System.Text.Encoding]::UTF8)
-        $parsed = $existingRaw | ConvertFrom-Json
-        if ($parsed -is [System.Array]) { $records = @($parsed) }
-        elseif ($null -ne $parsed) { $records = @($parsed) }
-    } catch { $records = @() }
-}
-
+$records = @($ExistingRecords)
 $defaultMemo = U "5\uB300 \uC624\uD1A0\uBC14\uC774 \uD50C\uB7AB\uD3FC (\uB2F9\uADFC \uCD5C\uC18C\uCE58 \u00B7 \uB77C\uC774\uD2B8\uBC14\uAC90 \u00B7 \uD30C\uC3D8 \u00B7 \uBC14\uD29C\uB9E4 \u00B7 \uCF00\uC774\uCE74 \uBE48\uCE78) \uC790\uB3D9 \uC218\uC9D1"
 
 $newEntry = [ordered]@{
@@ -1022,107 +1055,351 @@ foreach ($r in $sortedRecords) {
 [System.IO.File]::WriteAllLines($CsvPath, $csvLines, $utf8Bom)
 [System.IO.File]::WriteAllLines((Join-Path $DbDir "bike_daily_summary_db.csv"), $csvLines, $utf8Bom)
 
-# Build Master Vehicle DB CSV + Date-Specific Portfolio Bundle + Archive Manifest
-function Parse-BikeRawCsv([string]$csvPath) {
-    $rows = Import-Csv -Path $csvPath -Encoding UTF8
+# Fast CSV splitter (100x faster than Import-Csv for large master DB & backfill)
+$csvSplitRx = [regex]::new('(?:^|,)(?:"((?:[^"]|"")*)"|([^,]*))', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+function Split-CsvRow([string]$ln) {
+    $ms = $csvSplitRx.Matches($ln)
+    $arr = New-Object 'string[]' $ms.Count
+    for ($k = 0; $k -lt $ms.Count; $k++) {
+        $m = $ms[$k]
+        $arr[$k] = if ($m.Groups[1].Success) { $m.Groups[1].Value -replace '""', '"' } else { $m.Groups[2].Value }
+    }
+    return ,$arr
+}
+
+function Parse-BikeRawCsvFast([string]$csvPath) {
+    $lines = [System.IO.File]::ReadAllLines($csvPath, [System.Text.Encoding]::UTF8)
     $list = New-Object System.Collections.Generic.List[object]
-    foreach ($r in $rows) {
-        $props = @($r.PSObject.Properties)
-        if ($props.Count -lt 17) { continue }
+    for ($li = 1; $li -lt $lines.Length; $li++) {
+        $ln = $lines[$li]
+        if (-not $ln) { continue }
+        $c = Split-CsvRow $ln
+        if ($c.Length -lt 17) { continue }
+        $ccNum = 0; [void][int]::TryParse(($c[3] -replace '[^\d]',''), [ref]$ccNum)
+        $kmNum = 0; [void][int]::TryParse(($c[9] -replace '[^\d]',''), [ref]$kmNum)
+        $prNum = 0; [void][int]::TryParse(($c[10] -replace '[^\d]',''), [ref]$prNum)
         $list.Add([pscustomobject][ordered]@{
-            collectedDate = $props[0].Value
-            platform      = $props[1].Value
-            bikeId        = $props[2].Value
-            cc            = [int]($props[3].Value -replace '[^\d]','')
-            ccGroup       = $props[4].Value
-            manufacturer  = $props[5].Value
-            model         = $props[6].Value
-            fullTitle     = $props[7].Value
-            year          = $props[8].Value
-            mileageKm     = [int]($props[9].Value -replace '[^\d]','')
-            priceManwon   = [int]($props[10].Value -replace '[^\d]','')
-            priceBand     = $props[11].Value
-            sido          = $props[12].Value
-            sellType      = $props[13].Value
-            status        = $props[14].Value
-            registeredAt  = $props[15].Value
-            url           = $props[16].Value
+            collectedDate = $c[0]; platform = $c[1]; bikeId = $c[2]
+            cc = $ccNum; ccGroup = $c[4]; manufacturer = $c[5]; model = $c[6]
+            fullTitle = $c[7]; year = $c[8]; mileageKm = $kmNum
+            priceManwon = $prNum; priceBand = $c[11]; sido = $c[12]
+            sellType = $c[13]; status = $c[14]; registeredAt = $c[15]; url = $c[16]
         })
     }
     return $list
 }
 
-$rawFiles = @(Get-ChildItem -Path $RawDir -Filter "raw_bikes_20*.csv" | Sort-Object Name)
-$masterLines = New-Object System.Collections.Generic.List[string]
-$portfolioByDate = [ordered]@{}
-$allHistoricalItems = New-Object System.Collections.Generic.List[object]
-$manifestEntries = New-Object System.Collections.Generic.List[object]
+# 7A. Build Deduplicated Cumulative Master Vehicle DB (database/bike_vehicle_master_db.csv)
+#     Keyed by (platform|bikeId) with firstSeenDate, lastSeenDate, and lifecycle status (active vs ended).
+#     Includes an 80 MB automatic archive rollover so GitHub's 100 MB file limit is never reached.
+$masterDbPath  = Join-Path $DbDir "bike_vehicle_master_db.csv"
+$masterHeader  = U "\uCD5C\uCD08\uC218\uC9D1\uC77C,\uCD5C\uC885\uD655\uC778\uC77C,\uD50C\uB7AB\uD3FC,\uB9E4\uBB3CID,\uBC30\uAE30\uB7C9_cc,\uBC30\uAE30\uB7C9\uAD6C\uBD84,\uBE0C\uB79C\uB4DC_\uC81C\uC870\uC0AC,\uBAA8\uB378\uBA85,\uC804\uCCB4\uB9E4\uBB3C\uBA85,\uC5F0\uC2DD,\uC8FC\uD589\uAC70\uB9AC_km,\uD310\uB9E4\uAC00\uACA9_\uB9CC\uC6D0,\uAC00\uACA9\uB300\uAD6C\uAC04,\uC9C0\uC5ED_\uC2DC\uB3C4,\uAC70\uB798\uC720\uD615,\uD310\uB9E4\uC0C1\uD0DC,\uB4F1\uB85D\uC77C\uC2DC,\uC0C1\uC138URL"
+$masterDict    = [ordered]@{}
 
-for ($fIdx = 0; $fIdx -lt $rawFiles.Count; $fIdx++) {
-    $rf = $rawFiles[$fIdx]
-    $dStr = ($rf.BaseName -replace '^raw_bikes_', '')
-    $lines = [System.IO.File]::ReadAllLines($rf.FullName, [System.Text.Encoding]::UTF8)
-    $startIdx = if ($fIdx -eq 0) { 0 } else { 1 }
-    for ($li = $startIdx; $li -lt $lines.Length; $li++) { $masterLines.Add($lines[$li]) }
-
-    $dayItems = @(Parse-BikeRawCsv $rf.FullName)
-    foreach ($di in $dayItems) { $allHistoricalItems.Add($di) }
-
-    $recD = $recByDateMap[$dStr]
-    $dgItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_DAANGN })
-    $rwItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_RW })
-    $psItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_PASSO })
-    $btItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_BT })
-
-    $portfolioByDate[$dStr] = [ordered]@{
-        updatedAt = if ($recD) { $recD.updatedAt } else { $dStr }
-        daangn    = Build-BikePortfolioSummary $dgItemsD $(if ($recD -and $recD.daangnUnder300Count) { [int]$recD.daangnUnder300Count } else { 0 }) $(if ($recD -and $recD.daangnOver300Count) { [int]$recD.daangnOver300Count } else { 0 })
-        reitwagen = Build-BikePortfolioSummary $rwItemsD $(if ($recD) { [int]$recD.reitwagenUnder300Count } else { 0 }) $(if ($recD) { [int]$recD.reitwagenOver300Count } else { 0 })
-        passo     = Build-BikePortfolioSummary $psItemsD $(if ($recD) { [int]$recD.passoUnder300Count } else { 0 }) $(if ($recD) { [int]$recD.passoOver300Count } else { 0 })
-        batumae   = Build-BikePortfolioSummary $btItemsD $(if ($recD) { [int]$recD.batumaeUnder300Count } else { 0 }) $(if ($recD) { [int]$recD.batumaeOver300Count } else { 0 })
-        kcar      = [ordered]@{ notOperated = $true; sampleSize = 0 }
+function Upsert-MasterRowFromCols([string[]]$cols, [bool]$is18Col) {
+    if ($is18Col) {
+        if ($cols.Length -lt 18) { return }
+        $fDate = $cols[0]; $lDate = $cols[1]; $plat = $cols[2]; $bid = $cols[3]
+        $off = 1
+    } else {
+        if ($cols.Length -lt 17) { return }
+        $fDate = $cols[0]; $lDate = $cols[0]; $plat = $cols[1]; $bid = $cols[2]
+        $off = 0
     }
-
-    $urlRel = if (Test-Path (Join-Path $RawDir "daangn_bike_urls_$dStr.csv")) { "raw_data/daangn_bike_urls_$dStr.csv" } else { "" }
-    $manifestEntries.Add([ordered]@{
-        date           = $dStr
-        updatedAt      = if ($recD) { $recD.updatedAt } else { $dStr }
-        rawCsvPath     = "raw_data/raw_bikes_$dStr.csv"
-        daangnUrlPath  = $urlRel
-        bikeCount      = $dayItems.Count
-        daangnCount    = $dgItemsD.Count
-        reitwagenCount = $rwItemsD.Count
-        passoCount     = $psItemsD.Count
-        batumaeCount   = $btItemsD.Count
-    })
+    if (-not $plat -or -not $bid) { return }
+    $key = "$plat|$bid"
+    if ($masterDict.Contains($key)) {
+        $ex = $masterDict[$key]
+        if ($fDate -lt $ex.firstSeen) { $fDate = $ex.firstSeen }
+    }
+    $masterDict[$key] = [pscustomobject]@{
+        firstSeen    = $fDate
+        lastSeen     = $lDate
+        platform     = $plat
+        bikeId       = $bid
+        cc           = $cols[3 + $off]
+        ccGroup      = $cols[4 + $off]
+        manufacturer = $cols[5 + $off]
+        model        = $cols[6 + $off]
+        fullTitle    = $cols[7 + $off]
+        year         = $cols[8 + $off]
+        mileageKm    = $cols[9 + $off]
+        priceText    = $cols[10 + $off]
+        priceBand    = $cols[11 + $off]
+        sido         = $cols[12 + $off]
+        sellType     = $cols[13 + $off]
+        status       = $cols[14 + $off]
+        registeredAt = $cols[15 + $off]
+        url          = $cols[16 + $off]
+    }
 }
 
-$masterDbPath = Join-Path $DbDir "bike_vehicle_master_db.csv"
-[System.IO.File]::WriteAllLines($masterDbPath, $masterLines, $utf8Bom)
+if (Test-Path $masterDbPath) {
+    $mLines = [System.IO.File]::ReadAllLines($masterDbPath, [System.Text.Encoding]::UTF8)
+    if ($mLines.Length -gt 1) {
+        $firstHdr = $mLines[0].TrimStart([char]0xFEFF)
+        $is18 = $firstHdr.StartsWith((U "\uCD5C\uCD08\uC218\uC9D1\uC77C,"))
+        if ($is18) {
+            for ($mi = 1; $mi -lt $mLines.Length; $mi++) {
+                if ($mLines[$mi]) { Upsert-MasterRowFromCols (Split-CsvRow $mLines[$mi]) $true }
+            }
+        } else {
+            # One-time migration from 17-column historical CSV files
+            $priorRawFiles = @(Get-ChildItem -Path $RawDir -Filter "raw_bikes_20*.csv" | Where-Object { $_.Name -ne "raw_bikes_$($TodayDate).csv" } | Sort-Object Name)
+            foreach ($prf in $priorRawFiles) {
+                $pLines = [System.IO.File]::ReadAllLines($prf.FullName, [System.Text.Encoding]::UTF8)
+                for ($pi = 1; $pi -lt $pLines.Length; $pi++) {
+                    if ($pLines[$pi]) { Upsert-MasterRowFromCols (Split-CsvRow $pLines[$pi]) $false }
+                }
+            }
+        }
+    }
+}
 
+$todayKeySet = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($v in $allRawBikes) {
+    $k = "$($v.platform)|$($v.bikeId)"
+    [void]$todayKeySet.Add($k)
+    $fSeen = if ($masterDict.Contains($k)) { $masterDict[$k].firstSeen } else { $TodayDate }
+    $prcText = if ($v.priceManwon -gt 0) { [string]$v.priceManwon } else { "" }
+    $masterDict[$k] = [pscustomobject]@{
+        firstSeen    = $fSeen
+        lastSeen     = $TodayDate
+        platform     = [string]$v.platform
+        bikeId       = [string]$v.bikeId
+        cc           = [string]$v.cc
+        ccGroup      = [string]$v.ccGroup
+        manufacturer = [string]$v.manufacturer
+        model        = [string]$v.model
+        fullTitle    = [string]$v.fullTitle
+        year         = [string]$v.year
+        mileageKm    = [string]$v.mileageKm
+        priceText    = $prcText
+        priceBand    = [string]$v.priceBand
+        sido         = [string]$v.sido
+        sellType     = [string]$v.sellType
+        status       = [string]$v.status
+        registeredAt = [string]$v.registeredAt
+        url          = [string]$v.url
+    }
+}
+
+foreach ($entry in $masterDict.Values) {
+    $k = "$($entry.platform)|$($entry.bikeId)"
+    if (-not $todayKeySet.Contains($k) -and $entry.lastSeen -lt $TodayDate) {
+        if ($entry.status -eq $KR_ONSALE -or $entry.status -eq $KR_RESERVED) {
+            $entry.status = $KR_ENDED
+        }
+    }
+}
+
+function Format-MasterCsvLine($m) {
+    return "{0},{1},`"{2}`",`"{3}`",{4},`"{5}`",`"{6}`",`"{7}`",`"{8}`",`"{9}`",{10},{11},`"{12}`",`"{13}`",`"{14}`",`"{15}`",`"{16}`",`"{17}`"" -f `
+        $m.firstSeen, $m.lastSeen, $m.platform, ($m.bikeId -replace '"','""'), $m.cc, $m.ccGroup, `
+        ($m.manufacturer -replace '"','""'), ($m.model -replace '"','""'), ($m.fullTitle -replace '"','""'), `
+        $m.year, $m.mileageKm, $m.priceText, $m.priceBand, ($m.sido -replace '"','""'), `
+        $m.sellType, $m.status, $m.registeredAt, $m.url
+}
+
+$masterOutLines = New-Object System.Collections.Generic.List[string]
+$masterOutLines.Add($masterHeader)
+foreach ($m in $masterDict.Values) { $masterOutLines.Add((Format-MasterCsvLine $m)) }
+
+# Safety valve: if master DB ever exceeds 80 MB (~200k+ unique motorcycles), archive older ended listings so file stays well under GitHub's 100 MB limit
+$approxMasterBytes = $masterOutLines.Count * 380
+if ($approxMasterBytes -gt 80MB) {
+    $archivePath = Join-Path $DbDir "bike_vehicle_master_archive_$($NowKst.Year).csv"
+    $archCutoff  = $NowKst.AddDays(-90).ToString("yyyy-MM-dd")
+    $archLines   = New-Object System.Collections.Generic.List[string]
+    if (-not (Test-Path $archivePath)) { $archLines.Add($masterHeader) }
+    $trimmedLines = New-Object System.Collections.Generic.List[string]
+    $trimmedLines.Add($masterHeader)
+    foreach ($m in $masterDict.Values) {
+        $ln = Format-MasterCsvLine $m
+        if ($m.status -eq $KR_ENDED -and $m.lastSeen -lt $archCutoff) { $archLines.Add($ln) }
+        else { $trimmedLines.Add($ln) }
+    }
+    if ($archLines.Count -gt 0) { [System.IO.File]::AppendAllLines($archivePath, $archLines, $utf8Bom) }
+    $masterOutLines = $trimmedLines
+}
+[System.IO.File]::WriteAllLines($masterDbPath, $masterOutLines, $utf8Bom)
+
+# 7B. Incremental Date-Specific Portfolio Cache (database/portfolio_by_date.json) & Archive Manifest (database/db_manifest.json)
+$pfCachePath  = Join-Path $DbDir "portfolio_by_date.json"
 $manifestPath = Join-Path $DbDir "db_manifest.json"
+
+$cachedPfMap = @{}
+if (Test-Path $pfCachePath) {
+    try {
+        $pfRawObj = [System.IO.File]::ReadAllText($pfCachePath, [System.Text.Encoding]::UTF8) | ConvertFrom-Json
+        foreach ($prop in $pfRawObj.PSObject.Properties) {
+            if ($prop.Name -ne "ALL" -and $prop.Name -match '^20\d{2}-\d{2}-\d{2}$') {
+                $cachedPfMap[$prop.Name] = $prop.Value
+            }
+        }
+    } catch {}
+}
+
+$cachedManifestMap = @{}
+if (Test-Path $manifestPath) {
+    try {
+        $mRawObj = [System.IO.File]::ReadAllText($manifestPath, [System.Text.Encoding]::UTF8) | ConvertFrom-Json
+        foreach ($me in @($mRawObj)) {
+            if ($me -and $me.date) { $cachedManifestMap[[string]$me.date] = $me }
+        }
+    } catch {}
+}
+
+$rawFiles = @(Get-ChildItem -Path $RawDir -Filter "raw_bikes_20*.csv" | Sort-Object Name)
+$portfolioByDate = [ordered]@{}
+$manifestEntries = New-Object System.Collections.Generic.List[object]
+
+foreach ($rf in $rawFiles) {
+    $dStr = ($rf.BaseName -replace '^raw_bikes_', '')
+    $recD = $recByDateMap[$dStr]
+    $urlRel = if (Test-Path (Join-Path $RawDir "daangn_bike_urls_$dStr.csv")) { "raw_data/daangn_bike_urls_$dStr.csv" } else { "" }
+
+    if ($dStr -eq $TodayDate) {
+        $portfolioByDate[$dStr] = [ordered]@{
+            updatedAt = $Timestamp
+            daangn    = $daangnPortfolio
+            reitwagen = $rwPortfolio
+            passo     = $passoPortfolio
+            batumae   = $btPortfolio
+            kcar      = [ordered]@{ notOperated = $true; sampleSize = 0 }
+        }
+        $manifestEntries.Add([ordered]@{
+            date           = $dStr
+            updatedAt      = $Timestamp
+            rawCsvPath     = "raw_data/raw_bikes_$dStr.csv"
+            daangnUrlPath  = $urlRel
+            bikeCount      = $allRawBikes.Count
+            daangnCount    = $daangnNormItems.Count
+            reitwagenCount = $rwNormItems.Count
+            passoCount     = $passoNormItems.Count
+            batumaeCount   = $btNormItems.Count
+        })
+    } elseif ($cachedPfMap.ContainsKey($dStr) -and $cachedManifestMap.ContainsKey($dStr)) {
+        $portfolioByDate[$dStr] = $cachedPfMap[$dStr]
+        $manifestEntries.Add($cachedManifestMap[$dStr])
+    } else {
+        $dayItems = @(Parse-BikeRawCsvFast $rf.FullName)
+        $dgItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_DAANGN })
+        $rwItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_RW })
+        $psItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_PASSO })
+        $btItemsD = @($dayItems | Where-Object { $_.platform -eq $PLAT_BT })
+
+        $portfolioByDate[$dStr] = [ordered]@{
+            updatedAt = if ($recD) { $recD.updatedAt } else { $dStr }
+            daangn    = Build-BikePortfolioSummary $dgItemsD $(if ($recD -and $recD.daangnUnder300Count) { [int]$recD.daangnUnder300Count } else { 0 }) $(if ($recD -and $recD.daangnOver300Count) { [int]$recD.daangnOver300Count } else { 0 })
+            reitwagen = Build-BikePortfolioSummary $rwItemsD $(if ($recD) { [int]$recD.reitwagenUnder300Count } else { 0 }) $(if ($recD) { [int]$recD.reitwagenOver300Count } else { 0 })
+            passo     = Build-BikePortfolioSummary $psItemsD $(if ($recD) { [int]$recD.passoUnder300Count } else { 0 }) $(if ($recD) { [int]$recD.passoOver300Count } else { 0 })
+            batumae   = Build-BikePortfolioSummary $btItemsD $(if ($recD) { [int]$recD.batumaeUnder300Count } else { 0 }) $(if ($recD) { [int]$recD.batumaeOver300Count } else { 0 })
+            kcar      = [ordered]@{ notOperated = $true; sampleSize = 0 }
+        }
+        $manifestEntries.Add([ordered]@{
+            date           = $dStr
+            updatedAt      = if ($recD) { $recD.updatedAt } else { $dStr }
+            rawCsvPath     = "raw_data/raw_bikes_$dStr.csv"
+            daangnUrlPath  = $urlRel
+            bikeCount      = $dayItems.Count
+            daangnCount    = $dgItemsD.Count
+            reitwagenCount = $rwItemsD.Count
+            passoCount     = $psItemsD.Count
+            batumaeCount   = $btItemsD.Count
+        })
+    }
+}
+
+function Merge-PlatformPortfolios([object[]]$pfList) {
+    $sampleSum = 0; $pricedSum = 0; $weightedPrcSum = 0.0; $uSum = 0; $oSum = 0
+    $pbMap = [ordered]@{ $PB_1 = 0; $PB_2 = 0; $PB_3 = 0; $PB_4 = 0; $PB_5 = 0 }
+    $btMap = [ordered]@{ $BT_SCOOTER = 0; $BT_NAKED = 0; $BT_SPORT = 0; $BT_TOURER = 0; $BT_CRUISER = 0; $BT_CLASSIC = 0; $BT_OTHER = 0 }
+    $regMap = @{}; $modMap = @{}; $brdMap = @{}
+
+    foreach ($p in $pfList) {
+        if (-not $p) { continue }
+        $s = [int]$p.sampleSize
+        $ps = if ($null -ne $p.pricedSampleSize) { [int]$p.pricedSampleSize } else { $s }
+        $sampleSum += $s; $pricedSum += $ps
+        $weightedPrcSum += ([double]$p.avgPriceManwon * $ps)
+        $uSum += [int]$p.under300Count; $oSum += [int]$p.over300Count
+
+        if ($p.priceBands) {
+            foreach ($prp in $p.priceBands.PSObject.Properties) {
+                if ($pbMap.Contains($prp.Name)) { $pbMap[$prp.Name] = [int]$pbMap[$prp.Name] + [int]$prp.Value }
+            }
+            if ($p.priceBands -is [System.Collections.IDictionary]) {
+                foreach ($k in $p.priceBands.Keys) {
+                    if ($pbMap.Contains($k)) { $pbMap[$k] = [int]$pbMap[$k] + [int]$p.priceBands[$k] }
+                }
+            }
+        }
+        if ($p.bikeTypes) {
+            foreach ($prp in $p.bikeTypes.PSObject.Properties) {
+                if ($btMap.Contains($prp.Name)) { $btMap[$prp.Name] = [int]$btMap[$prp.Name] + [int]$prp.Value }
+            }
+            if ($p.bikeTypes -is [System.Collections.IDictionary]) {
+                foreach ($k in $p.bikeTypes.Keys) {
+                    if ($btMap.Contains($k)) { $btMap[$k] = [int]$btMap[$k] + [int]$p.bikeTypes[$k] }
+                }
+            }
+        }
+        foreach ($it in @($p.topRegions)) { if ($it -and $it.name) { $regMap[[string]$it.name] = [int]$regMap[[string]$it.name] + [int]$it.count } }
+        foreach ($it in @($p.topModels))  { if ($it -and $it.name) { $modMap[[string]$it.name] = [int]$modMap[[string]$it.name] + [int]$it.count } }
+        foreach ($it in @($p.topBrands))  { if ($it -and $it.name) { $brdMap[[string]$it.name] = [int]$brdMap[[string]$it.name] + [int]$it.count } }
+    }
+
+    $ccTot = [Math]::Max(1, ($uSum + $oSum))
+    return [ordered]@{
+        sampleSize       = $sampleSum
+        pricedSampleSize = $pricedSum
+        under300Count    = $uSum
+        over300Count     = $oSum
+        under300Ratio    = [math]::Round(($uSum / $ccTot) * 100, 1)
+        over300Ratio     = [math]::Round(($oSum / $ccTot) * 100, 1)
+        avgPriceManwon   = if ($pricedSum -gt 0) { [int][math]::Round($weightedPrcSum / $pricedSum) } else { 0 }
+        priceBands       = $pbMap
+        bikeTypes        = $btMap
+        topRegions       = @($regMap.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 8  | ForEach-Object { [ordered]@{ name = $_.Key; count = $_.Value } })
+        topModels        = @($modMap.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 10 | ForEach-Object { [ordered]@{ name = $_.Key; count = $_.Value } })
+        topBrands        = @($brdMap.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 8  | ForEach-Object { [ordered]@{ name = $_.Key; count = $_.Value } })
+    }
+}
+
+$dateKeysOnly = @($portfolioByDate.Keys)
+$portfolioByDate["ALL"] = [ordered]@{
+    updatedAt = "ALL"
+    daangn    = Merge-PlatformPortfolios @($dateKeysOnly | ForEach-Object { $portfolioByDate[$_].daangn })
+    reitwagen = Merge-PlatformPortfolios @($dateKeysOnly | ForEach-Object { $portfolioByDate[$_].reitwagen })
+    passo     = Merge-PlatformPortfolios @($dateKeysOnly | ForEach-Object { $portfolioByDate[$_].passo })
+    batumae   = Merge-PlatformPortfolios @($dateKeysOnly | ForEach-Object { $portfolioByDate[$_].batumae })
+    kcar      = [ordered]@{ notOperated = $true; sampleSize = 0 }
+}
+
+$pfByDateJson = $portfolioByDate | ConvertTo-Json -Depth 7
+[System.IO.File]::WriteAllText($pfCachePath, $pfByDateJson, $utf8NoBom)
+
 $manifestJson = ConvertTo-Json -InputObject @($manifestEntries.ToArray()) -Depth 4
 if ($manifestEntries.Count -eq 1 -and -not $manifestJson.TrimStart().StartsWith("[")) {
     $manifestJson = "[`r`n" + $manifestJson + "`r`n]"
 }
 [System.IO.File]::WriteAllText($manifestPath, $manifestJson, $utf8NoBom)
 
-$allArr = $allHistoricalItems.ToArray()
-$portfolioByDate["ALL"] = [ordered]@{
-    updatedAt = "ALL"
-    daangn    = Build-BikePortfolioSummary @($allArr | Where-Object { $_.platform -eq $PLAT_DAANGN }) $daangnUnder300 $daangnOver300
-    reitwagen = Build-BikePortfolioSummary @($allArr | Where-Object { $_.platform -eq $PLAT_RW }) $rwUnder300Count $rwOver300Count
-    passo     = Build-BikePortfolioSummary @($allArr | Where-Object { $_.platform -eq $PLAT_PASSO }) $passoUnder300Count $passoOver300Count
-    batumae   = Build-BikePortfolioSummary @($allArr | Where-Object { $_.platform -eq $PLAT_BT }) $btUnder300Count $btOver300Count
-    kcar      = [ordered]@{ notOperated = $true; sampleSize = 0 }
+# Build snappy browser search preview (latest 2 dates up to 20,000 rows so JS bundle stays ~6-7 MB forever)
+$browserItems = New-Object System.Collections.Generic.List[object]
+if ($rawFiles.Count -ge 2) {
+    $prevRawFile = $rawFiles[$rawFiles.Count - 2]
+    if ($prevRawFile.Name -ne "raw_bikes_$($TodayDate).csv") {
+        foreach ($pi in @(Parse-BikeRawCsvFast $prevRawFile.FullName)) { $browserItems.Add($pi) }
+    }
 }
+foreach ($ti in $allRawBikes) { $browserItems.Add($ti) }
+$rawForBrowser  = @($browserItems.ToArray() | Select-Object -Last 20000)
+$rawBrowserJson = $rawForBrowser | ConvertTo-Json -Depth 4 -Compress
 
 $latestPortfolio = $portfolioByDate[$TodayDate]
-$pfLatestJson = $latestPortfolio | ConvertTo-Json -Depth 6
-$pfByDateJson = $portfolioByDate | ConvertTo-Json -Depth 7
-# Keep latest day's full RAW items + recent historical items (up to 18,000 rows) for snappy browser search
-$rawForBrowser = @($allArr | Select-Object -Last 18000)
-$rawBrowserJson = $rawForBrowser | ConvertTo-Json -Depth 4 -Compress
+$pfLatestJson    = $latestPortfolio | ConvertTo-Json -Depth 6
 
 $jsContent = @"
 // Auto-generated 5-Platform Used Motorcycle Apple-to-Apple Intelligence Bundle ($Timestamp)
@@ -1131,11 +1408,21 @@ window.COMPETITOR_TREND_DATA = $jsonOutput;
 window.COMPETITOR_PORTFOLIO_DATA = $pfLatestJson;
 window.COMPETITOR_PORTFOLIO_BY_DATE = $pfByDateJson;
 window.COMPETITOR_RAW_PREVIEW = $rawBrowserJson;
-window.COMPETITOR_RAW_TOTAL_COUNT = $($allArr.Count);
+window.COMPETITOR_RAW_TOTAL_COUNT = $($masterDict.Count);
 window.COMPETITOR_DB_ARCHIVE = $manifestJson;
 "@
 [System.IO.File]::WriteAllText($JsPath, $jsContent, $utf8NoBom)
 
-Write-Host "[$Timestamp] Completed! Today RAW Bikes: $($allRawBikes.Count) | Cumulative Master DB: $($allArr.Count)" -ForegroundColor Cyan
+# Stamp fresh cache-buster ?v=yyyyMMddHHmm into index.html & competitor_trend.html so repeat visitors never get stale cached JS
+foreach ($htmlName in @("index.html", "competitor_trend.html")) {
+    $hp = Join-Path $WorkDir $htmlName
+    if (Test-Path $hp) {
+        $ht = [System.IO.File]::ReadAllText($hp, [System.Text.Encoding]::UTF8)
+        $htNew = [regex]::Replace($ht, 'competitor_trend_data\.js(\?v=[^"'']+)?', "competitor_trend_data.js?v=$CacheVer")
+        if ($htNew -ne $ht) { [System.IO.File]::WriteAllText($hp, $htNew, $utf8NoBom) }
+    }
+}
+
+Write-Host "[$Timestamp] Completed! Today RAW Bikes: $($allRawBikes.Count) | Unique Cumulative Master DB: $($masterDict.Count)" -ForegroundColor Cyan
 Write-Host "  - Master DB CSV    : $masterDbPath"
 Write-Host "  - Daily Summary CSV: $CsvPath"
