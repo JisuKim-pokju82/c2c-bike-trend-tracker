@@ -32,6 +32,7 @@ $filesToUpload = @(
     "competitor_trend.csv",
     "competitor_trend.json",
     "competitor_trend_data.js",
+    "raw_data/raw_bikes_2026-11-16.csv",
     "raw_data/raw_bikes_$($TodayDate).csv",
     "raw_data/raw_bikes_latest.csv",
     "raw_data/daangn_bike_urls_$($TodayDate).csv",

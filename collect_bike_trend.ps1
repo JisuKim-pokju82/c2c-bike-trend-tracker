@@ -173,27 +173,27 @@ function Resolve-SidoFromCoords([double]$lat, [double]$lng, [string]$fallbackTex
 }
 
 $BrandRules = @(
-    @{ Brand = (U "\uD63C\uB2E4");      Pattern = '(?i)(혼다|honda|\bpcx|\bforza|포르자|슈퍼커브|슈퍼\s*커브|헌터커브|\bct125|\bc125\b|\bcb\d|\bcbr\d|호넷|레블|rebel|골드윙|x-?adv|\badv\s*\d|몽키\s*125|그롬|msx\s*125|닥스\s*125|\bdax\b|벤리|비전\s*110|\bscr\s*110|아프리카\s*트윈|\bcrf\d|\bcl\s*500|\bgb\s*350|\bnc\s*750|엘리트\s*125)' },
-    @{ Brand = (U "\uC57C\uB9C8\uD558"); Pattern = '(?i)(야마하|yamaha|\bnmax|엔맥스|\bxmax|엑스맥스|\btmax|티맥스|테크맥스|\bmt-?0|\bmt-?10|\bmt\s*0|\byzf|\br3\b|\br6\b|\br7\b|\br9\b|\br1\b|\bxsr|트리시티|에어로스|시그너스|복스|비노|테네레|페이저|\bfjr)' },
-    @{ Brand = "BMW";                   Pattern = '(?i)(\bbmw\b|\br\s*1200|\br\s*1250|\br\s*1300|\bs\s*1000|\bm\s*1000|\br\s*18\b|알나인티|r\s*nine\s*t|\br9t\b|\br\s*12\b|\bf\s*750|\bf\s*800|\bf\s*850|\bf\s*900|\bg\s*310|\bc\s*400|\bc\s*600|\bc\s*650|\bk\s*1600|\bce\s*04)' },
-    @{ Brand = (U "\uD560\uB9AC\uB370\uC774\uBE44\uC2A8"); Pattern = '(?i)(할리|harley|스트리트\s*밥|스글|스트리트\s*글라이드|로드\s*글라이드|로글|로드킹|팻보이|팻밥|브레이크\s*아웃|아이언\s*883|\b883\b|포티에잇|스포스터|나잇스터|팬\s*아메리카|로우\s*라이더|소프테일|울트라\s*리미티드|헤리티지)' },
-    @{ Brand = (U "\uC2A4\uC988\uD0A4"); Pattern = '(?i)(스즈키|스즈끼|suzuki|\bgsx|하야부사|브이스트롬|v-?strom|버그만|어드레스|\bnex\b|넥스\s*125|아베니스|스위시|카타나|\bsv\s*650|\bdr-?z)' },
-    @{ Brand = (U "\uAC00\uC640\uC0AC\uD0A4"); Pattern = '(?i)(가와사키|kawasaki|닌자|ninja|\bzx-?\d|\bz125|\bz400|\bz650|\bz900|\bz1000|버시스|발칸|엘리미네이터|\bw800|\bh2\b|메구로|\bklx)' },
-    @{ Brand = (U "\uB450\uCE74\uD2F0"); Pattern = '(?i)(두카티|ducati|파니갈레|스크램블러\s*아이콘|데저트\s*슬레드|데저트슬레드|멀티스트라다|디아벨|스트리트\s*파이터|하이퍼모타드|\b몬스터\s*\d)' },
-    @{ Brand = (U "\uBCA0\uC2A4\uD30C"); Pattern = '(?i)(베스파|vespa|피아지오|piaggio|\bgts\s*125|\bgts\s*300|프리마베라|스프린트|스플린터|\blx\s*125|메들리|비버리)' },
-    @{ Brand = (U "\uD2B8\uB77C\uC774\uC5C4\uD504"); Pattern = '(?i)(트라이엄프|triumph|본네빌|\bt100\b|\bt120\b|스피드\s*트윈|스트리트\s*트리플|스피드\s*트리플|타이거\s*\d|트라이던트|로켓\s*3|스피드\s*400|스크램블러\s*400|스크램블러\s*900|스크램블러\s*1200)' },
-    @{ Brand = (U "\uB85C\uC584\uC5D4\uD544\uB4DC"); Pattern = '(?i)(로얄엔필드|로열엔필드|royal\s*enfield|헌터\s*350|클래식\s*350|클래식\s*500|메테오|인터셉터|컨티넨탈\s*gt|히말라얀|샷건\s*650|게릴라\s*450)' },
-    @{ Brand = "KTM";                   Pattern = '(?i)(\bktm\b|듀크|duke|\brc\s*125|\brc\s*390|슈퍼\s*어드벤처|어드벤처\s*\d{3,4}|\b390\s*adv|슈퍼듀크|\bexc\b)' },
+    @{ Brand = (U "\uD63C\uB2E4");      Pattern = '(?i)(혼다|honda|(?<![a-z0-9])pcx|(?<![a-z0-9])forza|포르자|슈퍼커브|슈퍼\s*커브|헌터커브|(?<![a-z0-9])ct\s*125|(?<![a-z0-9])c\s*125(?![a-z0-9])|(?<![a-z0-9])cb\s*\d|(?<![a-z0-9])cbr\s*\d|호넷|레블|rebel|골드윙|x-?adv|(?<![a-z0-9])adv\s*(125|150|160|350)|몽키\s*125|그롬|(?<![a-z0-9])msx\s*125|닥스\s*125|(?<![a-z0-9])dax(?![a-z0-9])|벤리|비전\s*110|(?<![a-z0-9])scr\s*110|아프리카\s*트윈|(?<![a-z0-9])crf\s*\d|(?<![a-z0-9])cl\s*500|(?<![a-z0-9])gb\s*350|(?<![a-z0-9])nc\s*750|엘리트\s*125)' },
+    @{ Brand = (U "\uC57C\uB9C8\uD558"); Pattern = '(?i)(야마하|yamaha|(?<![a-z0-9])nmax|엔맥스|(?<![a-z0-9])xmax|엑스맥스|(?<![a-z0-9])tmax|티맥스|테크맥스|(?<![a-z0-9])mt-?0[379]|(?<![a-z0-9])mt-?10|(?<![a-z0-9])mt\s*0[379]|(?<![a-z0-9])yzf|(?<![a-z0-9])r3(?![a-z0-9])|(?<![a-z0-9])r6(?![a-z0-9])|(?<![a-z0-9])r7(?![a-z0-9])|(?<![a-z0-9])r9(?![a-z0-9])|(?<![a-z0-9])r1m?(?![a-z0-9])|(?<![a-z0-9])xsr\s*(125|700|900)|트리시티|에어로스|시그너스|비위즈|복스|비노|테네레|트레이서\s*9|페이저|(?<![a-z0-9])fjr)' },
+    @{ Brand = "BMW";                   Pattern = '(?i)((?<![a-z0-9])bmw(?![a-z0-9])|(?<![a-z0-9])r\s*1200|(?<![a-z0-9])r\s*1250|(?<![a-z0-9])r\s*1300|(?<![a-z0-9])s\s*1000|(?<![a-z0-9])m\s*1000|(?<![a-z0-9])r\s*18(?![a-z0-9])|알나인티|r\s*nine\s*t|(?<![a-z0-9])r9t(?![a-z0-9])|(?<![a-z0-9])r\s*12(?![a-z0-9])|(?<![a-z0-9])f\s*750|(?<![a-z0-9])f\s*800|(?<![a-z0-9])f\s*850|(?<![a-z0-9])f\s*900|(?<![a-z0-9])g\s*310|(?<![a-z0-9])c\s*400|(?<![a-z0-9])c\s*600|(?<![a-z0-9])c\s*650|(?<![a-z0-9])k\s*1600|(?<![a-z0-9])ce\s*04)' },
+    @{ Brand = (U "\uD560\uB9AC\uB370\uC774\uBE44\uC2A8"); Pattern = '(?i)(할리|harley|스트리트\s*밥|스글|스트리트\s*글라이드|로드\s*글라이드|로글|로드킹|팻보이|펫보이|팻밥|브레이크\s*아웃|아이언\s*883|(?<!\d)883(?!\d)|포티에잇|스포스터|나잇스터|팬\s*아메리카|로우\s*라이더|소프테일|울트라\s*리미티드|헤리티지)' },
+    @{ Brand = (U "\uC2A4\uC988\uD0A4"); Pattern = '(?i)(스즈키|스즈끼|suzuki|(?<![a-z0-9])gsx|하야부사|브이스트롬|v-?strom|버그만|어드레스|(?<![a-z0-9])nex(?![a-z0-9])|넥스\s*125|아베니스|스위시|카타나|(?<![a-z0-9])sv\s*650|(?<![a-z0-9])dr-?z)' },
+    @{ Brand = (U "\uAC00\uC640\uC0AC\uD0A4"); Pattern = '(?i)(가와사키|kawasaki|닌자|ninja|(?<![a-z0-9])zx-?\d|(?<![a-z0-9])z\s*125|(?<![a-z0-9])z\s*400|(?<![a-z0-9])z\s*650|(?<![a-z0-9])z\s*900|(?<![a-z0-9])z\s*1000|버시스|발칸|엘리미네이터|(?<![a-z0-9])w800|(?<![a-z0-9])h2(?![a-z0-9])|메구로|(?<![a-z0-9])klx)' },
+    @{ Brand = (U "\uB450\uCE74\uD2F0"); Pattern = '(?i)(두카티|ducati|파니갈레|스크램블러\s*아이콘|데저트\s*슬레드|데저트슬레드|멀티스트라다|디아벨|스트리트\s*파이터|하이퍼모타드|몬스터\s*(696|796|797|821|937|1200))' },
+    @{ Brand = (U "\uBCA0\uC2A4\uD30C"); Pattern = '(?i)(베스파|vespa|피아지오|piaggio|(?<![a-z0-9])gts\s*125|(?<![a-z0-9])gts\s*300|(?<![a-z0-9])gtv\s*300|프리마베라|스프린트|스플린터|(?<![a-z0-9])lx\s*125|메들리|비버리)' },
+    @{ Brand = (U "\uD2B8\uB77C\uC774\uC5C4\uD504"); Pattern = '(?i)(트라이엄프|triumph|본네빌|(?<![a-z0-9])t100(?![a-z0-9])|(?<![a-z0-9])t120(?![a-z0-9])|스피드\s*트윈|스트리트\s*트리플|스피드\s*트리플|타이거\s*(660|800|850|900|1200)|트라이던트|로켓\s*3|스피드\s*400|스크램블러\s*(400|900|1200))' },
+    @{ Brand = (U "\uB85C\uC584\uC5D4\uD544\uB4DC"); Pattern = '(?i)(로얄엔필드|로열엔필드|royal\s*enfield|헌터\s*350|클래식\s*350|클래식\s*500|메테오\s*(350|650)|슈퍼\s*메테오|인터셉터\s*650|컨티넨탈\s*gt|히말라얀|샷건\s*650|게릴라\s*450)' },
+    @{ Brand = "KTM";                   Pattern = '(?i)((?<![a-z0-9])ktm(?![a-z0-9])|듀크\s*(125|200|250|390|690|790|890|1290)|(?<![a-z0-9])duke\s*\d|(?<![a-z0-9])rc\s*125|(?<![a-z0-9])rc\s*390|슈퍼\s*어드벤처|390\s*어드벤처|슈퍼듀크|(?<![a-z0-9])exc(?![a-z0-9]))' },
     @{ Brand = (U "\uD5C8\uC2A4\uD06C\uBC14\uB098"); Pattern = '(?i)(허스크바나|husqvarna|스바르트필렌|비트필렌|노든\s*901)' },
-    @{ Brand = "SYM";                   Pattern = '(?i)(\bsym\b|보이저|보이져|크루심|조이맥스|맥심|\bdrg\b|\badx\b|젯14|피들)' },
-    @{ Brand = (U "\uD0B4\uCF54");      Pattern = '(?i)(킴코|kymco|다운타운|엑스타운|익사이팅|\bak\s*550|필리\s*125)' },
-    @{ Brand = (U "\uB514\uC5D4\uC5D0\uC774(DNA/\uB300\uB9BC)"); Pattern = '(?i)(대림|디엔에이|\bdna\b|시티베스트|시티에이스|유아이|데이스타|\bvf100|\buh115|엠보이|\bq2\b|\bq3\b)' },
-    @{ Brand = (U "KR\uBAA8\uD130\uC2A4"); Pattern = '(?i)(kr모터스|효성|아퀼라|미라쥬|코멧|엑시브|델피노)' },
-    @{ Brand = (U "\uC874\uD14C\uC2A4"); Pattern = '(?i)(존테스|zontes|\b350d\b|\b350e\b|\b350gk\b)' },
-    @{ Brand = (U "CF\uBAA8\uD130");    Pattern = '(?i)(cf모토|cfmoto|파피오|\b450sr|\b450mt|\b450nk|\b700cl|\b800mt)' },
-    @{ Brand = (U "\uC544\uD504\uB9B4\uB9AC\uC544"); Pattern = '(?i)(아프릴리아|aprilia|\brs\s*660|\brs\s*457|\brsv4|투오노|\bsr\s*gt)' },
-    @{ Brand = (U "\uC778\uB514\uC5B8"); Pattern = '(?i)(인디언|indian|스카우트|치프테인)' },
-    @{ Brand = (U "\uC774\uD0C8\uC82F/\uAE30\uD0C0\uC218\uC785"); Pattern = '(?i)(이탈젯|드래그스터|모토구찌|푸조|장고|몬디알|파가니|보그|voge|벤다|benda|트릭스|써론|탈라리아)' }
+    @{ Brand = "SYM";                   Pattern = '(?i)((?<![a-z0-9])sym(?![a-z0-9])|보이저|보이져|크루심|조이맥스|맥심\s*(400|600)|(?<![a-z0-9])drg(?![a-z0-9])|(?<![a-z0-9])adx(?![a-z0-9])|젯\s*14|피들)' },
+    @{ Brand = (U "\uD0B4\uCF54");      Pattern = '(?i)(킴코|kymco|다운타운|다운다운\s*300|엑스타운|익사이팅|(?<![a-z0-9])ak\s*550|필리\s*125)' },
+    @{ Brand = (U "\uB514\uC5D4\uC5D0\uC774(DNA/\uB300\uB9BC)"); Pattern = '(?i)(대림|디엔에이|디앤에이|(?<![a-z0-9])dna(?![a-z0-9])|시티베스트|시티에이스|유아이|데이스타|(?<![a-z0-9])vf100|(?<![a-z0-9])uh115|엠보이|(?<![a-z0-9])q2(?![a-z0-9])|(?<![a-z0-9])q3(?![a-z0-9])|(?<![a-z0-9])xq\s*(125|250))' },
+    @{ Brand = (U "KR\uBAA8\uD130\uC2A4"); Pattern = '(?i)(kr모터스|효성|아퀼라|미라쥬|코멧|엑시브|델피노|티니\s*110|라온\s*100)' },
+    @{ Brand = (U "\uC874\uD14C\uC2A4"); Pattern = '(?i)(존테스|zontes|(?<![a-z0-9])350d(?![a-z0-9])|(?<![a-z0-9])350e(?![a-z0-9])|(?<![a-z0-9])350gk(?![a-z0-9])|(?<![a-z0-9])368\s*g)' },
+    @{ Brand = (U "CF\uBAA8\uD130");    Pattern = '(?i)(cf모토|cfmoto|파피오|(?<![a-z0-9])450\s*sr|(?<![a-z0-9])450\s*mt|(?<![a-z0-9])450\s*nk|(?<![a-z0-9])700\s*cl|(?<![a-z0-9])800\s*mt)' },
+    @{ Brand = (U "\uC544\uD504\uB9B4\uB9AC\uC544"); Pattern = '(?i)(아프릴리아|aprilia|(?<![a-z0-9])rs\s*660|(?<![a-z0-9])rs\s*457|(?<![a-z0-9])rsv4|투오노|(?<![a-z0-9])sr\s*gt)' },
+    @{ Brand = (U "\uC778\uB514\uC5B8"); Pattern = '(?i)(인디언|indian|스카우트|치프테인|치프태인)' },
+    @{ Brand = (U "\uC774\uD0C8\uC82F/\uAE30\uD0C0\uC218\uC785"); Pattern = '(?i)(이탈젯|드래그스터|모토구찌|푸조\s*장고|몬디알|파가니|보그|voge|벤다|benda|베넬리|benelli|(?<![a-z0-9])tnt\s*125|슈퍼쏘코|supersoco|부캐너|모터스타|엘로이|한솜|베네트|베네타|하트포드|hartford|하우주|브릭스톤|람브레타|우랄|ural|빅토리아\s*xdv|고고로|(?<![a-z0-9])zeeho|지호|대동모빌리티|이누리|이륜테크|이디뚜뚜|캔암|스파이더|mv\s*아구스타|써론|surron|탈라리아)' }
 )
 
 $ReitwagenBrandIdMap = @{
@@ -240,21 +240,22 @@ function Infer-DisplacementCc([string]$titleText, [bool]$forceUnder125, [int]$de
     if ($t -match 'gts\s*300|베스파\s*300') { return 278 }
     if ($t -match '레블\s*300|rebel\s*300|cb\s*300|cbr\s*300|crf\s*300') { return 286 }
     if ($t -match '닌자\s*300|ninja\s*300|아퀼라\s*300') { return 296 }
-    if ($t -match '크루심\s*300|조이맥스\s*300|보이저\s*300|보이져\s*300|다운타운\s*300') { return 279 }
-    if ($t -match 'pcx|엔맥스|nmax|슈퍼\s*커브|헌터커브|ct125|\bc125\b|몽키\s*125|그롬|msx|닥스\s*125|벤리|비전\s*110|scr\s*110|어드레스|넥스\s*125|스위시|아베니스|보이저\s*125|보이져\s*125|크루심\s*125|시티베스트|시티에이스|프리마베라|스프린트|\bgts\s*125|필리\s*125|젯\s*14|파피오|스바르트필렌\s*125|\bgsx-?[rs]?\s*125|\bcb\s*125|\bcbr\s*125|전기\s*스쿠터|전기\s*오토바이') { return 125 }
-    if ($t -match 'adv\s*150|adv\s*160|트리시티|버그만\s*200|cbr\s*250|코멧\s*250|미라쥬\s*250|브이스트롬\s*250|\b250\s*cc|\b155\s*cc|\b160\s*cc|\b125\s*cc|\b110\s*cc|\b100\s*cc|\b50\s*cc') { return 180 }
-    if ($t -match '포르자\s*350|forza\s*350|adv\s*350|비버리\s*350|gb\s*350') { return 330 }
+    if ($t -match '크루심\s*300|조이맥스\s*300|보이저\s*300|보이져\s*300|다운타운\s*300|다운다운\s*300') { return 279 }
+    if ($t -match 'pcx|엔맥스|nmax|슈퍼\s*커브|헌터커브|ct\s*125|(?<![a-z0-9])c\s*125(?![a-z0-9])|몽키\s*125|그롬|msx|닥스\s*125|벤리|비전\s*110|scr\s*110|어드레스|넥스\s*125|스위시|아베니스|보이저\s*125|보이져\s*125|크루심\s*125|시티베스트|시티에이스|프리마베라|스프린트|(?<![a-z0-9])gts\s*125|필리\s*125|젯\s*14|파피오|스바르트필렌\s*125|(?<![a-z0-9])gsx-?[rs]?\s*125|(?<![a-z0-9])cb\s*125|(?<![a-z0-9])cbr\s*125|(?<![a-z0-9])tnt\s*125|부캐너\s*125|베네트\s*125|베네타\s*125|전기\s*스쿠터|전기\s*오토바이') { return 125 }
+    if ($t -match 'adv\s*150|adv\s*160|트리시티|버그만\s*200|cbr\s*250|코멧\s*250|미라쥬\s*250|브이스트롬\s*250|(?<!\d)(250|155|160|125|110|100|50)\s*cc') { return 180 }
+    if ($t -match '포르자\s*350|forza\s*350|adv\s*350|비버리\s*350|gb\s*350|다운타운\s*350|존테스\s*350|존테스\s*368') { return 330 }
     if ($t -match '헌터\s*350|클래식\s*350|메테오\s*350') { return 349 }
-    if ($t -match 'mt-?03|\br3\b|yzf-?r3') { return 321 }
-    if ($t -match 'g\s*310') { return 313 }
-    if ($t -match 'c\s*400') { return 350 }
+    if ($t -match 'mt-?03|(?<![a-z0-9])r3(?![a-z0-9])|yzf-?r3') { return 321 }
+    if ($t -match '(?<![a-z0-9])g\s*310') { return 313 }
+    if ($t -match '(?<![a-z0-9])c\s*400') { return 350 }
     if ($t -match '티맥스|tmax|테크맥스') { return 560 }
-    if ($t -match 'mt-?07|\br7\b') { return 689 }
-    if ($t -match 'mt-?09|\br9\b|xsr\s*900') { return 890 }
-    if ($t -match 'mt-?10|\br1\b|s\s*1000|r\s*1000|cbr\s*1000|zx-?10') { return 999 }
-    if ($t -match '할리|스트리트\s*밥|스글|로글|로드킹|브레이크\s*아웃|팻보이|팻밥|아이언\s*883|포티에잇|스포스터|소프테일|울트라|\b114\b|\b117\b|\b883\b') { return 1200 }
-    if ($t -match '두카티|파니갈레|멀티스트라다|데저트\s*슬레드|디아벨|하야부사|골드윙|r\s*1200|r\s*1250|r\s*1300|\br\s*18\b|알나인티|r9t|본네빌|\bt100\b|\bt120\b|타이거|스피드\s*트윈|로켓\s*3|아프리카\s*트윈|x-?adv') { return 900 }
-    $mCc = [regex]::Match($t, '\b(50|80|90|100|110|125|150|155|160|180|200|250|300|310|320|350|390|400|401|450|500|530|550|560|600|650|660|700|750|790|800|850|883|890|900|901|950|1000|1050|1100|1200|1250|1290|1300|1400|1600|1800)\s*(?:cc)?\b')
+    if ($t -match '(?<![a-z0-9])r6(?![a-z0-9])|yzf-?r6|cbr\s*600|zx-?6r') { return 599 }
+    if ($t -match 'mt-?07|(?<![a-z0-9])r7(?![a-z0-9])|cbr\s*650|cb\s*650|닌자\s*650|z\s*650|버시스\s*650|브이스트롬\s*650|sv\s*650|인터셉터\s*650|컨티넨탈\s*gt|트라이던트\s*660|rs\s*660') { return 689 }
+    if ($t -match 'mt-?09|(?<![a-z0-9])r9(?![a-z0-9])|xsr\s*900|트레이서\s*9|f\s*900|z\s*900|타이거\s*900|노든\s*901') { return 890 }
+    if ($t -match 'mt-?10|(?<![a-z0-9])r1m?(?![a-z0-9])|yzf-?r1|s\s*1000|m\s*1000|r\s*1000|cbr\s*1000|cb\s*1000|gsx-?[rs]?\s*1000|zx-?10|닌자\s*1000|버시스\s*1000') { return 999 }
+    if ($t -match '할리|스트리트\s*밥|스글|로글|로드킹|브레이크\s*아웃|팻보이|펫보이|팻밥|아이언\s*883|포티에잇|스포스터|소프테일|울트라|(?<!\d)(114|117|883)(?!\d)') { return 1200 }
+    if ($t -match '두카티|파니갈레|멀티스트라다|데저트\s*슬레드|디아벨|하야부사|골드윙|r\s*1200|r\s*1250|r\s*1300|(?<![a-z0-9])r\s*18(?![a-z0-9])|알나인티|r9t|본네빌|(?<![a-z0-9])t100(?![a-z0-9])|(?<![a-z0-9])t120(?![a-z0-9])|타이거|스피드\s*트윈|로켓\s*3|아프리카\s*트윈|x-?adv|우랄') { return 900 }
+    $mCc = [regex]::Match($t, '(?<!\d)(50|80|90|100|110|125|150|155|160|180|200|250|300|310|320|350|390|400|401|450|500|530|550|560|600|650|660|700|750|790|800|850|883|890|900|901|950|1000|1050|1100|1200|1250|1290|1300|1400|1600|1800)\s*cc(?![a-z])')
     if ($mCc.Success) { return [int]$mCc.Groups[1].Value }
     return $defaultCc
 }
@@ -375,67 +376,75 @@ function Build-BikePortfolioSummary([object[]]$items, [int]$exactUnder300 = 0, [
 $allRawBikes = New-Object System.Collections.Generic.List[object]
 
 # ==============================================================================
-# 1. DAANGN MOTORCYCLES (238 Fine-Grained Keywords + Sitemap - Minimum Verified Floor)
+# 1. DAANGN MOTORCYCLES (370+ Purified Keywords + 4-Stage Precision Filter + Sitemap - Minimum Floor)
 # ==============================================================================
 $daangnKeywords = @(
-    # Broad Brand & Core Series Superset (46)
-    "오토바이", "스쿠터", "중고오토바이", "중고스쿠터", "바이크", "오토바이 팝니다", "스쿠터 팝니다", "바이크 팝니다",
-    "배달오토바이", "배달스쿠터", "전기스쿠터", "전기오토바이", "메뉴얼바이크", "125cc", "50cc", "100cc", "110cc", "250cc", "300cc", "350cc", "400cc", "500cc", "600cc", "650cc", "750cc", "800cc", "900cc", "1000cc",
-    "혼다 오토바이", "혼다 스쿠터", "pcx", "포르자", "슈퍼커브", "혼다 cb", "혼다 cbr", "레블", "골드윙", "혼다 adv",
-    "야마하", "nmax", "엔맥스", "xmax", "엑스맥스", "티맥스", "tmax", "야마하 mt", "야마하 r3",
-    "스즈키 오토바이", "스즈키 스쿠터", "스즈키 gsx", "하야부사", "브이스트롬", "버그만", "어드레스",
-    "가와사키", "가와사키 닌자", "가와사키 z", "버시스", "발칸",
-    "할리데이비슨", "할리 오토바이", "스트리트글라이드", "로드글라이드", "아이언883", "브레이크아웃", "팻보이", "로드킹", "스포스터",
-    "bmw 오토바이", "bmw 바이크", "bmw gs", "bmw s1000", "bmw c400", "bmw c650", "알나인티", "bmw r18",
-    "두카티", "베스파", "트라이엄프", "로얄엔필드", "ktm 오토바이", "ktm 듀크", "허스크바나", "sym 오토바이", "보이저", "크루심", "킴코", "대림 오토바이", "효성 오토바이", "kr모터스", "존테스", "cf모토", "아프릴리아", "인디언 바이크", "푸조 장고", "이탈젯", "모토구찌",
-    # Honda Fine-Grained Models & Model-Years (52)
-    "혼다 pcx", "pcx 125", "pcx 18년식", "pcx 19년식", "pcx 20년식", "pcx 21년식", "pcx 22년식", "pcx 23년식", "pcx 24년식", "pcx 25년식", "pcx abs",
-    "혼다 포르자", "포르자 300", "포르자 350", "포르자 750", "포르자 21년식", "포르자 22년식", "포르자 23년식", "포르자 24년식", "포르자 25년식",
-    "슈퍼커브", "슈퍼커브 110", "슈퍼커브 19년식", "슈퍼커브 20년식", "슈퍼커브 21년식", "슈퍼커브 22년식", "슈퍼커브 23년식", "슈퍼커브 24년식",
-    "혼다 c125", "헌터커브", "ct125", "몽키 125", "그롬 125", "msx 125", "닥스 125", "혼다 벤리", "벤리 110", "엘리트 125", "비전 110", "혼다 scr",
+    # Motorcycle-Anchored General & Displacement Queries (36 - zero standalone ambiguous words)
+    "오토바이", "스쿠터", "중고오토바이", "중고스쿠터", "오토바이 팝니다", "스쿠터 팝니다",
+    "배달오토바이", "배달스쿠터", "출퇴근 오토바이", "출퇴근 스쿠터", "전기스쿠터", "전기오토바이",
+    "메뉴얼바이크", "메뉴얼 오토바이", "매뉴얼 바이크", "네이키드 바이크", "크루저 바이크", "클래식 오토바이", "투어러 바이크",
+    "50cc 스쿠터", "100cc 스쿠터", "110cc 오토바이", "125cc 오토바이", "125cc 스쿠터", "250cc 오토바이", "300cc 오토바이", "300cc 스쿠터",
+    "350cc 스쿠터", "400cc 오토바이", "500cc 오토바이", "650cc 오토바이", "750cc 오토바이", "1000cc 오토바이",
+    "쿼터급 오토바이", "쿼터급 바이크", "미들급 바이크", "리터급 오토바이", "리터급 바이크",
+    # Brand + Motorcycle Anchored Superset (42 - blocks pianos, guitars, golf, bags, lawnmowers)
+    "혼다 오토바이", "혼다 스쿠터", "혼다 바이크", "혼다 pcx", "혼다 포르자", "슈퍼커브", "혼다 cb", "혼다 cbr", "혼다 레블", "골드윙", "혼다 adv",
+    "야마하 오토바이", "야마하 스쿠터", "야마하 바이크", "야마하 메뉴얼", "nmax", "엔맥스", "엑스맥스", "야마하 티맥스", "야마하 mt", "야마하 r3",
+    "스즈키 오토바이", "스즈키 스쿠터", "스즈키 바이크", "스즈키 gsx", "하야부사", "브이스트롬", "버그만", "스즈키 어드레스",
+    "가와사키 오토바이", "가와사키 바이크", "가와사키 닌자", "가와사키 z", "가와사키 버시스", "가와사키 발칸", "가와사키 엘리미네이터",
+    "할리데이비슨", "할리 오토바이", "스트리트글라이드", "로드글라이드", "아이언883", "할리 브레이크아웃", "할리 팻보이", "할리 로드킹", "스포스터",
+    "bmw 오토바이", "bmw 바이크", "bmw 모토라드", "bmw gs", "bmw s1000", "bmw c400", "bmw c650", "알나인티", "bmw r18",
+    "두카티 오토바이", "두카티 바이크", "베스파 스쿠터", "베스파 오토바이", "트라이엄프 오토바이", "트라이엄프 바이크",
+    "로얄엔필드", "ktm 오토바이", "ktm 듀크", "허스크바나 오토바이", "허스크바나 바이크",
+    "sym 오토바이", "sym 스쿠터", "sym 보이저", "크루심", "킴코 스쿠터", "킴코 오토바이",
+    "대림 오토바이", "디엔에이 스쿠터", "효성 오토바이", "kr모터스", "존테스", "cf모토", "아프릴리아 오토바이", "인디언 바이크", "푸조 장고", "이탈젯 드래그스터", "모토구찌",
+    # Honda Fine-Grained Models & Model-Years (64)
+    "pcx 125", "pcx 18년식", "pcx 19년식", "pcx 20년식", "pcx 21년식", "pcx 22년식", "pcx 23년식", "pcx 24년식", "pcx 25년식", "pcx abs",
+    "포르자 300", "포르자 350", "포르자 750", "포르자 20년식", "포르자 21년식", "포르자 22년식", "포르자 23년식", "포르자 24년식", "포르자 25년식",
+    "슈퍼커브 110", "슈퍼커브 19년식", "슈퍼커브 20년식", "슈퍼커브 21년식", "슈퍼커브 22년식", "슈퍼커브 23년식", "슈퍼커브 24년식", "슈퍼커브 25년식",
+    "혼다 c125", "헌터커브", "ct125", "몽키 125", "그롬 125", "msx 125", "닥스 125", "혼다 벤리", "벤리 110", "엘리트 125", "비전 110", "혼다 scr 110",
     "adv 125", "adv 150", "adv 160", "adv 350", "x-adv 750", "혼다 xadv",
-    "cb125r", "cb300r", "cb400", "cb500x", "cb650r", "cb750 호넷", "cb1000r",
+    "cb125r", "cb300r", "cb400sf", "cb500x", "cb650r", "cb750 호넷", "cb1000r",
     "cbr125r", "cbr250rr", "cbr500r", "cbr600rr", "cbr650r", "cbr1000rr",
-    "레블 300", "레블 500", "레블 1100", "혼다 cl500", "gb350", "nc750x", "아프리카트윈", "crf300l", "골드윙 1800",
-    # Yamaha Fine-Grained Models & Model-Years (36)
-    "야마하 nmax", "엔맥스 125", "nmax 155", "엔맥스 20년식", "엔맥스 21년식", "엔맥스 22년식", "엔맥스 23년식", "엔맥스 24년식",
-    "야마하 xmax", "엑스맥스 300", "xmax 21년식", "xmax 22년식", "xmax 23년식", "xmax 24년식",
+    "레블 300", "레블 500", "레블 1100", "혼다 cl500", "혼다 gb350", "nc750x", "아프리카트윈", "crf300l", "골드윙 1800",
+    # Yamaha Fine-Grained Models & Model-Years (44)
+    "야마하 nmax", "엔맥스 125", "nmax 155", "엔맥스 20년식", "엔맥스 21년식", "엔맥스 22년식", "엔맥스 23년식", "엔맥스 24년식", "엔맥스 25년식",
+    "야마하 xmax", "엑스맥스 300", "xmax 300", "엑스맥스 21년식", "엑스맥스 22년식", "엑스맥스 23년식", "엑스맥스 24년식",
     "티맥스 530", "티맥스 560", "테크맥스 560", "트리시티 125", "트리시티 155", "시그너스 125", "야마하 에어로스", "야마하 비노", "야마하 복스",
-    "야마하 r3", "yzf r3", "r3 22년식", "r3 23년식", "r3 24년식", "야마하 r6", "야마하 r7", "야마하 r9", "야마하 r1", "yzf r125", "yzf r15",
-    "야마하 mt03", "mt-03", "야마하 mt07", "mt-07", "야마하 mt09", "mt-09", "mt-10", "xsr 125", "xsr 700", "xsr 900", "테네레 700", "fjr1300",
-    # Suzuki (20)
+    "yzf r3", "r3 21년식", "r3 22년식", "r3 23년식", "r3 24년식", "야마하 r6", "야마하 r7", "야마하 r9", "야마하 r1", "yzf r125", "yzf r15",
+    "야마하 mt03", "mt-03", "야마하 mt07", "mt-07", "야마하 mt09", "mt-09", "야마하 mt10", "xsr 125", "xsr 700", "xsr 900", "테네레 700", "트레이서 9", "fjr1300",
+    # Suzuki (24)
     "gsx r125", "gsx s125", "gsx r600", "gsx r750", "gsx r1000", "gsx r1000r", "gsx s750", "gsx s1000", "gsx 8s", "gsx 8r",
     "스즈키 하야부사", "브이스트롬 250", "브이스트롬 650", "브이스트롬 800", "브이스트롬 1050",
     "버그만 125", "버그만 200", "버그만 400", "버그만 650", "어드레스 125", "스즈키 넥스", "아베니스 125", "스위시 125", "스즈키 sv650", "스즈키 카타나",
-    # Kawasaki (19)
+    # Kawasaki (21)
     "닌자 300", "닌자 400", "닌자 500", "닌자 650", "닌자 1000sx", "zx-4r", "zx-4rr", "zx-6r", "zx-10r",
     "가와사키 z125", "가와사키 z400", "가와사키 z650", "z650rs", "가와사키 z900", "z900rs", "가와사키 z1000",
-    "버시스 650", "버시스 1000", "발칸 s", "엘리미네이터", "가와사키 w800",
-    # BMW (24)
+    "버시스 650", "버시스 1000", "발칸 s", "가와사키 w800",
+    # BMW (27)
     "bmw g310r", "bmw g310gs", "bmw c400x", "bmw c400gt", "bmw c600", "bmw c650gt", "bmw c650 스포츠", "bmw ce04",
     "bmw f750gs", "bmw f800", "bmw f850gs", "bmw f900r", "bmw f900xr", "bmw f900gs",
     "bmw s1000rr", "bmw s1000r", "bmw s1000xr", "bmw m1000rr",
-    "알나인티", "bmw r12", "bmw r1200gs", "bmw r1200rt", "bmw r1250gs", "bmw r1250rt", "bmw r1300gs", "bmw r18", "bmw k1600",
-    # Harley-Davidson (17)
-    "할리데이비슨", "아이언 883", "포티에잇", "할리 48", "스포스터 s", "할리 나잇스터", "스트리트 750",
-    "스트리트밥", "할리 팻보이", "할리 팻밥", "할리 브레이크아웃", "로우라이더 s", "로우라이더 st", "헤리티지 클래식",
-    "스트리트글라이드", "로드글라이드", "할리 로드킹", "울트라 리미티드", "할리 팬아메리카",
-    # Ducati / Vespa / Triumph / Royal Enfield / KTM / Husqvarna / SYM / Kymco / KR / DNA / Others (48)
-    "두카티 파니갈레", "두카티 몬스터", "두카티 스크램블러", "멀티스트라다", "두카티 디아벨", "스트리트파이터 v4", "하이퍼모타드",
+    "bmw r9t", "bmw r12", "bmw r1200gs", "bmw r1200rt", "bmw r1250gs", "bmw r1250rt", "bmw r1300gs", "bmw k1600",
+    # Harley-Davidson (19)
+    "아이언 883", "할리 포티에잇", "할리 48", "스포스터 s", "할리 나잇스터", "할리 스트리트 750",
+    "할리 스트리트밥", "팻보이 114", "할리 팻밥", "브레이크아웃 114", "브레이크아웃 117", "로우라이더 s", "로우라이더 st", "헤리티지 클래식",
+    "할리 울트라", "할리 팬아메리카",
+    # Ducati / Vespa / Triumph / Royal Enfield / KTM / Husqvarna / SYM / Kymco / KR / DNA / Others (80+)
+    "두카티 파니갈레", "두카티 몬스터", "두카티 스크램블러", "두카티 멀티스트라다", "두카티 디아벨", "스트리트파이터 v4", "하이퍼모타드",
     "베스파 프리마베라", "베스파 스프린트", "베스파 gts 125", "베스파 gts 300", "피아지오 메들리", "피아지오 비버리",
-    "트라이엄프 본네빌", "트라이엄프 t100", "트라이엄프 t120", "스피드트윈 900", "스피드트윈 1200", "스트리트트리플", "트라이던트 660", "타이거 900", "스피드 400", "스크램블러 400x", "트라이엄프 로켓3",
-    "로얄엔필드 헌터 350", "클래식 350", "메테오 350", "인터셉터 650", "컨티넨탈 gt 650", "로얄엔필드 히말라얀", "슈퍼메테오 650", "샷건 650",
+    "트라이엄프 본네빌", "트라이엄프 t100", "트라이엄프 t120", "스피드트윈 900", "스피드트윈 1200", "스트리트트리플", "트라이던트 660", "트라이엄프 타이거", "트라이엄프 스피드 400", "스크램블러 400x", "트라이엄프 로켓3",
+    "로얄엔필드 헌터 350", "로얄엔필드 클래식 350", "로얄엔필드 메테오 350", "로얄엔필드 인터셉터 650", "컨티넨탈 gt 650", "로얄엔필드 히말라얀", "슈퍼메테오 650", "샷건 650",
     "ktm 듀크 125", "ktm 듀크 390", "ktm rc390", "ktm 390 어드벤처", "ktm 790", "ktm 890",
     "스바르트필렌 125", "스바르트필렌 401", "비트필렌 401", "노든 901",
     "보이저 125", "보이저 300", "sym 크루심", "조이맥스 z", "맥심 400", "sym drg", "sym 젯14", "sym 피들",
     "킴코 다운타운", "킴코 엑스타운", "킴코 ak550", "킴코 필리", "익사이팅 400",
     "시티베스트", "시티에이스", "대림 q2", "대림 q3", "대림 데이스타", "엠보이", "유아이 100",
     "아퀼라 125", "아퀼라 300", "미라쥬 250", "코멧 125", "코멧 250", "코멧 650",
-    "존테스 350d", "존테스 350e", "존테스 125", "cf모토 450sr", "파피오 xo", "cf모토 450mt",
-    "아프릴리아 rs660", "아프릴리아 sr gt", "인디언 스카우트", "푸조 장고", "이탈젯 드래그스터", "모토구찌 v7", "보그 300"
+    "존테스 350d", "존테스 350e", "존테스 368g", "존테스 125", "cf모토 450sr", "파피오 xo", "cf모토 450mt",
+    "아프릴리아 rs660", "아프릴리아 sr gt", "인디언 스카우트", "모토구찌 v7", "보그 300", "베넬리 tnt125", "슈퍼쏘코", "부캐너 125", "람브레타"
 )
 $daangnKeywords = @($daangnKeywords | Select-Object -Unique)
-Write-Host "1. Collecting Daangn Nationwide C2C Motorcycles ($($daangnKeywords.Count) Fine-Grained Keywords + Sitemap)..." -ForegroundColor Yellow
+Write-Host "1. Collecting Daangn Nationwide C2C Motorcycles ($($daangnKeywords.Count) Purified Keywords + 4-Stage Filter)..." -ForegroundColor Yellow
 
 $daangnFetchScript = {
     param([string]$kw)
@@ -467,9 +476,69 @@ $daangnFetchScript = {
     return @()
 }
 
-$nonBikeFilterRx = [regex]::new('(?i)(전기자전거|자전거|픽시|로드바이크|엠티비|\bmtb\b|전동킥보드|킥보드|유모차|휠체어|헬멧|자켓|재킷|장갑|부츠|블랙박스|거치대|탑박스|리어백|새들백|머플러만|배기만|카울만|배터리만|타이어만|장난감|레고|프라모델|피규어|키링|스티커|상품권|바지|점퍼|조끼|안전화|보호대|인터콤|세나|카도|구합니다|삽니다|매입합니다|렌트카|승용차|가방|숄더백|토트백|크로스백|백팩|지갑|명품|프라다|구찌|샤넬|루이비통|디올|생로랑|발렌시아가|시계|운동화|스니커즈|패딩|골프|카메라|렌즈|노트북|아이패드|아이폰|갤럭시)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+# 4-Stage Precision Motorcycle Filter Regexes (Shared across Daangn & Batumae)
+$nonBikeHardRx = [regex]::new('(?i)(피아노|디지털피아노|클라비노바|엘렉톤|건반|신디사이저|색소폰|섹소폰|플룻|플루트|클라리넷|트럼펫|바이올린|첼로|통기타|일렉기타|어쿠스틱|베이스기타|아치탑|펜더|깁슨|우쿨렐레|드럼세트|전자드럼|마우스피스|서브우퍼|사운드바|오디오\s*앰프|기타\s*앰프|베이스\s*앰프|리시버|디지털믹서|디지탈믹서|오디오인터페이스|턴테이블|이펙터|전기자전거|자전거|로드자전거|로드바이크|산악자전거|미니벨로|브롬톤|피나렐로|도그마|pinarello|dogma|에스웍스|스페셜라이즈드|비앙키|캐논데일|서벨로|메리다|치넬리|그래블|픽시|(?<![a-z0-9])mtb(?![a-z0-9])|엠티비|조립차|스핀바이크|실내바이크|실내사이클|헬스사이클|헬스바이크|운동기구|런닝머신|즈위프트|스마트로라|평로라|탁스|와후|울테그라|듀라에이스|사발이|(?<![a-z0-9])atv(?![a-z0-9])|(?<![a-z0-9])utv(?![a-z0-9])|4륜|사륜|삼발이|3륜\s*전동|3륜\s*전기|전기\s*삼륜|삼륜\s*스쿠터|삼륜\s*전기|삼륜\s*운반|삼륜\s*오토바이|삼륜짐칸|농용|운반차|유아\s*전동|아기\s*전동|어린이\s*전동|밸런스바이크|자토바이|팻바이크|엑스라이더|x-?rider|슈퍼73|super\s*73|전동킥보드|킥보드|전동\s*스쿠터|전동차|듀얼트론|위페드|나인봇|이노킴|미니모터스|전동휠|외발휠|전동보드|워터스쿠터|수중스쿠터|아쿠아스쿠터|의료용|노인|장애인|휠체어|유모차|1인승\s*자동차|(?<![a-z0-9])rc카|알씨카|트렉사스|프라모델|레고|다이캐스트|피규어|키링|포켓몬|트레이딩\s*카드|고반발|드라이버|\d\s*번\s*우드|아이언\s*세트|아이언\s*\d|퍼터|샤프트|골프채|골프|캐디백|스릭슨|테일러메이드|캘러웨이|타이틀리스트|거실형|터널\s*패밀리|텐트|타프|야전침대|잔디깎이|예초기|관리기|경운기|트랙터|콤바인|이앙기|스프레이어|농약|발전기|양수기|콤프레샤|선외기|보트|제트스키|요트|모니터|그래픽카드|(?<![a-z0-9])rtx\s*\d|지포스|라데온|라이젠|조립\s*pc|하이엔드\s*pc|게이밍\s*pc|키보드|노트북|맥북|아이패드|아이폰|갤럭시|인스타360|insta360|고프로|gopro|카메라|렌즈|냉장고|세탁기|안마의자|커피머신|자사호|다관|향수|오드퍼퓸|\d+\s*ml(?![a-z])|재즈마스터|롤렉스|오메가|태그호이어|자켓|재킷|고어텍스|다이네즈|알파인스타|코미네|헬멧|장갑|부츠|숄더백|토트백|크로스백|백팩|지갑|명품|프라다|구찌|샤넬|루이비통|디올|생로랑|발렌시아가|운동화|스니커즈|패딩|상품권|구합니다|삽니다|매입합니다|렌트카|승용차)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+
+$vehContextRx = [regex]::new('(?i)(\d{2,4}\s*(년식|연식|년형|년\s*출고)|\d[\d,\.]*\s*(km|키로|킬로|만키로|만킬로)|적산|실키로|실주행|구변|구조변경|폐지|서류\s*3장|서류\s*완비|명의\s*이전|이전\s*가능|사용신고|번호판\s*폐지|우꿍|좌꿍|제자리꿍|무꿍|슬립|무슬립|화물\s*거래|용달)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+$positiveBikeContextRx = [regex]::new('(?i)(\d{2,4}\s*(년식|연식|년형|년\s*출고)|\d[\d,\.]*\s*(km|키로|킬로|만키로|만킬로)|적산|실키로|실주행|구변|구조변경|폐지|서류|명의\s*이전|이전\s*가능|사용신고|우꿍|좌꿍|무꿍|슬립|오토바이|스쿠터|이륜차|모터사이클|메뉴얼|매뉴얼|네이키드|크루저|투어러|레플리카|쿼터급|미들급|리터급|(?<!\d)(50|100|110|125|150|155|160|250|300|321|350|390|400|450|500|530|560|600|650|750|800|883|900|1000|1100|1200|1250|1300|1800)\s*cc(?![a-z]))', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+
+$partsAlwaysRx = [regex]::new('(?i)(순정\s*탈거|신차\s*탈거|부품용|부품차|무서류|서류\s*없음|차대만|엔진만|머플러만|배기만|카울만|배터리만|타이어만|시트만|휠만|오버홀\s*엔진|구동계\s*풀세트|호환\s*\)|까지\s*호환|전용\s*방수포|콜라보\s*한정판|핸들\s*커버|방한\s*토시|방수\s*커버)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+$partsEndRx = [regex]::new('(?i)(머플러|슬립온|백스텝|카울|순정카울|페어링|윈드스크린|스크린|탑박스|탑케이스|사이드케이스|사이드백|리어백|새들백|배달통|슬라이더|포크\s*브릿지|슬리퍼\s*클러치|디스크|쇼바|서스펜션|캘리퍼|휠\s*세트|계기판|등받이|시시바|거치대|인터콤|세나|카도|엔진|커버)\s*(\([^)]*\))?\s*(팝니다|판매|판매합니다|팔아요|새상품|새제품|신품|정품|중고)?\s*$', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+$explicitBikeWordRx = [regex]::new('(?i)(오토바이|이륜차|모터사이클|스쿠터|(클래식|메뉴얼|매뉴얼|네이키드|크루저|배달|출퇴근|전기|투어러|스포츠)\s*바이크)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+
+$tier4Rx = [regex]::new('(?i)(할리데이비슨|할리\s|두카티|골드윙|(?<![a-z0-9])s\s*1000|(?<![a-z0-9])m\s*1000|(?<![a-z0-9])r\s*1200|(?<![a-z0-9])r\s*1250|(?<![a-z0-9])r\s*1300|(?<![a-z0-9])r\s*18(?![a-z0-9])|(?<![a-z0-9])k\s*1600|알나인티|(?<![a-z0-9])r9t(?![a-z0-9])|하야부사|zx-?10r|cbr\s*1000|yzf-?r1|(?<![a-z0-9])r1m?(?![a-z0-9])|인디언|로켓\s*3|멀티스트라다|파니갈레|스트리트\s*글라이드|로드\s*글라이드|브레이크\s*아웃|팻보이|펫보이|로드킹)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+$tier3Rx = [regex]::new('(?i)(티맥스|tmax|테크맥스|포르자\s*750|x-?adv|(?<![a-z0-9])c\s*600|(?<![a-z0-9])c\s*650|ak\s*550|cbr\s*600|cbr\s*650|cb\s*650|cb\s*1000|(?<![a-z0-9])r6(?![a-z0-9])|(?<![a-z0-9])r7(?![a-z0-9])|mt-?07|mt-?09|mt-?10|xsr\s*[79]00|테네레|트레이서\s*9|gsx-?[rs]?\s*(600|750|1000|8s|8r)|브이스트롬\s*(650|800|1050)|닌자\s*(650|1000)|zx-?[46]r|z\s*650|z\s*900|z\s*1000|버시스\s*(650|1000)|발칸\s*s|트라이엄프|스트리트\s*트리플|트라이던트|본네빌|스피드\s*트윈|타이거\s*[89]|인터셉터\s*650|컨티넨탈\s*gt|슈퍼\s*메테오|샷건\s*650|스바르트필렌\s*401|비트필렌\s*401|노든\s*901|듀크\s*(390|790|890)|rs\s*660)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+$tier2Rx = [regex]::new('(?i)(포르자\s*(300|350)|엑스맥스|xmax|(?<![a-z0-9])c\s*400|(?<![a-z0-9])ce\s*04|(?<![a-z0-9])f\s*750|(?<![a-z0-9])f\s*800|(?<![a-z0-9])f\s*850|(?<![a-z0-9])f\s*900|보이저\s*(250|300)|보이져\s*(250|300)|크루심\s*300|맥심\s*400|다운타운\s*(300|350)|다운다운\s*300|익사이팅\s*400|존테스\s*(350|368)|(?<![a-z0-9])r3(?![a-z0-9])|yzf-?r3|mt-?03|닌자\s*(300|400|500)|cbr\s*(250|300|500)|cb\s*(300|400|500)|레블\s*(300|500)|cl\s*500|gb\s*350|베스파\s*gts\s*300|클래식\s*350|헌터\s*350|메테오\s*350|히말라얀|스피드\s*400|스크램블러\s*400|(?<![a-z0-9])g\s*310|아퀼라\s*300|코멧\s*650|450\s*sr|450\s*mt)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+
+function Get-MinBikePriceManwon([string]$titleText) {
+    if ($tier4Rx.IsMatch($titleText)) { return 300 }
+    if ($tier3Rx.IsMatch($titleText)) { return 170 }
+    if ($tier2Rx.IsMatch($titleText)) { return 110 }
+    return 50
+}
+
+function Test-IsGenuineDaangnBike([string]$tit, [string]$bodyTxt, [double]$rawPriceWon, [ref]$outPriceManwon) {
+    if (-not $tit) { return $false }
+    $combined = "$tit $bodyTxt"
+
+    # Normalize price (including rescue when seller typed manwon e.g. '730' in price field & wrote '730만' in text)
+    $prcWon = $rawPriceWon
+    if ($prcWon -ge 80 -and $prcWon -le 9999) {
+        $intP = [int]$prcWon
+        if ($combined -match "(?<!\d)$intP\s*만" -and $vehContextRx.IsMatch($combined)) {
+            $prcWon = $prcWon * 10000.0
+        }
+    }
+    if ($prcWon -lt 500000 -or $prcWon -gt 150000000) { return $false }
+    $prcMan = [int][math]::Round($prcWon / 10000.0)
+
+    # Stage 1: Tiered Minimum Price Floor by Bike Segment
+    $minMan = Get-MinBikePriceManwon $tit
+    if ($prcMan -lt $minMan) { return $false }
+
+    # Stage 2: Hard Non-Bike Blacklist (title checked strictly; body checked for unmistakable non-bike categories)
+    if ($nonBikeHardRx.IsMatch($tit)) { return $false }
+    if ($bodyTxt -match '(?i)(업라이트\s*피아노|디지털\s*피아노|클라비노바|알토\s*색소폰|테너\s*색소폰|마우스피스|드라이버\s*샤프트|아이언\s*세트|스핀\s*바이크|스마트\s*로라|즈위프트|거실형\s*텐트|터널형\s*텐트|사발이|4륜\s*오토바이|사륜\s*오토바이|노인용\s*전동|의료용\s*스쿠터|그래픽카드\s*rtx)') { return $false }
+
+    # Stage 3: Standalone Parts vs Complete Tuned Motorcycle Separation
+    if ($partsAlwaysRx.IsMatch($tit)) { return $false }
+    if ($partsEndRx.IsMatch($tit) -and -not $vehContextRx.IsMatch($tit)) { return $false }
+
+    # Stage 4: Positive Motorcycle Identity + Context Signal Gate
+    $brand = Resolve-Brand "" $tit ""
+    if ($brand -eq $KR_ETC) {
+        $brandBody = Resolve-Brand "" $combined ""
+        if ($brandBody -eq $KR_ETC -and -not $explicitBikeWordRx.IsMatch($tit)) { return $false }
+        if (-not $explicitBikeWordRx.IsMatch($combined)) { return $false }
+    }
+    if (-not $positiveBikeContextRx.IsMatch($combined)) { return $false }
+
+    $outPriceManwon.Value = $prcMan
+    return $true
+}
 
 $daangnSeenMap = @{}
+$daangnPriceManMap = @{}
 $pool = [runspacefactory]::CreateRunspacePool(1, 6)
 $pool.Open()
 $jobs = New-Object System.Collections.Generic.List[object]
@@ -484,11 +553,13 @@ foreach ($j in $jobs) {
         $arts = $j.Pipe.EndInvoke($j.Handle)
         foreach ($a in $arts) {
             if (-not $a -or -not $a.id -or $daangnSeenMap.ContainsKey($a.id)) { continue }
-            $prc = 0; [void][double]::TryParse([string]$a.price, [ref]$prc)
-            if ($prc -lt 350000 -or $prc -gt 150000000) { continue }
+            $prc = 0.0; [void][double]::TryParse([string]$a.price, [ref]$prc)
             $tit = ([string]$a.title -replace '\s+', ' ').Trim()
-            if ($nonBikeFilterRx.IsMatch($tit)) { continue }
+            $bdy = ([string]$a.content -replace '\s+', ' ').Trim()
+            $validMan = 0
+            if (-not (Test-IsGenuineDaangnBike $tit $bdy $prc ([ref]$validMan))) { continue }
             $daangnSeenMap[$a.id] = $a
+            $daangnPriceManMap[$a.id] = $validMan
         }
     } catch {}
     $j.Pipe.Dispose()
@@ -516,13 +587,13 @@ try {
             $smXml = [System.Text.Encoding]::UTF8.GetString($rawBytes)
         }
 
-        $smBikeRx = [regex]::new('(?i)(오토바이|스쿠터|pcx|nmax|엔맥스|xmax|엑스맥스|tmax|티맥스|포르자|슈퍼커브|헌터커브|혼다-cb|혼다-c125|cbr\d|레블|골드윙|x-adv|adv125|adv160|adv350|야마하-r|mt-03|mt03|mt-07|mt07|mt-09|mt09|스즈키-gsx|버그만|브이스트롬|가와사키-닌자|할리데이비슨|두카티|베스파-gts|베스파-프리마베라|베스파-스프린트|트라이엄프-본네빌|로얄엔필드|보이저125|크루심|다운타운st|시티베스트|아퀼라)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+        $smBikeRx = [regex]::new('(?i)(오토바이|스쿠터|pcx|nmax|엔맥스|xmax|엑스맥스|티맥스530|티맥스560|포르자300|포르자350|포르자750|슈퍼커브|헌터커브|혼다-cb|혼다-c125|cbr\d|레블300|레블500|레블1100|골드윙|x-adv|adv125|adv160|adv350|yzf-r|mt-03|mt03|mt-07|mt07|mt-09|mt09|스즈키-gsx|버그만|브이스트롬|가와사키-닌자|할리데이비슨|두카티-파니갈레|두카티-몬스터|베스파-gts|베스파-프리마베라|베스파-스프린트|트라이엄프-본네빌|로얄엔필드|보이저125|보이저300|크루심|다운타운st|시티베스트|아퀼라)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
         $locMs = [regex]::Matches($smXml, '<loc>https://www\.daangn\.com(/kr/buy-sell/[^<]+?)</loc>')
         foreach ($m in $locMs) {
             $relId = $m.Groups[1].Value
             if ($daangnSeenMap.ContainsKey($relId)) { continue }
-            $slugDecoded = [uri]::UnescapeDataString(($relId -replace '^/kr/buy-sell/|-[a-z0-9]{10,14}/?$', ''))
-            if ($smBikeRx.IsMatch($slugDecoded) -and -not $nonBikeFilterRx.IsMatch($slugDecoded)) {
+            $slugDecoded = ([uri]::UnescapeDataString(($relId -replace '^/kr/buy-sell/|-[a-z0-9]{10,14}/?$', '')) -replace '-', ' ').Trim()
+            if ($smBikeRx.IsMatch($slugDecoded) -and -not $nonBikeHardRx.IsMatch($slugDecoded) -and -not $partsAlwaysRx.IsMatch($slugDecoded) -and -not $partsEndRx.IsMatch($slugDecoded)) {
                 $daangnSitemapExtraIds.Add($relId)
             }
         }
@@ -536,7 +607,13 @@ $daangnNewByCreated = 0; $daangnClosedSample = 0
 
 foreach ($a in $daangnSeenMap.Values) {
     $stRaw = [string]$a.status
-    if ($stRaw -eq 'Closed') { $daangnClosedSample++; continue }
+    if ($stRaw -eq 'Closed') {
+        try {
+            $chkDt = if ($a.boostedAt) { [DateTimeOffset]::Parse([string]$a.boostedAt) } elseif ($a.createdAt) { [DateTimeOffset]::Parse([string]$a.createdAt) } else { $null }
+            if ($chkDt -and $chkDt -gt $NewSinceCutoff) { $daangnClosedSample++ }
+        } catch {}
+        continue
+    }
     $stKr = if ($stRaw -eq 'Reserved') { $KR_RESERVED } else { $KR_ONSALE }
     $cleanId = ([string]$a.id -replace '^/kr/buy-sell/|/$', '')
     $daangnActiveIds.Add("DG_" + $cleanId)
@@ -559,18 +636,17 @@ foreach ($a in $daangnSeenMap.Values) {
     $cc = Infer-DisplacementCc $combinedTxt $false 250
     $ccGrp = if ($cc -ge 300) { $daangnOver300++; $KR_OVER300 } else { $daangnUnder300++; $KR_UNDER300 }
 
-    $prcWon = 0; [void][double]::TryParse([string]$a.price, [ref]$prcWon)
-    $prcMan = [int][math]::Round($prcWon / 10000.0)
+    $prcMan = [int]$daangnPriceManMap[$a.id]
 
     $yr = ""
-    $mYr = [regex]::Match($combinedTxt, '\b(20\d{2}|\d{2})\s*(?:년식|연식)')
+    $mYr = [regex]::Match($combinedTxt, '(?<!\d)(20\d{2}|\d{2})\s*(?:년식|연식)')
     if ($mYr.Success) {
         $yv = $mYr.Groups[1].Value
         $yr = if ($yv.Length -eq 2) { "20$yv" } else { $yv }
     }
 
     $kmNum = 0
-    $mKm = [regex]::Match($combinedTxt, '\b(\d{1,3}(?:,\d{3})+|\d{3,6})\s*(?:km|키로|킬로)')
+    $mKm = [regex]::Match($combinedTxt, '(?<!\d)(\d{1,3}(?:,\d{3})+|\d{3,6})\s*(?:km|키로|킬로)')
     if ($mKm.Success) {
         $kmVal = ($mKm.Groups[1].Value -replace ',', '')
         if ($kmVal -match '^\d+$') { $kmNum = [int]$kmVal }
@@ -584,7 +660,8 @@ foreach ($a in $daangnSeenMap.Values) {
     $regName = if ($a.region) { [string]$a.region.name } else { "" }
     $sido = Resolve-SidoFromCoords $lat $lng "$regName $tit"
 
-    $brand = Resolve-Brand "" $combinedTxt ""
+    $brand = Resolve-Brand "" $tit ""
+    if ($brand -eq $KR_ETC) { $brand = Resolve-Brand "" $combinedTxt "" }
     $model = Resolve-ModelShort $brand "" $tit
 
     $row = [pscustomobject][ordered]@{
@@ -627,16 +704,16 @@ $daangnUrlCsvPath = Join-Path $RawDir "daangn_bike_urls_$($TodayDate).csv"
 $daangnTotalCount  = $daangnUnder300 + $daangnOver300
 $daangnPortfolio   = Build-BikePortfolioSummary $daangnNormItems.ToArray() $daangnUnder300 $daangnOver300
 $daangnSnap        = Compare-And-SaveSnapshot "daangn_bike" $daangnActiveIds.ToArray()
-$daangnNewToday    = if ($null -ne $daangnSnap.NewFromDiff -and $daangnSnap.PrevCount -ge 7000 -and $daangnSnap.NewFromDiff -gt $daangnNewByCreated) { $daangnSnap.NewFromDiff } else { $daangnNewByCreated }
-$daangnSoldToday   = if ($null -ne $daangnSnap.SoldFromDiff -and $daangnSnap.PrevCount -ge 7000 -and $daangnSnap.SoldFromDiff -gt 0) { $daangnSnap.SoldFromDiff } else { $daangnClosedSample }
+$daangnNewToday    = if ($null -ne $daangnSnap.NewFromDiff -and $daangnSnap.PrevCount -ge 4500 -and $daangnSnap.NewFromDiff -gt $daangnNewByCreated) { $daangnSnap.NewFromDiff } else { $daangnNewByCreated }
+$daangnSoldToday   = if ($null -ne $daangnSnap.SoldFromDiff -and $daangnSnap.PrevCount -ge 4500 -and $daangnSnap.SoldFromDiff -gt 0) { $daangnSnap.SoldFromDiff } else { $daangnClosedSample }
 $daangnTurnoverPct = if ($daangnTotalCount -gt 0) { [math]::Round(($daangnSoldToday / $daangnTotalCount) * 100, 2) } else { 0 }
 
 Write-Host "   -> Daangn Motorcycles Minimum Verified Floor=$daangnTotalCount (<=299cc: $daangnUnder300, >=300cc: $daangnOver300 | Keywords=$($daangnKeywords.Count)), NewToday=$daangnNewToday, RichSample=$($daangnNormItems.Count)" -ForegroundColor Green
 
 # ==============================================================================
-# 2. REITWAGEN (https://www.reitwagen.co.kr/ - Native BAREE Used Bikes)
+# 2. REITWAGEN (https://www.reitwagen.co.kr/ - Pure Fixed-Price Personal BAREE Used Bikes, Excluding Auction Dummy 135,790,000)
 # ==============================================================================
-Write-Host "2. Collecting Reitwagen Native Used Bikes (ORPC API)..." -ForegroundColor Yellow
+Write-Host "2. Collecting Reitwagen Pure Fixed-Price Personal Used Bikes (Excluding Duplicate/Expired Auctions)..." -ForegroundColor Yellow
 
 function Invoke-ReitwagenOrpc([string]$endpoint, [hashtable]$payload) {
     $bodyStr = (@{ json = $payload } | ConvertTo-Json -Depth 6 -Compress)
@@ -657,22 +734,26 @@ function Invoke-ReitwagenOrpc([string]$endpoint, [hashtable]$payload) {
     }
 }
 
+$RW_MAX_FIXED_PRICE = 135780000
 $rwTotalCount = 0; $rwOver300Count = 0; $rwUnder300Count = 0; $rwCertifiedCount = 0
 $rwNormItems = New-Object System.Collections.Generic.List[object]
 $rwNewByPostedAt = 0; $rwSeenIds = @{}
 
 try {
-    $rwTotalCount     = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("BAREE") }).count
-    $rwOver300Count   = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("BAREE"); minDisplacement=300 }).count
+    $rwTotalCount     = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("BAREE"); maxPrice=$RW_MAX_FIXED_PRICE }).count
+    $rwOver300Count   = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("BAREE"); maxPrice=$RW_MAX_FIXED_PRICE; minDisplacement=300 }).count
     $rwUnder300Count  = [Math]::Max(0, $rwTotalCount - $rwOver300Count)
     $rwCertifiedCount = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("BAREE_CERTIFIED") }).count
 
     for ($pg = 0; $pg -lt 40; $pg++) {
-        $res = Invoke-ReitwagenOrpc "search/list" @{ page = $pg; skip = ($pg * 20); sourceType = @("BAREE"); sort = @{ field = "postedAt"; order = "desc" } }
+        $res = Invoke-ReitwagenOrpc "search/list" @{ page = $pg; skip = ($pg * 20); sourceType = @("BAREE"); maxPrice = $RW_MAX_FIXED_PRICE; sort = @{ field = "postedAt"; order = "desc" } }
         if (-not $res.data -or $res.data.Count -eq 0) { break }
         foreach ($entry in $res.data) {
             $g = $entry.goods
             if (-not $g -or -not $g._id -or $rwSeenIds.ContainsKey($g._id)) { continue }
+            if ($null -ne $entry.quotationPublishedAt -or $null -ne $entry.quotationBookEndedAt -or [double]$g.salePrice -eq 135790000) { continue }
+            $titRw = [string]$g.title
+            if ($titRw -match '(?i)(사발이|\batv\b|4륜|사륜|삼발이|자토바이)') { continue }
             $rwSeenIds[$g._id] = $true
 
             $postedKst = ""
@@ -687,14 +768,14 @@ try {
             $cc = [int]$g.cylinderCapacity
             $ccGrp = if ($cc -ge 300) { $KR_OVER300 } else { $KR_UNDER300 }
             $prcMan = [int][math]::Round(([double]$g.salePrice) / 10000.0)
-            $brand = Resolve-Brand "" ([string]$g.title) ([string]$g.brandId)
-            $model = Resolve-ModelShort $brand "" ([string]$g.title)
+            $brand = Resolve-Brand "" $titRw ([string]$g.brandId)
+            $model = Resolve-ModelShort $brand "" $titRw
             $sido  = Normalize-Region ([string]$g.locationCategory + " " + [string]$g.address)
 
             $row = [pscustomobject][ordered]@{
                 collectedDate = $TodayDate; platform = $PLAT_RW; bikeId = [string]$g._id
                 cc = $cc; ccGroup = $ccGrp; manufacturer = $brand; model = $model
-                fullTitle = [string]$g.title; year = [string]$g.modelYear; mileageKm = [int]$g.mileage
+                fullTitle = $titRw; year = [string]$g.modelYear; mileageKm = [int]$g.mileage
                 priceManwon = $prcMan; priceBand = Get-BikePriceBand $prcMan; sido = $sido
                 sellType = $KR_PERSONAL; status = $KR_ONSALE; registeredAt = $postedKst
                 url = "https://www.reitwagen.co.kr/products/detail/$($g.sourceId)"
@@ -747,6 +828,7 @@ try {
             }
 
             $rawTitle = ([string]$g.title -replace '\([A-Za-z0-9\-\s&]+\)', ' ' -replace '\s+', ' ').Trim()
+            if ($rawTitle -match '(?i)(사발이|(?<![a-z0-9])atv(?![a-z0-9])|(?<![a-z0-9])utv(?![a-z0-9])|아웃랜더|매버릭|4륜|사륜|삼발이|자토바이|제트스키|스노우모빌)') { continue }
             $brand = Resolve-Brand "" $rawTitle ([string]$g.brandId)
             $model = Resolve-ModelShort $brand "" $rawTitle
             $cc = if ($null -ne $g.cylinderCapacity -and [int]$g.cylinderCapacity -gt 0) { [int]$g.cylinderCapacity } else { Infer-DisplacementCc $rawTitle $false 400 }
@@ -823,6 +905,8 @@ foreach ($bm in $batumaeMenus) {
 
                 $subj = ([System.Net.WebUtility]::HtmlDecode([string]$a.subject) -replace '\s+', ' ').Trim()
                 $head = ([System.Net.WebUtility]::HtmlDecode([string]$a.headName)).Trim()
+                if ($subj -match '(?i)(사발이|(?<![a-z0-9])atv(?![a-z0-9])|(?<![a-z0-9])utv(?![a-z0-9])|4륜|사륜|삼발이|자토바이|구합니다|삽니다|매입합니다)' -or $head -match '구매|구함|삽니다') { continue }
+                if ($partsAlwaysRx.IsMatch($subj) -or ($partsEndRx.IsMatch($subj) -and -not $vehContextRx.IsMatch($subj))) { continue }
 
                 $saleStat = if ($a.productSale) { [string]$a.productSale.saleStatus } else { "" }
                 $isSold = ($subj -match '판매\s*완료|거래\s*완료|판완|완료됨|판매\s*중지된') -or ($head -match '완료') -or ($saleStat -eq 'SOLD_OUT')
@@ -1152,6 +1236,14 @@ if (Test-Path $masterDbPath) {
                     if ($pLines[$pi]) { Upsert-MasterRowFromCols (Split-CsvRow $pLines[$pi]) $false }
                 }
             }
+        }
+    }
+} else {
+    $priorRawFiles = @(Get-ChildItem -Path $RawDir -Filter "raw_bikes_20*.csv" | Where-Object { $_.Name -ne "raw_bikes_$($TodayDate).csv" } | Sort-Object Name)
+    foreach ($prf in $priorRawFiles) {
+        $pLines = [System.IO.File]::ReadAllLines($prf.FullName, [System.Text.Encoding]::UTF8)
+        for ($pi = 1; $pi -lt $pLines.Length; $pi++) {
+            if ($pLines[$pi]) { Upsert-MasterRowFromCols (Split-CsvRow $pLines[$pi]) $false }
         }
     }
 }
