@@ -1218,27 +1218,20 @@ function Upsert-MasterRowFromCols([string[]]$cols, [bool]$is18Col) {
     }
 }
 
+$loadedMaster = $false
 if (Test-Path $masterDbPath) {
     $mLines = [System.IO.File]::ReadAllLines($masterDbPath, [System.Text.Encoding]::UTF8)
     if ($mLines.Length -gt 1) {
         $firstHdr = $mLines[0].TrimStart([char]0xFEFF)
-        $is18 = $firstHdr.StartsWith((U "\uCD5C\uCD08\uC218\uC9D1\uC77C,"))
-        if ($is18) {
+        if ($firstHdr.StartsWith((U "\uCD5C\uCD08\uC218\uC9D1\uC77C,"))) {
             for ($mi = 1; $mi -lt $mLines.Length; $mi++) {
                 if ($mLines[$mi]) { Upsert-MasterRowFromCols (Split-CsvRow $mLines[$mi]) $true }
             }
-        } else {
-            # One-time migration from 17-column historical CSV files
-            $priorRawFiles = @(Get-ChildItem -Path $RawDir -Filter "raw_bikes_20*.csv" | Where-Object { $_.Name -ne "raw_bikes_$($TodayDate).csv" } | Sort-Object Name)
-            foreach ($prf in $priorRawFiles) {
-                $pLines = [System.IO.File]::ReadAllLines($prf.FullName, [System.Text.Encoding]::UTF8)
-                for ($pi = 1; $pi -lt $pLines.Length; $pi++) {
-                    if ($pLines[$pi]) { Upsert-MasterRowFromCols (Split-CsvRow $pLines[$pi]) $false }
-                }
-            }
+            $loadedMaster = $true
         }
     }
-} else {
+}
+if (-not $loadedMaster) {
     $priorRawFiles = @(Get-ChildItem -Path $RawDir -Filter "raw_bikes_20*.csv" | Where-Object { $_.Name -ne "raw_bikes_$($TodayDate).csv" } | Sort-Object Name)
     foreach ($prf in $priorRawFiles) {
         $pLines = [System.IO.File]::ReadAllLines($prf.FullName, [System.Text.Encoding]::UTF8)
