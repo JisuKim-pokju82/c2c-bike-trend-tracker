@@ -1,13 +1,15 @@
-﻿# 4-Platform Used Motorcycle Apple-to-Apple Daily Collector
+﻿# 5-Platform Used Motorcycle Apple-to-Apple Daily Collector (10:00 KST)
 # Platforms:
-#   1) Reitwagen (https://www.reitwagen.co.kr/ - Native BAREE used listings, excluding external PASSO crawl)
-#   2) Passo Bike (http://bike.passo.co.kr/bike/ - Personal used listings @state:0#@product_state:2#@family_idx:0#)
-#   3) Batumae Naver Cafe (https://cafe.naver.com/bikecargogo - Personal C2C & Safety-Pay 30-day active listings)
-#   4) K Car (Service not currently active - placeholder slot only, no numeric values recorded)
+#   1) Daangn (https://www.daangn.com/kr/buy-sell/?search=오토바이 - C2C Direct Motorcycle Listings)
+#   2) Reitwagen (https://www.reitwagen.co.kr/ - Native BAREE used listings, excluding external PASSO crawl)
+#   3) Passo Bike (http://bike.passo.co.kr/bike/ - Used motorcycle listings, excluding new bike promotions)
+#   4) Batumae Naver Cafe (https://cafe.naver.com/bikecargogo - Personal C2C & Safety-Pay 30-day active listings)
+#   5) K Car (Service not currently active - placeholder slot only, no numeric values recorded)
 
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::DefaultConnectionLimit = 32
 
 $WorkDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not $WorkDir) { $WorkDir = (Get-Location).Path }
@@ -22,11 +24,10 @@ $JsonPath = Join-Path $WorkDir "competitor_trend.json"
 $CsvPath  = Join-Path $WorkDir "competitor_trend.csv"
 $JsPath   = Join-Path $WorkDir "competitor_trend_data.js"
 
-$NowKst    = [DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))
-$TodayDate = $NowKst.ToString("yyyy-MM-dd")
-$TodayShort= $NowKst.ToString("yy-MM-dd")
-$Timestamp = $NowKst.ToString("yyyy-MM-dd HH:mm:ss")
-$Cutoff30dMs = $NowKst.AddDays(-30).ToUnixTimeMilliseconds()
+$NowKst        = [DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))
+$TodayDate     = $NowKst.ToString("yyyy-MM-dd")
+$Timestamp     = $NowKst.ToString("yyyy-MM-dd HH:mm:ss")
+$Cutoff30dMs   = $NowKst.AddDays(-30).ToUnixTimeMilliseconds()
 $Cutoff29dDate = $NowKst.AddDays(-29).ToString("yyyy-MM-dd")
 
 function U([string]$esc) { return [regex]::Unescape($esc) }
@@ -48,7 +49,7 @@ $PB_5 = U "2,000\uB9CC\uC6D0 \uC774\uC0C1"
 $PB_UNKNOWN = U "\uAC00\uACA9\uBBF8\uAE30\uC7AC"
 
 function Get-BikePriceBand([int]$priceManwon) {
-    if ($priceManwon -le 0) { return $PB_UNKNOWN }
+    if ($priceManwon -le 0)    { return $PB_UNKNOWN }
     if ($priceManwon -lt 300)  { return $PB_1 }
     if ($priceManwon -lt 600)  { return $PB_2 }
     if ($priceManwon -lt 1000) { return $PB_3 }
@@ -94,29 +95,53 @@ function Normalize-Region([string]$rawRegion) {
     return $KR_ETC
 }
 
+function Resolve-SidoFromCoords([double]$lat, [double]$lng, [string]$fallbackText) {
+    $byText = Normalize-Region $fallbackText
+    if ($byText -ne $KR_ETC) { return $byText }
+    if ($lat -le 0 -or $lng -le 0) { return $KR_ETC }
+    if ($lat -lt 33.65) { return (U "\uC81C\uC8FC") }
+    if ($lat -ge 37.43 -and $lat -le 37.70 -and $lng -ge 126.76 -and $lng -le 127.19) { return (U "\uC11C\uC6B8") }
+    if ($lat -ge 37.33 -and $lat -le 37.63 -and $lng -ge 126.35 -and $lng -lt 126.76) { return (U "\uC778\uCC9C") }
+    if ($lat -ge 36.89 -and $lat -le 38.30 -and $lng -ge 126.50 -and $lng -le 127.80) { return (U "\uACBD\uAE30") }
+    if ($lat -ge 34.98 -and $lat -le 35.39 -and $lng -ge 128.78 -and $lng -le 129.31) { return (U "\uBD80\uC0B0") }
+    if ($lat -ge 35.39 -and $lat -le 35.73 -and $lng -ge 129.00 -and $lng -le 129.47) { return (U "\uC6B8\uC0B0") }
+    if ($lat -ge 35.60 -and $lat -le 36.02 -and $lng -ge 128.35 -and $lng -le 128.80) { return (U "\uB300\uAD6C") }
+    if ($lat -ge 36.18 -and $lat -le 36.50 -and $lng -ge 127.25 -and $lng -le 127.56) { return (U "\uB300\uC804") }
+    if ($lat -ge 36.43 -and $lat -le 36.72 -and $lng -ge 127.13 -and $lng -le 127.39) { return (U "\uC138\uC885") }
+    if ($lat -ge 35.05 -and $lat -le 35.26 -and $lng -ge 126.65 -and $lng -le 127.02) { return (U "\uAD11\uC8FC") }
+    if ($lat -ge 37.05 -and $lng -gt 127.70) { return (U "\uAC15\uC6D0") }
+    if ($lat -ge 36.00 -and $lat -lt 37.05 -and $lng -lt 127.30) { return (U "\uCDA9\uB0A8") }
+    if ($lat -ge 36.05 -and $lat -lt 37.25 -and $lng -ge 127.30 -and $lng -le 128.65) { return (U "\uCDA9\uBD81") }
+    if ($lat -ge 35.28 -and $lat -lt 36.15 -and $lng -lt 127.90) { return (U "\uC804\uBD81") }
+    if ($lat -lt 35.55 -and $lng -lt 127.90) { return (U "\uC804\uB0A8") }
+    if ($lat -ge 35.55 -and $lng -ge 127.90) { return (U "\uACBD\uBD81") }
+    if ($lat -lt 35.90 -and $lng -ge 127.55) { return (U "\uACBD\uB0A8") }
+    return $KR_ETC
+}
+
 # Comprehensive Motorcycle Brand & Model + Engine CC Inference Engine
 $BrandRules = @(
     @{ Brand = (U "\uD63C\uB2E4");      Pattern = '(?i)(혼다|honda|\bpcx|\bforza|포르자|슈퍼커브|슈퍼\s*커브|\bc125\b|\bcb\d|\bcbr\d|호넷|레블|rebel|골드윙|x-?adv|\badv\s*\d|몽키\s*125|그롬|msx\s*125|벤리|아프리카\s*트윈|\bcrf\d|\bcl\s*500|\bnc750|엘리트\s*125|스크램블러\s*cl)' },
-    @{ Brand = (U "\uC57C\uB9C8\uD558"); Pattern = '(?i)(야마하|yamaha|\bnmax|엔맥스|\bxmax|엑스맥스|\btmax|티맥스|\bmt-?0|\bmt-?10|\bmt\s*0|\byzf|\br3\b|\br6\b|\br7\b|\br9\b|\br1\b|\bxsr|트리시티|에어로스|시그너스|테네레|페이저|\bfjr)' },
+    @{ Brand = (U "\uC57C\uB9C8\uD558"); Pattern = '(?i)(야마하|yamaha|\bnmax|엔맥스|\bxmax|엑스맥스|\btmax|티맥스|테크맥스|\bmt-?0|\bmt-?10|\bmt\s*0|\byzf|\br3\b|\br6\b|\br7\b|\br9\b|\br1\b|\bxsr|트리시티|에어로스|시그너스|테네레|페이저|\bfjr)' },
     @{ Brand = "BMW";                   Pattern = '(?i)(\bbmw\b|\br\s*1200|\br\s*1250|\br\s*1300|\bs\s*1000|\bm\s*1000|\br\s*18\b|알나인티|r\s*nine\s*t|\br9t\b|\bf\s*750|\bf\s*800|\bf\s*850|\bf\s*900|\bg\s*310|\bc\s*400|\bc\s*600|\bc\s*650|\bk\s*1600|\bce\s*04)' },
     @{ Brand = (U "\uD560\uB9AC\uB370\uC774\uBE44\uC2A8"); Pattern = '(?i)(할리|harley|스트리트\s*밥|스글|스트리트\s*글라이드|로드\s*글라이드|로글|로드킹|팻보이|팻밥|브레이크\s*아웃|아이언\s*883|\b883\b|포티에잇|스포스터|나잇스터|팬\s*아메리카|로우\s*라이더|소프테일|울트라\s*리미티드|헤리티지)' },
     @{ Brand = (U "\uC2A4\uC988\uD0A4"); Pattern = '(?i)(스즈키|스즈끼|suzuki|\bgsx|하야부사|브이스트롬|v-?strom|버그만|어드레스|\bnex\b|넥스\s*125|아베니스|스위시|카타나|\bsv\s*650|\bdr-?z)' },
-    @{ Brand = (U "\uAC00\uC640\uC0AC\uD0A4"); Pattern = '(?i)(가와사키|kawasaki|닌자|ninja|\bzx-?\d|\bz125|\bz400|\bz650|\bz900|\bz1000|버시스|발칸|엘리미네이터|\bw800|\bh2\b)' },
+    @{ Brand = (U "\uAC00\uC640\uC0AC\uD0A4"); Pattern = '(?i)(가와사키|kawasaki|닌자|ninja|\bzx-?\d|\bz125|\bz400|\bz650|\bz900|\bz1000|버시스|발칸|엘리미네이터|\bw800|\bh2\b|메구로)' },
     @{ Brand = (U "\uB450\uCE74\uD2F0"); Pattern = '(?i)(두카티|ducati|파니갈레|스크램블러\s*아이콘|데저트\s*슬레드|데저트슬레드|멀티스트라다|디아벨|스트리트\s*파이터|하이퍼모타드|\b몬스터\s*\d)' },
     @{ Brand = (U "\uBCA0\uC2A4\uD30C"); Pattern = '(?i)(베스파|vespa|피아지오|piaggio|\bgts\s*125|\bgts\s*300|프리마베라|스프린트|스플린터|\blx\s*125)' },
     @{ Brand = (U "\uD2B8\uB77C\uC774\uC5C4\uD504"); Pattern = '(?i)(트라이엄프|triumph|본네빌|스피드\s*트윈|스트리트\s*트리플|스피드\s*트리플|타이거\s*\d|트라이던트|로켓\s*3|스피드\s*400|스크램블러\s*400|스크램블러\s*900|스크램블러\s*1200)' },
     @{ Brand = (U "\uB85C\uC584\uC5D4\uD544\uB4DC"); Pattern = '(?i)(로얄엔필드|로열엔필드|royal\s*enfield|헌터\s*350|클래식\s*350|클래식\s*500|메테오|인터셉터|컨티넨탈\s*gt|히말라얀|샷건\s*650|게릴라\s*450)' },
-    @{ Brand = "KTM";                   Pattern = '(?i)(\bktm\b|듀크|duke|\brc\s*125|\brc\s*390|슈퍼\s*어드벤처|어드벤처\s*\d{3,4}|슈퍼듀크|\bexc\b)' },
+    @{ Brand = "KTM";                   Pattern = '(?i)(\bktm\b|듀크|duke|\brc\s*125|\brc\s*390|슈퍼\s*어드벤처|어드벤처\s*\d{3,4}|\b390\s*adv|슈퍼듀크|\bexc\b)' },
     @{ Brand = (U "\uD5C8\uC2A4\uD06C\uBC14\uB098"); Pattern = '(?i)(허스크바나|husqvarna|스바르트필렌|비트필렌|노든\s*901)' },
-    @{ Brand = "SYM";                   Pattern = '(?i)(\bsym\b|보이저|크루심|조이맥스|맥심|\bdrg\b|\badx\b|젯14|피들)' },
-    @{ Brand = (U "\uD0B4\uCF54");      Pattern = '(?i)(킴코|kymco|다운타운|엑스타운|\bak\s*550|필리\s*125)' },
-    @{ Brand = (U "\uB514\uC5D4\uC5D0\uC774(DNA/\uB300\uB9BC)"); Pattern = '(?i)(대림|디엔에이|\bdna\b|시티베스트|시티에이스|유아이|데이스타|\bvf100|\buh115|엠보이)' },
+    @{ Brand = "SYM";                   Pattern = '(?i)(\bsym\b|보이저|보이져|크루심|조이맥스|맥심|\bdrg\b|\badx\b|젯14|피들)' },
+    @{ Brand = (U "\uD0B4\uCF54");      Pattern = '(?i)(킴코|kymco|다운타운|엑스타운|익사이팅|\bak\s*550|필리\s*125)' },
+    @{ Brand = (U "\uB514\uC5D4\uC5D0\uC774(DNA/\uB300\uB9BC)"); Pattern = '(?i)(대림|디엔에이|\bdna\b|시티베스트|시티에이스|유아이|데이스타|\bvf100|\buh115|엠보이|\bq2\b|\bq3\b)' },
     @{ Brand = (U "KR\uBAA8\uD130\uC2A4"); Pattern = '(?i)(kr모터스|효성|아퀼라|미라쥬|코멧|엑시브|델피노)' },
     @{ Brand = (U "\uC874\uD14C\uC2A4"); Pattern = '(?i)(존테스|zontes|\b350d\b|\b350e\b|\b350gk\b)' },
     @{ Brand = (U "CF\uBAA8\uD130");    Pattern = '(?i)(cf모토|cfmoto|파피오|\b450sr|\b450mt|\b450nk|\b700cl|\b800mt)' },
     @{ Brand = (U "\uC544\uD504\uB9B4\uB9AC\uC544"); Pattern = '(?i)(아프릴리아|aprilia|\brs\s*660|\brs\s*457|\brsv4|투오노|\bsr\s*gt)' },
     @{ Brand = (U "\uC778\uB514\uC5B8"); Pattern = '(?i)(인디언|indian|스카우트|치프테인)' },
-    @{ Brand = (U "\uC774\uD0C8\uC82F/\uAE30\uD0C0\uC218\uC785"); Pattern = '(?i)(이탈젯|드래그스터|모토구찌|푸조|장고|몬디알|파가니|보그|voge|벤다|benda|트릭스)' }
+    @{ Brand = (U "\uC774\uD0C8\uC82F/\uAE30\uD0C0\uC218\uC785"); Pattern = '(?i)(이탈젯|드래그스터|모토구찌|푸조|장고|몬디알|파가니|보그|voge|벤다|benda|트릭스|써론|탈라리아)' }
 )
 
 $ReitwagenBrandIdMap = @{
@@ -158,56 +183,51 @@ function Resolve-ModelShort([string]$brandName, [string]$rawModel, [string]$titl
     if ($rawModel -and $rawModel.Trim() -ne "") { return $rawModel.Trim() }
     $clean = [System.Net.WebUtility]::HtmlDecode($titleText)
     $clean = $clean -replace '\[[^\]]*\]', ' ' -replace '\([^\)]*\)', ' ' -replace '<[^>]*>', ' '
-    $clean = $clean -replace '\b20\d{2}\s*년식?\b', ' ' -replace '\b\d{2}\s*년식?\b', ' '
-    $clean = $clean -replace '\b[\d,]+\s*(?:km|키로|만\s*원?)\b', ' '
-    $clean = $clean -replace '(판매합니다|팝니다|급처|무사고|구변완료|배기구변|신차급|상태최상|정비완료|대차|가격인하|가격내림|팔아요|중고)', ' '
+    $clean = $clean -replace '\b20\d{2}\s*년식?\b', ' ' -replace '\b\d{2}\s*(?:년식|연식|식)\b', ' '
+    $clean = $clean -replace '\b[\d,]+\s*(?:km|키로|킬로|만\s*원?)\b', ' '
+    $clean = $clean -replace '(판매합니다|팝니다|급처|무사고|구변완료|배기구변|신차급|상태최상|정비완료|대차|가격인하|가격내림|팔아요|중고|오토바이|바이크|스쿠터|모터사이클)', ' '
     $clean = $clean -replace '(?i)\b(honda|yamaha|suzuki|kawasaki|ducati|vespa|triumph|harley|ktm|bmw|sym|kymco)\b', ' '
     if ($brandName -and $brandName -ne $KR_ETC) {
         $clean = $clean -replace [regex]::Escape($brandName), ' '
     }
-    $clean = ($clean -replace '[/|·~]+', ' ' -replace '\s+', ' ').Trim()
-    $tokens = @($clean -split '\s+' | Where-Object { $_ -and $_.Length -ge 2 -and $_ -notmatch '^(서울|경기|인천|부산|대구|대전|광주|울산|경남|경북|충남|충북|전남|전북|강원|제주)$' })
+    $clean = ($clean -replace '[!/|·~]+', ' ' -replace '\s+', ' ').Trim()
+    $tokens = @($clean -split '\s+' | Where-Object { $_ -and $_.Length -ge 2 -and $_ -notmatch '^(서울|경기|인천|부산|대구|대전|광주|울산|경남|경북|충남|충북|전남|전북|강원|제주|신차|새상품)$' })
     if ($tokens.Count -ge 2) { return "$($tokens[0]) $($tokens[1])" }
     if ($tokens.Count -eq 1) { return $tokens[0] }
     return $KR_ETC
 }
 
-function Infer-DisplacementCc([string]$titleText, [bool]$forceUnder125) {
+function Infer-DisplacementCc([string]$titleText, [bool]$forceUnder125, [int]$defaultCc = 250) {
     if ($forceUnder125) { return 125 }
     $t = $titleText.ToLowerInvariant()
-    # Known 250~299cc models whose names contain "300" (actual engine < 300cc)
     if ($t -match 'xmax\s*300|엑스맥스\s*300|x\s*맥스\s*300') { return 292 }
     if ($t -match '포르자\s*300|forza\s*300') { return 279 }
     if ($t -match 'gts\s*300|베스파\s*300') { return 278 }
     if ($t -match '레블\s*300|rebel\s*300|cb\s*300|cbr\s*300|crf\s*300') { return 286 }
     if ($t -match '닌자\s*300|ninja\s*300|아퀼라\s*300') { return 296 }
-    if ($t -match '크루심\s*300|조이맥스\s*300|보이저\s*300|다운타운\s*300') { return 279 }
-    # Known <300cc models in 125cc-over board
-    if ($t -match 'nmax\s*155|엔맥스\s*155|pcx\s*160|pcx\s*150|adv\s*150|adv\s*160|트리시티\s*155|버그만\s*200|cbr\s*250|코멧\s*250|브이스트롬\s*250|\b250\s*cc|\b155\s*cc|\b160\s*cc|\b125\s*cc') { return 200 }
-    # Known >=300cc models without explicit cc suffix
+    if ($t -match '크루심\s*300|조이맥스\s*300|보이저\s*300|보이져\s*300|다운타운\s*300') { return 279 }
+    if ($t -match 'pcx|엔맥스|nmax|슈퍼\s*커브|\bc125\b|몽키\s*125|그롬|msx|벤리|어드레스|넥스\s*125|스위시|아베니스|보이저\s*125|보이져\s*125|크루심\s*125|시티베스트|시티에이스|프리마베라|스프린트|\bgts\s*125|필리\s*125|젯\s*14|파피오|스바르트필렌\s*125|\bgsx-?[rs]?\s*125|\bcb\s*125|\bcbr\s*125|전기\s*스쿠터|전기\s*오토바이') { return 125 }
+    if ($t -match 'adv\s*150|adv\s*160|트리시티|버그만\s*200|cbr\s*250|코멧\s*250|브이스트롬\s*250|\b250\s*cc|\b155\s*cc|\b160\s*cc|\b125\s*cc|\b110\s*cc|\b100\s*cc|\b50\s*cc') { return 180 }
     if ($t -match '포르자\s*350|forza\s*350|adv\s*350') { return 330 }
     if ($t -match '헌터\s*350|클래식\s*350|메테오\s*350') { return 349 }
     if ($t -match 'mt-?03|\br3\b|yzf-?r3') { return 321 }
     if ($t -match 'g\s*310') { return 313 }
     if ($t -match 'c\s*400') { return 350 }
-    if ($t -match '티맥스|tmax') { return 560 }
+    if ($t -match '티맥스|tmax|테크맥스') { return 560 }
     if ($t -match 'mt-?07|\br7\b') { return 689 }
     if ($t -match 'mt-?09|\br9\b|xsr\s*900') { return 890 }
     if ($t -match 'mt-?10|\br1\b|s\s*1000|r\s*1000|cbr\s*1000|zx-?10') { return 999 }
     if ($t -match '할리|스트리트\s*밥|스글|로글|로드킹|브레이크\s*아웃|팻보이|팻밥|아이언\s*883|포티에잇|스포스터|소프테일|울트라|\b114\b|\b117\b|\b883\b') { return 1200 }
     if ($t -match '두카티|파니갈레|멀티스트라다|데저트\s*슬레드|디아벨|하야부사|골드윙|r\s*1200|r\s*1250|r\s*1300|\br\s*18\b|알나인티|r9t|본네빌|타이거|스피드\s*트윈|로켓\s*3|아프리카\s*트윈|x-?adv') { return 900 }
-    # Explicit numeric cc or model digits
-    $mCc = [regex]::Match($t, '\b(50|80|90|100|110|125|150|155|160|180|200|250|300|310|320|350|390|400|450|500|530|550|560|600|650|660|700|750|790|800|850|883|890|900|950|1000|1050|1100|1200|1250|1290|1300|1400|1600|1800)\s*(?:cc)?\b')
+    $mCc = [regex]::Match($t, '\b(50|80|90|100|110|125|150|155|160|180|200|250|300|310|320|350|390|400|401|450|500|530|550|560|600|650|660|700|750|790|800|850|883|890|900|901|950|1000|1050|1100|1200|1250|1290|1300|1400|1600|1800)\s*(?:cc)?\b')
     if ($mCc.Success) {
         return [int]$mCc.Groups[1].Value
     }
-    # Default for menu 351/133 (125cc over, mostly >=300cc big bikes)
-    return 400
+    return $defaultCc
 }
 
 function Parse-TitlePriceManwon([string]$titleText) {
     if (-not $titleText) { return 0 }
-    # Match patterns like "1550만원", "1,550만", "450만원", "2800만"
     $m1 = [regex]::Match($titleText, '(?<!\d)(\d{1,2},?\d{3}|\d{2,4})\s*만\s*원?')
     if ($m1.Success) {
         $val = [int]($m1.Groups[1].Value -replace ',', '')
@@ -320,26 +340,221 @@ function Build-BikePortfolioSummary([object[]]$items, [int]$exactUnder300, [int]
     $topBrands  = @($brandCounts.GetEnumerator()  | Where-Object { $_.Key -ne $KR_ETC } | Sort-Object Value -Descending | Select-Object -First 8 | ForEach-Object { [ordered]@{ name = $_.Key; count = $_.Value } })
 
     return [ordered]@{
-        sampleSize      = $totalSample
-        pricedSampleSize= $priceCnt
-        under300Count   = $exactUnder300
-        over300Count    = $exactOver300
-        under300Ratio   = [math]::Round(($exactUnder300 / $ccTotal) * 100, 1)
-        over300Ratio    = [math]::Round(($exactOver300 / $ccTotal) * 100, 1)
-        avgPriceManwon  = $avgPrice
-        priceBands      = $priceBands
-        topRegions      = $topRegions
-        topModels       = $topModels
-        topBrands       = $topBrands
+        sampleSize       = $totalSample
+        pricedSampleSize = $priceCnt
+        under300Count    = $exactUnder300
+        over300Count     = $exactOver300
+        under300Ratio    = [math]::Round(($exactUnder300 / $ccTotal) * 100, 1)
+        over300Ratio     = [math]::Round(($exactOver300 / $ccTotal) * 100, 1)
+        avgPriceManwon   = $avgPrice
+        priceBands       = $priceBands
+        topRegions       = $topRegions
+        topModels        = $topModels
+        topBrands        = $topBrands
     }
 }
 
 $allRawBikes = New-Object System.Collections.Generic.List[object]
 
 # ==============================================================================
-# 1. REITWAGEN (https://www.reitwagen.co.kr/ - Native BAREE Used Bikes)
+# 1. DAANGN MOTORCYCLES (https://www.daangn.com/kr/buy-sell/?search=오토바이)
+#    Parallel Multi-Keyword Nationwide Enumeration + Sitemap Bike Slugs
 # ==============================================================================
-Write-Host "1. Collecting Reitwagen Native Used Bikes (ORPC API + Sitemap)..." -ForegroundColor Yellow
+Write-Host "1. Collecting Daangn Nationwide C2C Motorcycles (Parallel Search + Sitemap)..." -ForegroundColor Yellow
+
+$daangnKeywords = @(
+    "오토바이", "스쿠터", "중고오토바이", "바이크 팝니다", "125cc", "배달오토바이",
+    "혼다 pcx", "혼다 포르자", "슈퍼커브", "혼다 cbr", "혼다 cb", "혼다 레블", "혼다 adv", "골드윙",
+    "야마하 nmax", "야마하 xmax", "티맥스", "야마하 r3", "야마하 mt", "야마하 xsr",
+    "할리데이비슨", "스트리트글라이드", "로드글라이드", "아이언883", "브레이크아웃",
+    "bmw gs", "bmw s1000", "bmw c400", "알나인티", "bmw r18",
+    "가와사키 닌자", "가와사키 z", "스즈키 gsx", "브이스트롬", "버그만",
+    "두카티", "베스파", "로얄엔필드", "트라이엄프", "ktm 듀크", "허스크바나", "보이저 125", "크루심", "다운타운"
+)
+
+$daangnFetchScript = {
+    param([string]$kw)
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    try {
+        $enc = [uri]::EscapeDataString($kw)
+        $req = [System.Net.HttpWebRequest]::Create("https://www.daangn.com/kr/buy-sell/?search=$enc")
+        $req.Method = "GET"
+        $req.UserAgent = "Mozilla/5.0"
+        $req.Timeout = 20000
+        $req.AutomaticDecompression = [System.Net.DecompressionMethods]::GZip -bor [System.Net.DecompressionMethods]::Deflate
+        $resp = $req.GetResponse()
+        $sr = New-Object System.IO.StreamReader($resp.GetResponseStream(), [System.Text.Encoding]::UTF8)
+        $h = $sr.ReadToEnd(); $sr.Close(); $resp.Close()
+        $i1 = $h.IndexOf("window.__remixContext = ")
+        if ($i1 -lt 0) { return @() }
+        $i1 += 24
+        $i2 = $h.IndexOf(";__remixContext.p", $i1)
+        if ($i2 -lt 0) { return @() }
+        $obj = ($h.Substring($i1, $i2 - $i1)) | ConvertFrom-Json
+        return @($obj.state.loaderData.'routes/_buy-sell-shell'.buySellArticles)
+    } catch {
+        return @()
+    }
+}
+
+$nonBikeFilterRx = [regex]::new('(?i)(전기자전거|자전거|픽시|로드바이크|엠티비|\bmtb\b|전동킥보드|킥보드|유모차|휠체어|헬멧|자켓|재킷|장갑|부츠|블랙박스|거치대|탑박스|리어백|새들백|머플러만|배기만|카울만|배터리만|타이어만|장난감|레고|프라모델|피규어|키링|스티커|상품권|바지|점퍼|조끼|안전화|보호대|인터콤|세나|카도|구합니다|삽니다|매입합니다|렌트카|승용차)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+
+$daangnSeenMap = @{}
+$pool = [runspacefactory]::CreateRunspacePool(1, 8)
+$pool.Open()
+$jobs = New-Object System.Collections.Generic.List[object]
+foreach ($kw in $daangnKeywords) {
+    $ps = [powershell]::Create().AddScript($daangnFetchScript).AddArgument($kw)
+    $ps.RunspacePool = $pool
+    $jobs.Add([pscustomobject]@{ Pipe = $ps; Handle = $ps.BeginInvoke() })
+}
+
+foreach ($j in $jobs) {
+    try {
+        $arts = $j.Pipe.EndInvoke($j.Handle)
+        foreach ($a in $arts) {
+            if (-not $a -or -not $a.id -or $daangnSeenMap.ContainsKey($a.id)) { continue }
+            $prc = 0; [void][double]::TryParse([string]$a.price, [ref]$prc)
+            if ($prc -lt 350000 -or $prc -gt 150000000) { continue }
+            $tit = ([string]$a.title -replace '\s+', ' ').Trim()
+            if ($nonBikeFilterRx.IsMatch($tit)) { continue }
+            $daangnSeenMap[$a.id] = $a
+        }
+    } catch {}
+    $j.Pipe.Dispose()
+}
+$pool.Close()
+$pool.Dispose()
+
+# Also scan Daangn buy-sell sitemap for additional active nationwide motorcycle slugs
+$daangnSitemapExtraIds = New-Object System.Collections.Generic.List[string]
+try {
+    $tmpGz = Join-Path $env:TEMP "daangn_bikes_sm_$($PID).xml.gz"
+    curl.exe -s -L -A "Mozilla/5.0" "https://www.daangn.com/kr/buy-sell/sitemap-detail.xml.gz" -o $tmpGz
+    if (Test-Path $tmpGz) {
+        $fs = [System.IO.File]::OpenRead($tmpGz)
+        $gz = New-Object System.IO.Compression.GZipStream($fs, [System.IO.Compression.CompressionMode]::Decompress)
+        $sr = New-Object System.IO.StreamReader($gz, [System.Text.Encoding]::UTF8)
+        $smXml = $sr.ReadToEnd()
+        $sr.Close(); $gz.Close(); $fs.Close()
+        Remove-Item $tmpGz -Force -ErrorAction SilentlyContinue
+
+        $smBikeRx = [regex]::new('(?i)(오토바이|스쿠터|pcx|nmax|엔맥스|xmax|엑스맥스|tmax|티맥스|포르자|슈퍼커브|혼다-cb|혼다-c125|cbr\d|레블|골드윙|x-adv|adv125|adv160|adv350|야마하-r|mt-03|mt03|mt-07|mt07|mt-09|mt09|스즈키-gsx|버그만|브이스트롬|가와사키-닌자|할리데이비슨|두카티|베스파-gts|베스파-프리마베라|베스파-스프린트|트라이엄프-본네빌|로얄엔필드|보이저125|크루심|다운타운st|시티베스트|아퀼라)', [System.Text.RegularExpressions.RegexOptions]::Compiled)
+        $locMs = [regex]::Matches($smXml, '<loc>https://www\.daangn\.com(/kr/buy-sell/[^<]+?)</loc>')
+        foreach ($m in $locMs) {
+            $relId = $m.Groups[1].Value
+            if ($daangnSeenMap.ContainsKey($relId)) { continue }
+            $slugDecoded = [uri]::UnescapeDataString(($relId -replace '^/kr/buy-sell/|-[a-z0-9]{10,14}/?$', ''))
+            if ($smBikeRx.IsMatch($slugDecoded) -and -not $nonBikeFilterRx.IsMatch($slugDecoded)) {
+                $daangnSitemapExtraIds.Add($relId)
+            }
+        }
+    }
+} catch { Write-Warning "Daangn buy-sell sitemap warning: $_" }
+
+$daangnNormItems = New-Object System.Collections.Generic.List[object]
+$daangnActiveIds = New-Object System.Collections.Generic.List[string]
+$daangnUnder300 = 0; $daangnOver300 = 0
+$daangnNewByCreated = 0; $daangnClosedSample = 0
+
+foreach ($a in $daangnSeenMap.Values) {
+    $stRaw = [string]$a.status
+    if ($stRaw -eq 'Closed') {
+        $daangnClosedSample++
+        continue
+    }
+    $stKr = if ($stRaw -eq 'Reserved') { $KR_RESERVED } else { $KR_ONSALE }
+    $cleanId = ([string]$a.id -replace '^/kr/buy-sell/|/$', '')
+    $daangnActiveIds.Add("DG_" + $cleanId)
+
+    $tit = ([string]$a.title -replace '\s+', ' ').Trim()
+    $bodyTxt = ([string]$a.content -replace '\s+', ' ').Trim()
+    $combinedTxt = "$tit $bodyTxt"
+
+    $createdKst = ""
+    if ($a.createdAt) {
+        try {
+            $dto = [DateTimeOffset]::Parse([string]$a.createdAt).ToOffset([TimeSpan]::FromHours(9))
+            $createdKst = $dto.ToString("yyyy-MM-dd HH:mm")
+            if ($dto.ToString("yyyy-MM-dd") -eq $TodayDate) { $daangnNewByCreated++ }
+        } catch { $createdKst = [string]$a.createdAt }
+    }
+
+    $cc = Infer-DisplacementCc $combinedTxt $false
+    $ccGrp = if ($cc -ge 300) { $daangnOver300++; $KR_OVER300 } else { $daangnUnder300++; $KR_UNDER300 }
+
+    $prcWon = 0; [void][double]::TryParse([string]$a.price, [ref]$prcWon)
+    $prcMan = [int][math]::Round($prcWon / 10000.0)
+
+    $yr = ""
+    $mYr = [regex]::Match($combinedTxt, '\b(20\d{2}|\d{2})\s*(?:년식|연식)')
+    if ($mYr.Success) {
+        $yv = $mYr.Groups[1].Value
+        $yr = if ($yv.Length -eq 2) { "20$yv" } else { $yv }
+    }
+
+    $kmNum = 0
+    $mKm = [regex]::Match($combinedTxt, '\b(\d{1,3}(?:,\d{3})+|\d{3,6})\s*(?:km|키로|킬로)')
+    if ($mKm.Success) {
+        $kmVal = ($mKm.Groups[1].Value -replace ',', '')
+        if ($kmVal -match '^\d+$') { $kmNum = [int]$kmVal }
+    }
+
+    $lat = 0.0; $lng = 0.0
+    if ($a.contentCoordinates -and $a.contentCoordinates.Count -gt 0) {
+        $lat = [double]$a.contentCoordinates[0].latitude
+        $lng = [double]$a.contentCoordinates[0].longitude
+    }
+    $regName = if ($a.region) { [string]$a.region.name } else { "" }
+    $sido = Resolve-SidoFromCoords $lat $lng "$regName $tit"
+
+    $brand = Resolve-Brand "" $combinedTxt ""
+    $model = Resolve-ModelShort $brand "" $tit
+
+    $row = [pscustomobject][ordered]@{
+        collectedDate = $TodayDate
+        platform      = (U "\uB2F9\uADFC(\uC624\uD1A0\uBC14\uC774)")
+        bikeId        = "DG_" + $cleanId
+        cc            = $cc
+        ccGroup       = $ccGrp
+        manufacturer  = $brand
+        model         = $model
+        fullTitle     = $tit
+        year          = $yr
+        mileageKm     = $kmNum
+        priceManwon   = $prcMan
+        priceBand     = Get-BikePriceBand $prcMan
+        sido          = $sido
+        sellType      = $KR_PERSONAL
+        status        = $stKr
+        registeredAt  = $createdKst
+        url           = "https://www.daangn.com$($a.href)"
+    }
+    $daangnNormItems.Add($row)
+    $allRawBikes.Add($row)
+}
+
+foreach ($extraRel in $daangnSitemapExtraIds) {
+    $cleanExtra = ($extraRel -replace '^/kr/buy-sell/|/$', '')
+    $daangnActiveIds.Add("DG_" + $cleanExtra)
+    $slugTitle = ([uri]::UnescapeDataString(($cleanExtra -replace '-[a-z0-9]{10,14}$', '')) -replace '-', ' ').Trim()
+    $ccExtra = Infer-DisplacementCc $slugTitle $false
+    if ($ccExtra -ge 300) { $daangnOver300++ } else { $daangnUnder300++ }
+}
+
+$daangnTotalCount = $daangnUnder300 + $daangnOver300
+$daangnPortfolio  = Build-BikePortfolioSummary $daangnNormItems.ToArray() $daangnUnder300 $daangnOver300
+$daangnSnap       = Compare-And-SaveSnapshot "daangn_bike" $daangnActiveIds.ToArray()
+$daangnNewToday   = if ($null -ne $daangnSnap.NewFromDiff -and $daangnSnap.NewFromDiff -gt $daangnNewByCreated) { $daangnSnap.NewFromDiff } else { $daangnNewByCreated }
+$daangnSoldToday  = if ($null -ne $daangnSnap.SoldFromDiff -and $daangnSnap.SoldFromDiff -gt 0) { $daangnSnap.SoldFromDiff } else { $daangnClosedSample }
+$daangnTurnoverPct= if ($daangnTotalCount -gt 0) { [math]::Round(($daangnSoldToday / $daangnTotalCount) * 100, 2) } else { 0 }
+
+Write-Host "   -> Daangn Motorcycles Total=$daangnTotalCount (<=299cc: $daangnUnder300, >=300cc: $daangnOver300), NewToday=$daangnNewToday, RichSample=$($daangnNormItems.Count)" -ForegroundColor Green
+
+# ==============================================================================
+# 2. REITWAGEN (https://www.reitwagen.co.kr/ - Native BAREE Used Bikes)
+# ==============================================================================
+Write-Host "2. Collecting Reitwagen Native Used Bikes (ORPC API + Sitemap)..." -ForegroundColor Yellow
 
 function Invoke-ReitwagenOrpc([string]$endpoint, [hashtable]$payload) {
     $bodyStr = (@{ json = $payload } | ConvertTo-Json -Depth 6 -Compress)
@@ -367,7 +582,6 @@ try {
     $rwUnder300Count  = [Math]::Max(0, $rwTotalCount - $rwOver300Count)
     $rwCertifiedCount = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("BAREE_CERTIFIED") }).count
 
-    # Fetch newest 40 pages (800 vehicles) for exact today postedAt count + rich portfolio
     for ($pg = 0; $pg -lt 40; $pg++) {
         $res = Invoke-ReitwagenOrpc "search/list" @{
             page       = $pg
@@ -422,7 +636,6 @@ try {
     }
 } catch { Write-Warning "Reitwagen API error: $_" }
 
-# Reitwagen Sitemap IDs for full-population snapshot diffing
 $rwSitemapIds = New-Object System.Collections.Generic.List[string]
 try {
     for ($si = 0; $si -le 1; $si++) {
@@ -432,36 +645,31 @@ try {
     }
 } catch { Write-Warning "Reitwagen sitemap error: $_" }
 
-$rwPortfolio = Build-BikePortfolioSummary $rwNormItems.ToArray() $rwUnder300Count $rwOver300Count
-$rwSnapIds = if ($rwSitemapIds.Count -gt 0) { $rwSitemapIds.ToArray() } else { @($rwSeenIds.Keys) }
-$rwSnap = Compare-And-SaveSnapshot "reitwagen" $rwSnapIds
-$rwNewToday  = if ($null -ne $rwSnap.NewFromDiff -and $rwSnap.NewFromDiff -gt $rwNewByPostedAt) { $rwSnap.NewFromDiff } else { $rwNewByPostedAt }
-$rwSoldToday = if ($null -ne $rwSnap.SoldFromDiff) { $rwSnap.SoldFromDiff } else { 0 }
+$rwPortfolio   = Build-BikePortfolioSummary $rwNormItems.ToArray() $rwUnder300Count $rwOver300Count
+$rwSnapIds     = if ($rwSitemapIds.Count -gt 0) { $rwSitemapIds.ToArray() } else { @($rwSeenIds.Keys) }
+$rwSnap        = Compare-And-SaveSnapshot "reitwagen" $rwSnapIds
+$rwNewToday    = if ($null -ne $rwSnap.NewFromDiff -and $rwSnap.PrevCount -ge 10000 -and $rwSnap.NewFromDiff -gt $rwNewByPostedAt) { $rwSnap.NewFromDiff } else { $rwNewByPostedAt }
+$rwSoldToday   = if ($null -ne $rwSnap.SoldFromDiff -and $rwSnap.PrevCount -ge 10000) { $rwSnap.SoldFromDiff } else { 0 }
 $rwTurnoverPct = if ($rwTotalCount -gt 0) { [math]::Round(($rwSoldToday / $rwTotalCount) * 100, 2) } else { 0 }
 
-Write-Host "   -> Reitwagen Total=$rwTotalCount (<=299cc: $rwUnder300Count, >=300cc: $rwOver300Count), NewToday=$rwNewToday, Sample=$($rwNormItems.Count)" -ForegroundColor Green
+Write-Host "   -> Reitwagen Total=$rwTotalCount (<=299cc: $rwUnder300Count, >=300cc: $rwOver300Count), NewToday=$rwNewToday, SoldToday=$rwSoldToday" -ForegroundColor Green
 
 # ==============================================================================
-# 2. PASSO BIKE (http://bike.passo.co.kr/bike/ - Used Motorcycle Listings)
-#    Uses Cloud-Accessible Real-Time Passo Index (bypasses Passo KR-only IDC geo-timeout on GitHub Actions)
+# 3. PASSO BIKE (http://bike.passo.co.kr/bike/ - Used Motorcycle Listings)
 # ==============================================================================
-Write-Host "2. Collecting Passo Bike Used Listings (Cloud-Accessible Real-Time Feed)..." -ForegroundColor Yellow
+Write-Host "3. Collecting Passo Bike Used Listings (Cloud-Accessible Real-Time Feed)..." -ForegroundColor Yellow
 
-$passoAllUsedCount = 0
-$passoUnder300Count = 0
-$passoOver300Count = 0
-$passoTotalCount = 0
+$passoAllUsedCount = 0; $passoUnder300Count = 0; $passoOver300Count = 0; $passoTotalCount = 0
 $passoNormItems = New-Object System.Collections.Generic.List[object]
 $passoSeenIds = @{}
 $passoNewByPostedAt = 0
 
 try {
-    $passoTotalCount   = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("PASSO") }).count
-    $passoOver300Count = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("PASSO"); minDisplacement=300 }).count
-    $passoUnder300Count= [Math]::Max(0, $passoTotalCount - $passoOver300Count)
-    $passoAllUsedCount = $passoTotalCount
+    $passoTotalCount    = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("PASSO") }).count
+    $passoOver300Count  = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("PASSO"); minDisplacement=300 }).count
+    $passoUnder300Count = [Math]::Max(0, $passoTotalCount - $passoOver300Count)
+    $passoAllUsedCount  = $passoTotalCount
 
-    # Fetch newest 40 pages (800 vehicles) for exact today postedAt count + rich portfolio
     for ($pg = 0; $pg -lt 40; $pg++) {
         $res = Invoke-ReitwagenOrpc "search/list" @{
             page       = $pg
@@ -521,29 +729,28 @@ try {
 } catch { Write-Warning "Passo error: $_" }
 
 if ($passoTotalCount -eq 0) { $passoTotalCount = $passoNormItems.Count }
-$passoPortfolio = Build-BikePortfolioSummary $passoNormItems.ToArray() $passoUnder300Count $passoOver300Count
-$passoSnap = Compare-And-SaveSnapshot "passo_used" @($passoSeenIds.Keys)
-$passoNewToday  = if ($null -ne $passoSnap.NewFromDiff -and $passoSnap.NewFromDiff -gt $passoNewByPostedAt) { $passoSnap.NewFromDiff } else { $passoNewByPostedAt }
-$passoSoldToday = if ($null -ne $passoSnap.SoldFromDiff) { $passoSnap.SoldFromDiff } else { 0 }
+$passoPortfolio   = Build-BikePortfolioSummary $passoNormItems.ToArray() $passoUnder300Count $passoOver300Count
+$passoSnap        = Compare-And-SaveSnapshot "passo_used" @($passoSeenIds.Keys)
+$passoNewToday    = $passoNewByPostedAt
+$passoSoldToday   = if ($null -ne $passoSnap.SoldFromDiff) { $passoSnap.SoldFromDiff } else { 0 }
 $passoTurnoverPct = if ($passoTotalCount -gt 0) { [math]::Round(($passoSoldToday / $passoTotalCount) * 100, 2) } else { 0 }
 
-Write-Host "   -> Passo Used Total=$passoTotalCount (<=299cc: $passoUnder300Count, >=300cc: $passoOver300Count), NewToday=$passoNewToday, Sample=$($passoNormItems.Count)" -ForegroundColor Green
+Write-Host "   -> Passo Used Total=$passoTotalCount (<=299cc: $passoUnder300Count, >=300cc: $passoOver300Count), NewToday=$passoNewToday, SoldToday=$passoSoldToday" -ForegroundColor Green
 
 # ==============================================================================
-# 3. BATUMAE NAVER CAFE (https://cafe.naver.com/bikecargogo - CafeId: 10312966)
-#    Public Board API (No Login Required) + Optional NAVER_NID_AUT/SES Enrichment
+# 4. BATUMAE NAVER CAFE (https://cafe.naver.com/bikecargogo - CafeId: 10312966)
 # ==============================================================================
-Write-Host "3. Collecting Batumae (Naver Cafe bikecargogo) 30-Day Active Personal C2C Listings..." -ForegroundColor Yellow
+Write-Host "4. Collecting Batumae (Naver Cafe bikecargogo) 30-Day Active Personal C2C Listings..." -ForegroundColor Yellow
 
 $batumaeMenus = @(
-    @{ menuId = 351; forceUnder125 = $false; sellType = $KR_PERSONAL }, # 개인 125cc초과 판매
-    @{ menuId = 352; forceUnder125 = $true;  sellType = $KR_PERSONAL }, # 개인 125cc이하 판매
-    @{ menuId = 133; forceUnder125 = $false; sellType = $KR_ESCROW   }, # 125cc 초과 안전결제
-    @{ menuId = 144; forceUnder125 = $true;  sellType = $KR_ESCROW   }  # 125cc 이하 안전결제
+    @{ menuId = 351; forceUnder125 = $false; sellType = $KR_PERSONAL },
+    @{ menuId = 352; forceUnder125 = $true;  sellType = $KR_PERSONAL },
+    @{ menuId = 133; forceUnder125 = $false; sellType = $KR_ESCROW   },
+    @{ menuId = 144; forceUnder125 = $true;  sellType = $KR_ESCROW   }
 )
 
 $btSeenIds = @{}
-$btActiveMap = @{} # id -> writeDate (yyyy-MM-dd)
+$btActiveMap = @{}
 $btNormItems = New-Object System.Collections.Generic.List[object]
 $btUnder300Count = 0; $btOver300Count = 0
 $btNewTodayCount = 0; $btSoldTaggedToday = 0; $btTraded30dCount = 0
@@ -584,7 +791,6 @@ foreach ($bm in $batumaeMenus) {
                 $subj = ([System.Net.WebUtility]::HtmlDecode([string]$a.subject) -replace '\s+', ' ').Trim()
                 $head = ([System.Net.WebUtility]::HtmlDecode([string]$a.headName)).Trim()
 
-                # Detect sold/completed/stopped status from subject/head/productSale
                 $saleStat = if ($a.productSale) { [string]$a.productSale.saleStatus } else { "" }
                 $isSold = ($subj -match '판매\s*완료|거래\s*완료|판완|완료됨|판매\s*중지된') -or ($head -match '완료') -or ($saleStat -eq 'SOLD_OUT')
 
@@ -600,7 +806,7 @@ foreach ($bm in $batumaeMenus) {
 
                 $btActiveMap[$aid] = $wDate
 
-                $cc = Infer-DisplacementCc $subj $bm.forceUnder125
+                $cc = Infer-DisplacementCc $subj $bm.forceUnder125 400
                 $ccGrp = if ($cc -ge 300) { $btOver300Count++; $KR_OVER300 } else { $btUnder300Count++; $KR_UNDER300 }
 
                 $prcMan = 0
@@ -650,18 +856,14 @@ foreach ($bm in $batumaeMenus) {
     }
 }
 
-# Optional Naver Login Cookie Enrichment (if NAVER_NID_AUT and NAVER_NID_SES exist in environment)
 $hasNaverAuth = ($env:NAVER_NID_AUT -and $env:NAVER_NID_SES)
 if ($hasNaverAuth) {
-    Write-Host "   -> NAVER_NID_AUT/SES detected: enriching missing prices from article body (top 80 newest)..." -ForegroundColor Cyan
-    $enriched = 0
     foreach ($item in ($btNormItems | Where-Object { $_.priceManwon -eq 0 } | Select-Object -First 80)) {
         try {
             $rawId = $item.bikeId -replace '^BT', ''
             $artUrl = "https://apis.naver.com/cafe-web/cafe-articleapi/v2.1/cafes/10312966/articles/$rawId"
             $req = [System.Net.HttpWebRequest]::Create($artUrl)
-            $req.Method = "GET"
-            $req.UserAgent = "Mozilla/5.0"
+            $req.Method = "GET"; $req.UserAgent = "Mozilla/5.0"
             $req.Headers.Add("Cookie", "NID_AUT=$($env:NAVER_NID_AUT); NID_SES=$($env:NAVER_NID_SES)")
             $resp = $req.GetResponse()
             $sr = New-Object System.IO.StreamReader($resp.GetResponseStream(), [System.Text.Encoding]::UTF8)
@@ -674,14 +876,11 @@ if ($hasNaverAuth) {
                     $item.priceManwon = [int][math]::Round(([double]($pMatch.Groups[2].Value -replace ',', '')) / 10000.0)
                 }
                 $item.priceBand = Get-BikePriceBand $item.priceManwon
-                $enriched++
             }
         } catch {}
     }
-    Write-Host "   -> Enriched $enriched article prices via Naver session." -ForegroundColor Cyan
 }
 
-# Date-aware Batumae snapshot comparison (excludes natural >29d window aging from Sold count)
 $btSnapTodayPath  = Join-Path $SnapshotDir "batumae_$($TodayDate).json"
 $btSnapLatestPath = Join-Path $SnapshotDir "batumae_latest.json"
 $btPrevFiles = @(Get-ChildItem -Path $SnapshotDir -Filter "batumae_*.json" -ErrorAction SilentlyContinue |
@@ -721,15 +920,15 @@ $btNewToday    = $btNewTodayCount
 $btSoldToday   = if ($null -ne $btSoldFromDiff -and $btSoldFromDiff -gt 0) { $btSoldFromDiff } else { $btSoldTaggedToday }
 $btTurnoverPct = if ($btTotalCount -gt 0) { [math]::Round(($btSoldToday / $btTotalCount) * 100, 2) } else { 0 }
 
-Write-Host "   -> Batumae 30d Active Personal Total=$btTotalCount (<=299cc: $btUnder300Count, >=300cc: $btOver300Count), NewToday=$btNewToday, PricedSample=$($btPortfolio.pricedSampleSize)" -ForegroundColor Green
+Write-Host "   -> Batumae 30d Active Personal Total=$btTotalCount (<=299cc: $btUnder300Count, >=300cc: $btOver300Count), NewToday=$btNewToday, SoldToday=$btSoldToday" -ForegroundColor Green
 
 # ==============================================================================
-# 4. K CAR (Service Not Operated - Placeholder Slot Only, No Numeric Values)
+# 5. K CAR (Service Not Operated - Placeholder Slot Only, No Numeric Values)
 # ==============================================================================
-Write-Host "4. K Car Bike Slot: Reserved as placeholder (Service not active, numbers omitted)." -ForegroundColor DarkGray
+Write-Host "5. K Car Bike Slot: Reserved as placeholder (Service not active, numbers omitted)." -ForegroundColor DarkGray
 
 # ==============================================================================
-# 5. SAVE UNIFIED VEHICLE-LEVEL RAW CSV
+# 6. SAVE UNIFIED VEHICLE-LEVEL RAW CSV
 # ==============================================================================
 $utf8Bom = New-Object System.Text.UTF8Encoding($true)
 $rawCsvToday  = Join-Path $RawDir "raw_bikes_$($TodayDate).csv"
@@ -750,7 +949,7 @@ foreach ($v in $allRawBikes) {
 [System.IO.File]::WriteAllLines($rawCsvLatest, $rawLines, $utf8Bom)
 
 # ==============================================================================
-# 6. MERGE DAILY RECORD & SAVE PORTFOLIO + DASHBOARD JS BUNDLE
+# 7. MERGE DAILY RECORD & SAVE PORTFOLIO + DASHBOARD JS BUNDLE
 # ==============================================================================
 $records = @()
 if (Test-Path $JsonPath) {
@@ -762,13 +961,23 @@ if (Test-Path $JsonPath) {
     } catch { $records = @() }
 }
 
-$defaultMemo = U "4\uB300 \uC624\uD1A0\uBC14\uC774 \uD50C\uB7AB\uD3FC Apple-to-Apple (300cc \uC774\uD558/\uC774\uC0C1 \u00B7 \uBE0C\uB79C\uB4DC \u00B7 \uAC00\uACA9 \u00B7 RAW) \uC790\uB3D9 \uC218\uC9D1"
+$defaultMemo = U "5\uB300 \uC624\uD1A0\uBC14\uC774 \uD50C\uB7AB\uD3FC (\uB2F9\uADFC \u00B7 \uB77C\uC774\uD2B8\uBC14\uAC90 \u00B7 \uD30C\uC3D8 \u00B7 \uBC14\uD29C\uB9E4 \u00B7 \uCF00\uC774\uCE74 \uBE48\uCE78) \uC790\uB3D9 \uC218\uC9D1"
 
 $newEntry = [ordered]@{
     date                    = $TodayDate
     updatedAt               = $Timestamp
     rawBikeCount            = $allRawBikes.Count
-    # 1. Reitwagen (Native BAREE Used)
+    # 1. Daangn Motorcycles (C2C Direct)
+    daangnBikeCount         = $daangnTotalCount
+    daangnUnder300Count     = $daangnUnder300
+    daangnOver300Count      = $daangnOver300
+    daangnOnSaleCount       = $daangnTotalCount
+    daangnNewCount          = $daangnNewToday
+    daangnSoldCount         = $daangnSoldToday
+    daangnTurnoverPct       = $daangnTurnoverPct
+    daangnAvgPrice          = $daangnPortfolio.avgPriceManwon
+    daangnDiff              = 0
+    # 2. Reitwagen (Native BAREE Used)
     reitwagenCount          = $rwTotalCount
     reitwagenUnder300Count  = $rwUnder300Count
     reitwagenOver300Count   = $rwOver300Count
@@ -779,7 +988,7 @@ $newEntry = [ordered]@{
     reitwagenTurnoverPct    = $rwTurnoverPct
     reitwagenAvgPrice       = $rwPortfolio.avgPriceManwon
     reitwagenDiff           = 0
-    # 2. Passo Bike (Personal Used)
+    # 3. Passo Bike (Used)
     passoCount              = $passoTotalCount
     passoUnder300Count      = $passoUnder300Count
     passoOver300Count       = $passoOver300Count
@@ -790,7 +999,7 @@ $newEntry = [ordered]@{
     passoTurnoverPct        = $passoTurnoverPct
     passoAvgPrice           = $passoPortfolio.avgPriceManwon
     passoDiff               = 0
-    # 3. Batumae Naver Cafe (Personal C2C & Safety-Pay 30d Active)
+    # 4. Batumae Naver Cafe (Personal C2C & Safety-Pay 30d Active)
     batumaeCount            = $btTotalCount
     batumaeUnder300Count    = $btUnder300Count
     batumaeOver300Count     = $btOver300Count
@@ -801,7 +1010,7 @@ $newEntry = [ordered]@{
     batumaeTurnoverPct      = $btTurnoverPct
     batumaeAvgPrice         = $btPortfolio.avgPriceManwon
     batumaeDiff             = 0
-    # 4. K Car (Placeholder - Not Operated, null values)
+    # 5. K Car (Placeholder - Not Operated, null values)
     kcarStatus              = "NOT_OPERATED"
     kcarCount               = $null
     kcarUnder300Count       = $null
@@ -819,13 +1028,18 @@ $filtered += [pscustomobject]$newEntry
 $sortedRecords = @($filtered | Sort-Object date)
 
 for ($i = 0; $i -lt $sortedRecords.Count; $i++) {
+    $cur = $sortedRecords[$i]
+    if (-not $cur.PSObject.Properties['daangnDiff']) {
+        $cur | Add-Member -NotePropertyName 'daangnDiff' -NotePropertyValue 0 -Force
+    }
     if ($i -eq 0) {
-        $sortedRecords[$i].reitwagenDiff = 0
-        $sortedRecords[$i].passoDiff     = 0
-        $sortedRecords[$i].batumaeDiff   = 0
+        $cur.daangnDiff    = 0
+        $cur.reitwagenDiff = 0
+        $cur.passoDiff     = 0
+        $cur.batumaeDiff   = 0
     } else {
         $prev = $sortedRecords[$i - 1]
-        $cur  = $sortedRecords[$i]
+        $cur.daangnDiff    = if ($null -ne $prev.daangnBikeCount -and [int]$prev.daangnBikeCount -gt 0) { [int]$cur.daangnBikeCount - [int]$prev.daangnBikeCount } else { 0 }
         $cur.reitwagenDiff = [int]$cur.reitwagenCount - [int]$prev.reitwagenCount
         $cur.passoDiff     = [int]$cur.passoCount     - [int]$prev.passoCount
         $cur.batumaeDiff   = [int]$cur.batumaeCount   - [int]$prev.batumaeCount
@@ -838,19 +1052,29 @@ if ($sortedRecords.Count -eq 1 -and -not $jsonOutput.TrimStart().StartsWith("[")
 }
 [System.IO.File]::WriteAllText($JsonPath, $jsonOutput, $utf8NoBom)
 
-# Save Daily Summary CSV (K Car columns reserved & intentionally left blank!)
+# Save Daily Summary CSV (5 Platforms; K Car columns reserved & left blank)
 $csvHeader = U (
     "\uC77C\uC790,\uC218\uC9D1\uC2DC\uAC01," +
+    "\uB2F9\uADFC_\uC804\uCCB4,\uB2F9\uADFC_300cc\uC774\uD558,\uB2F9\uADFC_300cc\uC774\uC0C1,\uB2F9\uADFC_\uC2E0\uADDC\uB4F1\uB85D,\uB2F9\uADFC_\uC2E0\uADDC\uD310\uB9E4,\uB2F9\uADFC_\uD68C\uC804\uC728(%),\uB2F9\uADFC_\uD3C9\uADE0\uAC00(\uB9CC\uC6D0)," +
     "\uB77C\uC774\uD2B8\uBC14\uAC90_\uC804\uCCB4,\uB77C\uC774\uD2B8\uBC14\uAC90_300cc\uC774\uD558,\uB77C\uC774\uD2B8\uBC14\uAC90_300cc\uC774\uC0C1,\uB77C\uC774\uD2B8\uBC14\uAC90_\uC2E0\uADDC\uB4F1\uB85D,\uB77C\uC774\uD2B8\uBC14\uAC90_\uC2E0\uADDC\uD310\uB9E4,\uB77C\uC774\uD2B8\uBC14\uAC90_\uD68C\uC804\uC728(%),\uB77C\uC774\uD2B8\uBC14\uAC90_\uD3C9\uADE0\uAC00(\uB9CC\uC6D0)," +
-    "\uD30C\uC3D8_\uC804\uCCB4(\uAC1C\uC778),\uD30C\uC3D8_300cc\uC774\uD558,\uD30C\uC3D8_300cc\uC774\uC0C1,\uD30C\uC3D8_\uC2E0\uADDC\uB4F1\uB85D,\uD30C\uC3D8_\uC2E0\uADDC\uD310\uB9E4,\uD30C\uC3D8_\uD68C\uC804\uC728(%),\uD30C\uC3D8_\uD3C9\uADE0\uAC00(\uB9CC\uC6D0)," +
+    "\uD30C\uC3D8_\uC804\uCCB4,\uD30C\uC3D8_300cc\uC774\uD558,\uD30C\uC3D8_300cc\uC774\uC0C1,\uD30C\uC3D8_\uC2E0\uADDC\uB4F1\uB85D,\uD30C\uC3D8_\uC2E0\uADDC\uD310\uB9E4,\uD30C\uC3D8_\uD68C\uC804\uC728(%),\uD30C\uC3D8_\uD3C9\uADE0\uAC00(\uB9CC\uC6D0)," +
     "\uBC14\uD29C\uB9E4_\uC804\uCCB4(30\uC77C\uD65C\uC131),\uBC14\uD29C\uB9E4_300cc\uC774\uD558,\uBC14\uD29C\uB9E4_300cc\uC774\uC0C1,\uBC14\uD29C\uB9E4_\uC2E0\uADDC\uB4F1\uB85D,\uBC14\uD29C\uB9E4_\uC2E0\uADDC\uD310\uB9E4,\uBC14\uD29C\uB9E4_\uD68C\uC804\uC728(%),\uBC14\uD29C\uB9E4_\uD3C9\uADE0\uAC00(\uB9CC\uC6D0)," +
     "\uCF00\uC774\uCE74_\uC804\uCCB4,\uCF00\uC774\uCE74_300cc\uC774\uD558,\uCF00\uC774\uCE74_300cc\uC774\uC0C1,\uCF00\uC774\uCE74_\uC2E0\uADDC\uB4F1\uB85D,\uCF00\uC774\uCE74_\uC2E0\uADDC\uD310\uB9E4,\uCF00\uC774\uCE74_\uD68C\uC804\uC728(%),\uCF00\uC774\uCE74_\uD3C9\uADE0\uAC00(\uB9CC\uC6D0)"
 )
 $csvLines = New-Object System.Collections.Generic.List[string]
 $csvLines.Add($csvHeader)
 foreach ($r in $sortedRecords) {
-    $line = "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},,,,,,," -f `
+    $dgTot = if ($null -ne $r.daangnBikeCount) { $r.daangnBikeCount } else { "" }
+    $dgU   = if ($null -ne $r.daangnUnder300Count) { $r.daangnUnder300Count } else { "" }
+    $dgO   = if ($null -ne $r.daangnOver300Count) { $r.daangnOver300Count } else { "" }
+    $dgN   = if ($null -ne $r.daangnNewCount) { $r.daangnNewCount } else { "" }
+    $dgS   = if ($null -ne $r.daangnSoldCount) { $r.daangnSoldCount } else { "" }
+    $dgT   = if ($null -ne $r.daangnTurnoverPct) { $r.daangnTurnoverPct } else { "" }
+    $dgP   = if ($null -ne $r.daangnAvgPrice) { $r.daangnAvgPrice } else { "" }
+
+    $line = "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20},{21},{22},{23},{24},{25},{26},{27},{28},{29},,,,,,," -f `
         $r.date, $r.updatedAt, `
+        $dgTot, $dgU, $dgO, $dgN, $dgS, $dgT, $dgP, `
         $r.reitwagenCount, $r.reitwagenUnder300Count, $r.reitwagenOver300Count, $r.reitwagenNewCount, $r.reitwagenSoldCount, $r.reitwagenTurnoverPct, $r.reitwagenAvgPrice, `
         $r.passoCount, $r.passoUnder300Count, $r.passoOver300Count, $r.passoNewCount, $r.passoSoldCount, $r.passoTurnoverPct, $r.passoAvgPrice, `
         $r.batumaeCount, $r.batumaeUnder300Count, $r.batumaeOver300Count, $r.batumaeNewCount, $r.batumaeSoldCount, $r.batumaeTurnoverPct, $r.batumaeAvgPrice
@@ -860,6 +1084,7 @@ foreach ($r in $sortedRecords) {
 
 $portfolioBundle = [ordered]@{
     updatedAt = $Timestamp
+    daangn    = $daangnPortfolio
     reitwagen = $rwPortfolio
     passo     = $passoPortfolio
     batumae   = $btPortfolio
@@ -870,14 +1095,15 @@ $portfolioBundle = [ordered]@{
 }
 $portfolioJson = $portfolioBundle | ConvertTo-Json -Depth 6
 $balancedPreview = @(
-    @($rwNormItems | Select-Object -First 200) +
-    @($passoNormItems | Select-Object -First 200) +
-    @($btNormItems | Select-Object -First 200)
+    @($daangnNormItems | Select-Object -First 150) +
+    @($rwNormItems     | Select-Object -First 150) +
+    @($passoNormItems  | Select-Object -First 150) +
+    @($btNormItems     | Select-Object -First 150)
 )
 $rawPreview = $balancedPreview | ConvertTo-Json -Depth 4
 
 $jsContent = @"
-// Auto-generated 4-Platform Used Motorcycle Apple-to-Apple Intelligence Bundle ($Timestamp)
+// Auto-generated 5-Platform Used Motorcycle Apple-to-Apple Intelligence Bundle ($Timestamp)
 window.COMPETITOR_TREND_LAST_UPDATED = "$Timestamp";
 window.COMPETITOR_TREND_DATA = $jsonOutput;
 window.COMPETITOR_PORTFOLIO_DATA = $portfolioJson;

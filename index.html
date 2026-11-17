@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>오토바이 4대 플랫폼 중고 매물 경쟁사 동향 보고서</title>
+  <title>오토바이 5대 플랫폼 중고 매물 경쟁사 동향 보고서</title>
   <style>
     :root {
       --bg: #f1f5f9;
@@ -12,7 +12,8 @@
       --text-sub: #475569;
       --border: #cbd5e1;
       --border-soft: #e2e8f0;
-      --reitwagen: #ea580c;
+      --daangn: #ff6f0f;
+      --reitwagen: #7c3aed;
       --passo: #2563eb;
       --batumae: #059669;
       --kcar: #1e3a8a;
@@ -43,7 +44,7 @@
       padding: 18px 28px;
     }
     .topbar-inner {
-      max-width: 1480px;
+      max-width: 1620px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -92,11 +93,11 @@
     .btn:hover { background: #f8fafc; }
     .btn-primary { background: #0f172a; color: #fff; border-color: #0f172a; }
     .btn-primary:hover { background: #1e293b; }
-    .btn-accent { background: var(--reitwagen); color: #fff; border-color: var(--reitwagen); }
+    .btn-accent { background: var(--daangn); color: #fff; border-color: var(--daangn); }
     .btn-accent:hover { opacity: 0.92; }
 
     .container {
-      max-width: 1480px;
+      max-width: 1620px;
       margin: 28px auto 0;
       padding: 0 28px;
       display: flex;
@@ -108,7 +109,7 @@
       background: var(--surface);
       border: 1px solid var(--border-soft);
       border-radius: var(--radius);
-      padding: 28px 30px;
+      padding: 28px 28px;
       box-shadow: var(--shadow);
     }
     .section-header {
@@ -167,26 +168,28 @@
       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.18);
     }
 
-    /* Ⅰ. 4개사 전체 등록대수 카드 */
-    .stock-grid {
+    /* 5열 반응형 그리드 */
+    .five-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 26px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
     }
-    @media (max-width: 1200px) { .stock-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .stock-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1420px) { .five-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 920px)  { .five-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .five-grid { grid-template-columns: 1fr; } }
 
+    /* Ⅰ. 5개사 전체 등록대수 카드 */
     .stock-card {
       background: #f8fafc;
       border: 1px solid var(--border-soft);
       border-radius: 14px;
-      padding: 22px 24px;
+      padding: 20px 18px;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+    .stock-card.daangn    { border-top: 5px solid var(--daangn); }
     .stock-card.reitwagen { border-top: 5px solid var(--reitwagen); }
     .stock-card.passo     { border-top: 5px solid var(--passo); }
     .stock-card.batumae   { border-top: 5px solid var(--batumae); }
@@ -196,20 +199,22 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 10px;
+      flex-wrap: wrap;
     }
-    .stock-name { font-size: 18px; font-weight: 800; }
+    .stock-name { font-size: 17px; font-weight: 800; }
     .stock-name a { color: inherit; text-decoration: none; }
     .stock-name a:hover { text-decoration: underline; }
     .stock-badge {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 800;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 6px;
       white-space: nowrap;
     }
-    .stock-badge.reitwagen { background: rgba(234,88,12,0.14); color: #c2410c; }
+    .stock-badge.daangn    { background: rgba(255,111,15,0.14); color: #c2410c; }
+    .stock-badge.reitwagen { background: rgba(124,58,237,0.13); color: #6d28d9; }
     .stock-badge.passo     { background: rgba(37,99,235,0.12); color: #1d4ed8; }
     .stock-badge.batumae   { background: rgba(5,150,105,0.14); color: #047857; }
     .stock-badge.kcar      { background: #e2e8f0; color: #475569; }
@@ -217,20 +222,21 @@
     .stock-main {
       display: flex;
       align-items: baseline;
-      gap: 10px;
-      margin: 6px 0 14px;
+      gap: 8px;
+      margin: 6px 0 12px;
+      flex-wrap: wrap;
     }
     .stock-num {
-      font-size: 38px;
+      font-size: 34px;
       font-weight: 800;
       letter-spacing: -0.03em;
       font-variant-numeric: tabular-nums;
     }
-    .stock-unit { font-size: 16.5px; font-weight: 700; color: var(--text-sub); }
+    .stock-unit { font-size: 15px; font-weight: 700; color: var(--text-sub); }
     .diff-tag {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 800;
-      padding: 3px 9px;
+      padding: 3px 8px;
       border-radius: 6px;
       display: inline-block;
     }
@@ -244,58 +250,50 @@
       border-radius: 5px;
       overflow: hidden;
       display: flex;
-      margin-bottom: 10px;
+      margin-bottom: 9px;
     }
     .stock-split-info {
       display: flex;
-      justify-content: space-between;
-      font-size: 14px;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text-sub);
-      gap: 6px;
-      flex-wrap: wrap;
     }
 
     .inactive-placeholder {
       border: 1.5px dashed #cbd5e1;
       border-radius: 10px;
       background: #f1f5f9;
-      padding: 16px 14px;
+      padding: 16px 12px;
       text-align: center;
       color: #64748b;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
     }
-
-    .trend-chart-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 1200px) { .trend-chart-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .trend-chart-grid { grid-template-columns: 1fr; } }
 
     .mini-chart-box {
       border: 1px solid var(--border-soft);
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px;
       background: #ffffff;
     }
     .mini-chart-title {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 800;
       margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 6px;
     }
     .mini-svg {
       width: 100%;
-      height: 150px;
+      height: 145px;
       display: block;
     }
 
-    /* 달력 기반 조회기간 배너 */
+    /* 달력 배너 */
     .calendar-control-banner {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
@@ -341,7 +339,7 @@
     .date-sep { font-size: 18px; font-weight: 800; color: #cbd5e1; padding: 0 4px; }
     .search-submit-btn {
       border: none;
-      background: var(--reitwagen);
+      background: var(--daangn);
       color: #ffffff;
       padding: 11px 24px;
       border-radius: 9px;
@@ -351,10 +349,10 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
+      box-shadow: 0 4px 12px rgba(255, 111, 15, 0.35);
       transition: all 0.15s;
     }
-    .search-submit-btn:hover { background: #c2410c; transform: translateY(-1px); }
+    .search-submit-btn:hover { background: #ea580c; transform: translateY(-1px); }
     .quick-date-btn {
       border: 1px solid rgba(255, 255, 255, 0.28);
       background: rgba(255, 255, 255, 0.12);
@@ -370,57 +368,48 @@
     .quick-date-btn.active { background: #ffffff; border-color: #ffffff; color: #0f172a; }
 
     /* Ⅱ. 신규등록/판매 카드 */
-    .flow-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 24px;
-    }
-    @media (max-width: 1200px) { .flow-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .flow-grid { grid-template-columns: 1fr; } }
-
     .flow-card {
       border: 1px solid var(--border-soft);
       border-radius: 14px;
-      padding: 22px;
+      padding: 20px 18px;
       background: #f8fafc;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .flow-card-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding-bottom: 10px;
       border-bottom: 2px solid var(--border-soft);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .flow-metric-row { margin-bottom: 16px; }
+    .flow-metric-row { margin-bottom: 14px; }
     .flow-metric-head {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
-    .flow-metric-label { font-size: 15px; font-weight: 700; color: var(--text-sub); }
-    .flow-metric-val { font-size: 25px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .flow-metric-label { font-size: 14px; font-weight: 700; color: var(--text-sub); }
+    .flow-metric-val { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
     .flow-bar-track {
-      height: 14px;
+      height: 12px;
       background: #e2e8f0;
-      border-radius: 7px;
+      border-radius: 6px;
       overflow: hidden;
     }
     .flow-bar-fill {
       height: 100%;
-      border-radius: 7px;
+      border-radius: 6px;
       transition: width 0.3s ease;
     }
     .turnover-box {
-      margin-top: 14px;
-      padding: 12px 14px;
+      margin-top: 12px;
+      padding: 11px 12px;
       border-radius: 10px;
       background: #ffffff;
       border: 1px solid var(--border-soft);
@@ -428,8 +417,8 @@
       justify-content: space-between;
       align-items: center;
     }
-    .turnover-label { font-size: 14.5px; font-weight: 700; color: var(--text-sub); }
-    .turnover-val { font-size: 20px; font-weight: 800; color: #0f172a; }
+    .turnover-label { font-size: 13.5px; font-weight: 700; color: var(--text-sub); }
+    .turnover-val { font-size: 18px; font-weight: 800; color: #0f172a; }
 
     /* 표 스타일 */
     .table-wrap {
@@ -440,11 +429,11 @@
     table.exec-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 15.5px;
+      font-size: 15px;
       font-variant-numeric: tabular-nums;
     }
     table.exec-table th, table.exec-table td {
-      padding: 14px 16px;
+      padding: 13px 15px;
       text-align: right;
       border-bottom: 1px solid var(--border-soft);
       white-space: nowrap;
@@ -458,46 +447,39 @@
       background: #f1f5f9;
       font-weight: 800;
       color: #1e293b;
-      font-size: 15px;
+      font-size: 14.5px;
     }
 
-    /* Ⅲ. 포트폴리오 그리드 */
-    .pf-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-    @media (max-width: 1200px) { .pf-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px) { .pf-grid { grid-template-columns: 1fr; } }
-
+    /* Ⅲ. 포트폴리오 카드 */
     .pf-card {
       border: 1px solid var(--border-soft);
       border-radius: 14px;
-      padding: 22px;
+      padding: 20px 18px;
       background: #fafbfc;
     }
     .pf-card-head {
-      font-size: 18px;
+      font-size: 16.5px;
       font-weight: 800;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding-bottom: 10px;
       border-bottom: 2px solid var(--border-soft);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex-wrap: wrap;
     }
-    .pf-bar-item { margin-bottom: 13px; }
+    .pf-bar-item { margin-bottom: 12px; }
     .pf-bar-top {
       display: flex;
       justify-content: space-between;
-      font-size: 14.5px;
+      font-size: 13.5px;
       font-weight: 700;
-      margin-bottom: 5px;
-      gap: 8px;
+      margin-bottom: 4px;
+      gap: 6px;
     }
     .pf-bar-bg {
-      height: 12px;
+      height: 11px;
       background: #e2e8f0;
       border-radius: 6px;
       overflow: hidden;
@@ -507,7 +489,6 @@
       border-radius: 6px;
     }
 
-    /* RAW 검색 필터 바 */
     .filter-bar {
       display: flex;
       gap: 10px;
@@ -526,7 +507,6 @@
     }
     .filter-input { min-width: 240px; flex: 1; }
 
-    /* 기준 안내 그리드 */
     .note-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -550,7 +530,7 @@
     <div class="topbar-inner">
       <div class="brand-area">
         <span class="brand-badge">BIKE MARKET REPORT</span>
-        <h1 class="brand-title">4대 오토바이 플랫폼 중고 매물 경쟁사 동향</h1>
+        <h1 class="brand-title">5대 오토바이 플랫폼 중고 매물 경쟁사 동향</h1>
         <span class="brand-meta" id="lastUpdatedInfo">기준일시: -</span>
       </div>
       <div class="top-actions">
@@ -563,14 +543,14 @@
   <main class="container">
 
     <!-- =================================================================== -->
-    <!-- Ⅰ. 상단 독립 영역: 전체 등록대수 현황 및 배기량(300cc 기준) 추이 -->
+    <!-- Ⅰ. 상단 독립 영역: 5개사 전체 등록대수 현황 및 배기량(300cc 기준) 추이 -->
     <!-- =================================================================== -->
     <section class="section-block">
       <div class="section-header">
         <div>
-          <div class="section-eyebrow">Ⅰ. 상시 모니터링 영역 (매일 오전 08:00 KST 클라우드 자동 수집)</div>
+          <div class="section-eyebrow">Ⅰ. 상시 모니터링 영역 (매일 오전 10:00 KST 클라우드 자동 수집)</div>
           <h2 class="section-title">회사별 중고 오토바이 등록대수 및 배기량(300cc 이상·이하) 변화 추이</h2>
-          <p class="section-desc">신차·업체 중복 도배·타사 외부크롤링 매물을 제외한 Apple-to-Apple 기준 등록대수 및 배기량(300cc 이하 vs 300cc 이상) 분포입니다.</p>
+          <p class="section-desc">당근(오토바이 직거래) · 라이트바겐 · 파쏘 · 바튜매 · 케이카(미운영 빈칸) 5개 플랫폼의 동일 조건 등록대수 및 배기량 분포입니다.</p>
         </div>
         <div class="big-tabs" id="stockCcTabs">
           <button type="button" class="big-tab active" data-cc="all">전체 등록대수</button>
@@ -579,8 +559,8 @@
         </div>
       </div>
 
-      <div class="stock-grid" id="stockCardsContainer"></div>
-      <div class="trend-chart-grid" id="stockTrendChartsContainer"></div>
+      <div class="five-grid" style="margin-bottom:24px;" id="stockCardsContainer"></div>
+      <div class="five-grid" id="stockTrendChartsContainer"></div>
     </section>
 
     <!-- =================================================================== -->
@@ -619,17 +599,18 @@
         </div>
       </div>
 
-      <div class="flow-grid" id="flowCardsContainer"></div>
+      <div class="five-grid" style="margin-bottom:24px;" id="flowCardsContainer"></div>
 
       <div class="table-wrap">
         <table class="exec-table">
           <thead>
             <tr>
               <th>구분 항목 (선택 날짜/기간 기준)</th>
-              <th style="color:#c2410c;">1. 라이트바겐 (자체중고)</th>
-              <th style="color:#1d4ed8;">2. 파쏘 바이크 (중고전체)</th>
-              <th style="color:#047857;">3. 바튜매 (개인·안전결제)</th>
-              <th style="color:#64748b;">4. 케이카 (서비스 미운영)</th>
+              <th style="color:#c2410c;">1. 당근 (오토바이)</th>
+              <th style="color:#6d28d9;">2. 라이트바겐 (자체중고)</th>
+              <th style="color:#1d4ed8;">3. 파쏘 바이크 (중고전체)</th>
+              <th style="color:#047857;">4. 바튜매 (개인·안전결제)</th>
+              <th style="color:#64748b;">5. 케이카 (서비스 미운영)</th>
             </tr>
           </thead>
           <tbody id="singlePeriodSummaryTable"></tbody>
@@ -643,7 +624,7 @@
     <section class="section-block">
       <div class="section-header">
         <div>
-          <div class="section-eyebrow">Ⅲ. 4개사 매물 구성 Apple-to-Apple 비교 그래프</div>
+          <div class="section-eyebrow">Ⅲ. 5개사 매물 구성 Apple-to-Apple 비교 그래프</div>
           <h2 class="section-title">회사별 오토바이 포트폴리오 비교 (배기량 300cc 기준 / 브랜드·제조사 / 판매가격 / 지역 / 모델)</h2>
           <p class="section-desc">상단 탭을 클릭하면 배기량(300cc 이상·이하), 브랜드/제조사, 판매가격대, 지역, 인기 모델 분포가 즉시 전환됩니다.</p>
         </div>
@@ -656,7 +637,7 @@
         </div>
       </div>
 
-      <div class="pf-grid" id="portfolioGridContainer"></div>
+      <div class="five-grid" id="portfolioGridContainer"></div>
     </section>
 
     <!-- =================================================================== -->
@@ -674,9 +655,10 @@
       <div class="filter-bar">
         <select id="rawPlatformFilter" class="filter-select" aria-label="플랫폼 필터">
           <option value="ALL">전체 플랫폼</option>
-          <option value="라이트바겐">1. 라이트바겐</option>
-          <option value="파쏘바이크">2. 파쏘 바이크</option>
-          <option value="바튜매(네이버카페)">3. 바튜매(네이버카페)</option>
+          <option value="당근(오토바이)">1. 당근(오토바이)</option>
+          <option value="라이트바겐">2. 라이트바겐</option>
+          <option value="파쏘바이크">3. 파쏘 바이크</option>
+          <option value="바튜매(네이버카페)">4. 바튜매(네이버카페)</option>
         </select>
         <select id="rawCcFilter" class="filter-select" aria-label="배기량 필터">
           <option value="ALL">전체 배기량</option>
@@ -707,34 +689,32 @@
     </section>
 
     <!-- =================================================================== -->
-    <!-- Ⅴ. 수집 기준 및 네이버 카페(바튜매) 아키텍처 안내 -->
+    <!-- Ⅴ. 수집 기준 안내 -->
     <!-- =================================================================== -->
     <section class="section-block">
       <div class="section-header" style="margin-bottom:16px;padding-bottom:12px;">
         <div>
           <div class="section-eyebrow">Ⅴ. 데이터 정합성 및 수집 기준 안내</div>
-          <h2 class="section-title">플랫폼별 동일 조건(Apple-to-Apple) 필터링 기준</h2>
+          <h2 class="section-title">플랫폼별 동일 조건(Apple-to-Apple) 필터링 기준 (매일 오전 10:00 KST 자동 취합)</h2>
         </div>
       </div>
       <div class="note-grid">
         <div class="note-box">
-          <strong>1. 라이트바겐 (reitwagen.co.kr)</strong><br />
-          • 사이트 내 통합 노출되는 외부 파쏘 크롤링 매물(<code>PASSO</code>) 및 신차관(<code>BRANDNEW</code>), 직영인증(<code>BAREE_CERTIFIED</code>)을 분리하고 <strong>순수 라이트바겐 자체 등록 중고매물(<code>BAREE</code>)</strong>만 정확히 집계합니다.<br />
-          • 공식 데이터 필드의 실측 배기량(<code>cylinderCapacity</code>)으로 300cc 이하(~299cc)와 300cc 이상(300cc~)을 정확히 구분합니다.
+          <strong>1. 당근 오토바이 (daangn.com)</strong><br />
+          • 당근중고차(<code>/kr/cars/</code>) 내 '오토바이' 바로가기 연동 대상인 당근 개인 직거래 오토바이·스쿠터 매물(<code>/kr/buy-sell/</code>)을 브랜드·모델·차종 멀티 키워드 및 사이트맵으로 전국 병렬 수집합니다. (용품·헬멧·자전거·킥보드·삽니다 및 35만원 미만 부품류 자동 제외, GPS 좌표 기반 시·도 분류)
         </div>
         <div class="note-box">
-          <strong>2. 파쏘 바이크 (bike.passo.co.kr)</strong><br />
-          • 신차 프로모션 매물을 제외하고 라이트바겐과 동일한 기준인 <strong>파쏘 중고 오토바이 등록매물 전체</strong>를 실시간 클라우드 인덱스로 수집하여 해외 GitHub Actions 서버에서도 차단 없이 100% 자동 작동합니다.<br />
-          • 매물별 실측 배기량 데이터로 300cc 이하(~299cc)와 300cc 이상(300cc~)을 정확히 구분합니다.
+          <strong>2. 라이트바겐 &amp; 3. 파쏘 바이크</strong><br />
+          • <strong>라이트바겐</strong>: 외부 파쏘 크롤링(<code>PASSO</code>)·신차(<code>BRANDNEW</code>)를 분리한 순수 자체 등록 중고매물(<code>BAREE</code>)만 집계합니다.<br />
+          • <strong>파쏘 바이크</strong>: 신차 프로모션을 제외한 파쏘 중고 오토바이 전체 매물을 실시간 클라우드 인덱스로 수집하여 해외 GitHub 서버에서도 차단 없이 구동됩니다.
         </div>
         <div class="note-box">
-          <strong>3. 바튜매 네이버 카페 (cafe.naver.com/bikecargogo)</strong><br />
-          • 제휴업체의 일일 반복 도배글 게시판(272·302)을 제외하고, <strong>개인 직거래 게시판(351: 125cc초과, 352: 125cc이하) 및 안전결제 장터(133·144)의 최근 30일 활성 매물 전수</strong>를 비로그인 공개 API로 자동 수집합니다.<br />
-          • 안전결제 가격 필드(<code>cost</code>) 및 제목 내 가격 표기분을 자동 추출하며, GitHub Secrets에 선택적으로 네이버 세션(<code>NAVER_NID_AUT</code>/<code>SES</code>) 등록 시 본문 가격까지 추가 확장됩니다.
+          <strong>4. 바튜매 네이버 카페 (cafe.naver.com/bikecargogo)</strong><br />
+          • 제휴업체의 일일 반복 도배 게시판(272·302)을 제외하고, <strong>개인 직거래 게시판(351·352) 및 안전결제 장터(133·144)의 최근 30일 활성 매물 전수</strong>를 비로그인 공개 API로 자동 수집합니다.
         </div>
         <div class="note-box">
-          <strong>4. 케이카 (K Car)</strong><br />
-          • 현재 이륜차(오토바이) 직거래/직영 서비스 미운영 상태이므로 비교 양식 내 전용 카드 및 테이블 열만 확보해 두고 숫자는 일절 기재하지 않습니다(<code>-</code> 처리).
+          <strong>5. 케이카 (K Car)</strong><br />
+          • 현재 이륜차(오토바이) 서비스 미운영 상태이므로 비교 양식 내 전용 카드 및 테이블 열만 확보해 두고 숫자는 일절 기재하지 않습니다(<code>-</code> 처리).
         </div>
       </div>
     </section>
@@ -773,38 +753,44 @@
       document.getElementById('endDateInput').value = endDateStr;
     }
 
-    // Ⅰ. 상단 전체 등록대수 카드 및 추이 차트
     function renderStockSection() {
       const records = getRecords();
       const latest = records[records.length - 1] || {};
 
       document.getElementById('lastUpdatedInfo').textContent =
-        `최종 업데이트: ${latest.updatedAt || window.COMPETITOR_TREND_LAST_UPDATED || '-'} (매일 오전 08:00 KST GitHub Actions 자동 취합)`;
+        `최종 업데이트: ${latest.updatedAt || window.COMPETITOR_TREND_LAST_UPDATED || '-'} (매일 오전 10:00 KST GitHub Actions 자동 취합)`;
 
       const platforms = [
         {
-          cls: 'reitwagen', name: '1. 라이트바겐', url: 'https://www.reitwagen.co.kr/', badge: '자체 중고매물', color: '#ea580c',
+          cls: 'daangn', name: '1. 당근 (오토바이)', url: 'https://www.daangn.com/kr/buy-sell/?search=%EC%98%A4%ED%86%A0%EB%B0%94%EC%9D%B4', badge: '개인 직거래', color: '#ff6f0f',
+          active: true,
+          total: latest.daangnBikeCount, u300: latest.daangnUnder300Count, o300: latest.daangnOver300Count,
+          diff: latest.daangnDiff, subNote: `전국 직거래 실매물 (용품·부품 제외)`,
+          valKey: 'daangnBikeCount', uKey: 'daangnUnder300Count', oKey: 'daangnOver300Count'
+        },
+        {
+          cls: 'reitwagen', name: '2. 라이트바겐', url: 'https://www.reitwagen.co.kr/', badge: '자체 중고매물', color: '#7c3aed',
           active: true,
           total: latest.reitwagenCount, u300: latest.reitwagenUnder300Count, o300: latest.reitwagenOver300Count,
           diff: latest.reitwagenDiff, subNote: `직영인증 ${fmt(latest.reitwagenCertifiedCount)}대 · 외부크롤링 제외`,
           valKey: 'reitwagenCount', uKey: 'reitwagenUnder300Count', oKey: 'reitwagenOver300Count'
         },
         {
-          cls: 'passo', name: '2. 파쏘 바이크', url: 'http://bike.passo.co.kr/bike/', badge: '중고매물 전체', color: '#2563eb',
+          cls: 'passo', name: '3. 파쏘 바이크', url: 'http://bike.passo.co.kr/bike/', badge: '중고매물 전체', color: '#2563eb',
           active: true,
           total: latest.passoCount, u300: latest.passoUnder300Count, o300: latest.passoOver300Count,
           diff: latest.passoDiff, subNote: `신차 프로모션 제외 · 중고매물 기준`,
           valKey: 'passoCount', uKey: 'passoUnder300Count', oKey: 'passoOver300Count'
         },
         {
-          cls: 'batumae', name: '3. 바튜매 (네이버카페)', url: 'https://cafe.naver.com/bikecargogo', badge: '개인 30일 활성', color: '#059669',
+          cls: 'batumae', name: '4. 바튜매 (카페)', url: 'https://cafe.naver.com/bikecargogo', badge: '개인 30일 활성', color: '#059669',
           active: true,
           total: latest.batumaeCount, u300: latest.batumaeUnder300Count, o300: latest.batumaeOver300Count,
-          diff: latest.batumaeDiff, subNote: `개인 판매·안전결제 장터 (업체도배 제외)`,
+          diff: latest.batumaeDiff, subNote: `개인 판매·안전결제 (업체도배 제외)`,
           valKey: 'batumaeCount', uKey: 'batumaeUnder300Count', oKey: 'batumaeOver300Count'
         },
         {
-          cls: 'kcar', name: '4. 케이카 (K Car)', url: null, badge: '서비스 미운영', color: '#1e3a8a',
+          cls: 'kcar', name: '5. 케이카 (K Car)', url: null, badge: '서비스 미운영', color: '#1e3a8a',
           active: false
         }
       ];
@@ -820,19 +806,19 @@
                 </div>
                 <div class="stock-main">
                   <span class="stock-num" style="color:#94a3b8;">-</span>
-                  <span class="stock-unit">미운영 (숫자 미기재)</span>
+                  <span class="stock-unit">숫자 미기재</span>
                 </div>
               </div>
               <div class="inactive-placeholder">
                 현재 오토바이 서비스 미제공<br />
-                <span style="font-size:12.5px;font-weight:600;">(향후 서비스 도입 시 즉시 비교 연동 슬롯)</span>
+                <span style="font-size:12px;font-weight:600;">(향후 도입 시 비교 연동 슬롯)</span>
               </div>
             </article>
           `;
         }
 
         const displayNum = stockCcMode === 'under300' ? p.u300 : stockCcMode === 'over300' ? p.o300 : p.total;
-        const unitLabel = stockCcMode === 'under300' ? '대 (300cc 이하)' : stockCcMode === 'over300' ? '대 (300cc 이상)' : '대 (전체)';
+        const unitLabel = stockCcMode === 'under300' ? '대 (≤299cc)' : stockCcMode === 'over300' ? '대 (≥300cc)' : '대 (전체)';
         const uPct = p.total > 0 ? ((p.u300 / p.total) * 100).toFixed(1) : '0.0';
         const oPct = p.total > 0 ? ((p.o300 / p.total) * 100).toFixed(1) : '0.0';
         const d = Number(p.diff || 0);
@@ -850,9 +836,9 @@
                 <span class="stock-num">${fmt(displayNum)}</span>
                 <span class="stock-unit">${unitLabel}</span>
               </div>
-              <div style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;">
+              <div style="margin-bottom:11px;">
                 <span class="diff-tag ${dCls}">${dTxt}</span>
-                <span style="font-size:12.5px;color:#64748b;font-weight:600;">${p.subNote}</span>
+                <div style="font-size:12px;color:#64748b;font-weight:600;margin-top:5px;">${p.subNote}</div>
               </div>
             </div>
             <div>
@@ -861,8 +847,8 @@
                 <div style="width:${oPct}%;background:${p.color};" title="300cc 이상 ${oPct}%"></div>
               </div>
               <div class="stock-split-info">
-                <span style="color:#475569;">● 300cc 이하 ${fmt(p.u300)}대 (${uPct}%)</span>
-                <span style="color:${p.color};">● 300cc 이상 ${fmt(p.o300)}대 (${oPct}%)</span>
+                <span style="color:#475569;">● 300cc 이하: ${fmt(p.u300)}대 (${uPct}%)</span>
+                <span style="color:${p.color};">● 300cc 이상: ${fmt(p.o300)}대 (${oPct}%)</span>
               </div>
             </div>
           </article>
@@ -874,24 +860,25 @@
           return `
             <div class="mini-chart-box" style="display:flex;flex-direction:column;justify-content:space-between;background:#f8fafc;">
               <div class="mini-chart-title">
-                <span style="color:#64748b;">● ${p.name} 일별 등록 추이</span>
-                <span style="font-size:13px;color:#94a3b8;">미운영</span>
+                <span style="color:#64748b;">● ${p.name} 추이</span>
+                <span style="font-size:12.5px;color:#94a3b8;">미운영</span>
               </div>
-              <div class="inactive-placeholder" style="height:150px;display:flex;align-items:center;justify-content:center;">
-                서비스 미운영으로 추이 수치 미기재
+              <div class="inactive-placeholder" style="height:145px;display:flex;align-items:center;justify-content:center;">
+                서비스 미운영 (수치 미기재)
               </div>
             </div>
           `;
         }
         const key = stockCcMode === 'under300' ? p.uKey : stockCcMode === 'over300' ? p.oKey : p.valKey;
-        const svgHtml = buildTrendSvg(records, key, p.color);
+        const validRecs = records.filter(r => r[key] !== null && r[key] !== undefined);
+        const svgHtml = buildTrendSvg(validRecs, key, p.color);
         return `
           <div class="mini-chart-box">
             <div class="mini-chart-title">
-              <span style="color:${p.color};">● ${p.name} 일별 추이</span>
-              <span style="font-size:13px;color:#64748b;">누적 ${records.length}일</span>
+              <span style="color:${p.color};">● ${p.name} 추이</span>
+              <span style="font-size:12.5px;color:#64748b;">누적 ${validRecs.length}일</span>
             </div>
-            <svg class="mini-svg" viewBox="0 0 320 150">${svgHtml}</svg>
+            <svg class="mini-svg" viewBox="0 0 300 145">${svgHtml}</svg>
           </div>
         `;
       }).join('');
@@ -899,7 +886,7 @@
 
     function buildTrendSvg(records, key, color) {
       if (!records.length) return '';
-      const W = 320, H = 150, padL = 42, padR = 22, padT = 26, padB = 28;
+      const W = 300, H = 145, padL = 38, padR = 22, padT = 26, padB = 26;
       const plotW = W - padL - padR, plotH = H - padT - padB;
       const vals = records.map(r => Number(r[key] || 0));
       let minV = Math.min(...vals), maxV = Math.max(...vals);
@@ -907,7 +894,7 @@
         minV = Math.max(0, Math.floor(minV * 0.95));
         maxV = Math.ceil(maxV * 1.05) || 10;
       } else {
-        const p = (maxV - minV) * 0.2;
+        const p = (maxV - minV) * 0.25;
         minV = Math.max(0, Math.floor(minV - p));
         maxV = Math.ceil(maxV + p);
       }
@@ -927,9 +914,9 @@
         ${pts.length > 1 ? `<polygon points="${area}" fill="${color}" fill-opacity="0.10"/>` : ''}
         ${pts.length > 1 ? `<polyline fill="none" stroke="${color}" stroke-width="3" points="${poly}"/>` : ''}
         ${pts.map(p => `
-          <circle cx="${p.x}" cy="${p.y}" r="5" fill="#fff" stroke="${color}" stroke-width="3"/>
-          <text x="${p.x}" y="${p.y - 10}" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0f172a">${fmt(p.v)}</text>
-          <text x="${p.x}" y="${H - 7}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#64748b">${p.d}</text>
+          <circle cx="${p.x}" cy="${p.y}" r="4.5" fill="#fff" stroke="${color}" stroke-width="3"/>
+          <text x="${p.x}" y="${p.y - 9}" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0f172a">${fmt(p.v)}</text>
+          <text x="${p.x}" y="${H - 6}" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">${p.d}</text>
         `).join('')}
       `;
     }
@@ -944,6 +931,7 @@
       const last = slice[slice.length - 1];
       const sum = k => slice.reduce((acc, r) => acc + Number(r[k] || 0), 0);
 
+      const dgNew = sum('daangnNewCount'),    dgSold = sum('daangnSoldCount');
       const rwNew = sum('reitwagenNewCount'), rwSold = sum('reitwagenSoldCount');
       const psNew = sum('passoNewCount'),     psSold = sum('passoSoldCount');
       const btNew = sum('batumaeNewCount'),   btSold = sum('batumaeSoldCount');
@@ -959,6 +947,12 @@
 
       const agg = {
         label: rangeLabel,
+        dg: {
+          total: last.daangnBikeCount, u300: last.daangnUnder300Count, o300: last.daangnOver300Count,
+          newCnt: dgNew, soldCnt: dgSold,
+          turnPct: last.daangnBikeCount > 0 ? ((dgSold / last.daangnBikeCount) * 100).toFixed(2) : '0.00',
+          avgPrice: last.daangnAvgPrice
+        },
         rw: {
           total: last.reitwagenCount, u300: last.reitwagenUnder300Count, o300: last.reitwagenOver300Count,
           newCnt: rwNew, soldCnt: rwSold,
@@ -979,13 +973,20 @@
         }
       };
 
-      const maxAcross = Math.max(10, agg.rw.newCnt, agg.rw.soldCnt, agg.ps.newCnt, agg.ps.soldCnt, agg.bt.newCnt, agg.bt.soldCnt);
+      const maxAcross = Math.max(
+        10,
+        agg.dg.newCnt, agg.dg.soldCnt,
+        agg.rw.newCnt, agg.rw.soldCnt,
+        agg.ps.newCnt, agg.ps.soldCnt,
+        agg.bt.newCnt, agg.bt.soldCnt
+      );
 
       const items = [
-        { name: '1. 라이트바겐', color: '#ea580c', active: true, d: agg.rw },
-        { name: '2. 파쏘 바이크', color: '#2563eb', active: true, d: agg.ps },
-        { name: '3. 바튜매 (네이버카페)', color: '#059669', active: true, d: agg.bt },
-        { name: '4. 케이카 (K Car)', color: '#64748b', active: false }
+        { name: '1. 당근 (오토바이)', color: '#ff6f0f', active: true, d: agg.dg },
+        { name: '2. 라이트바겐', color: '#7c3aed', active: true, d: agg.rw },
+        { name: '3. 파쏘 바이크', color: '#2563eb', active: true, d: agg.ps },
+        { name: '4. 바튜매 (카페)', color: '#059669', active: true, d: agg.bt },
+        { name: '5. 케이카 (K Car)', color: '#64748b', active: false }
       ];
 
       document.getElementById('flowCardsContainer').innerHTML = items.map(it => {
@@ -1046,10 +1047,11 @@
       document.getElementById('singlePeriodSummaryTable').innerHTML = `
         <tr>
           <td>선택된 조회일자 / 기간</td>
-          <td colspan="4" style="text-align:center;font-weight:800;color:#0f172a;background:#f8fafc;">${agg.label}</td>
+          <td colspan="5" style="text-align:center;font-weight:800;color:#0f172a;background:#f8fafc;">${agg.label}</td>
         </tr>
         <tr>
           <td>전체 활성 등록대수</td>
+          <td style="font-weight:800;">${agg.dg.total != null ? fmt(agg.dg.total) + '대' : '-'}</td>
           <td style="font-weight:800;">${fmt(agg.rw.total)}대</td>
           <td style="font-weight:800;">${fmt(agg.ps.total)}대</td>
           <td style="font-weight:800;">${fmt(agg.bt.total)}대</td>
@@ -1057,6 +1059,7 @@
         </tr>
         <tr>
           <td>├ 300cc 이하 (~299cc) 등록대수</td>
+          <td>${agg.dg.u300 != null ? fmt(agg.dg.u300) + '대' : '-'}</td>
           <td>${fmt(agg.rw.u300)}대</td>
           <td>${fmt(agg.ps.u300)}대</td>
           <td>${fmt(agg.bt.u300)}대</td>
@@ -1064,6 +1067,7 @@
         </tr>
         <tr>
           <td>└ 300cc 이상 (300cc~) 등록대수</td>
+          <td style="font-weight:700;">${agg.dg.o300 != null ? fmt(agg.dg.o300) + '대' : '-'}</td>
           <td style="font-weight:700;">${fmt(agg.rw.o300)}대</td>
           <td style="font-weight:700;">${fmt(agg.ps.o300)}대</td>
           <td style="font-weight:700;">${fmt(agg.bt.o300)}대</td>
@@ -1071,13 +1075,15 @@
         </tr>
         <tr>
           <td>기간 내 신규 등록대수</td>
+          <td style="color:#e11d48;font-weight:800;">+${fmt(agg.dg.newCnt)}대</td>
           <td style="color:#e11d48;font-weight:800;">+${fmt(agg.rw.newCnt)}대</td>
           <td style="color:#e11d48;font-weight:800;">+${fmt(agg.ps.newCnt)}대</td>
           <td style="color:#e11d48;font-weight:800;">+${fmt(agg.bt.newCnt)}대</td>
           <td style="color:#94a3b8;">-</td>
         </tr>
         <tr>
-          <td>기간 내 신규 판매대수 (거래완료/삭제)</td>
+          <td>기간 내 신규 판매대수 (거래완료/소진)</td>
+          <td style="color:#2563eb;font-weight:800;">${fmt(agg.dg.soldCnt)}대</td>
           <td style="color:#2563eb;font-weight:800;">${fmt(agg.rw.soldCnt)}대</td>
           <td style="color:#2563eb;font-weight:800;">${fmt(agg.ps.soldCnt)}대</td>
           <td style="color:#2563eb;font-weight:800;">${fmt(agg.bt.soldCnt)}대</td>
@@ -1085,6 +1091,7 @@
         </tr>
         <tr>
           <td>기간 판매회전율 (판매 ÷ 등록모수)</td>
+          <td style="font-weight:800;">${agg.dg.turnPct}%</td>
           <td style="font-weight:800;">${agg.rw.turnPct}%</td>
           <td style="font-weight:800;">${agg.ps.turnPct}%</td>
           <td style="font-weight:800;">${agg.bt.turnPct}%</td>
@@ -1092,6 +1099,7 @@
         </tr>
         <tr>
           <td>평균 판매가격 (유효가격 표본 기준)</td>
+          <td style="font-weight:800;">${agg.dg.avgPrice != null ? fmt(agg.dg.avgPrice) + '만원' : '-'}</td>
           <td style="font-weight:800;">${fmt(agg.rw.avgPrice)}만원</td>
           <td style="font-weight:800;">${fmt(agg.ps.avgPrice)}만원</td>
           <td style="font-weight:800;">${fmt(agg.bt.avgPrice)}만원</td>
@@ -1104,10 +1112,11 @@
     function renderPortfolioSection() {
       const pf = window.COMPETITOR_PORTFOLIO_DATA || {};
       const companies = [
-        { key: 'reitwagen', title: '1. 라이트바겐', color: '#ea580c', active: true, data: pf.reitwagen },
-        { key: 'passo',     title: '2. 파쏘 바이크', color: '#2563eb', active: true, data: pf.passo },
-        { key: 'batumae',   title: '3. 바튜매 (카페)', color: '#059669', active: true, data: pf.batumae },
-        { key: 'kcar',      title: '4. 케이카 (K Car)', color: '#64748b', active: false, data: pf.kcar }
+        { key: 'daangn',    title: '1. 당근 (오토바이)', color: '#ff6f0f', active: true, data: pf.daangn },
+        { key: 'reitwagen', title: '2. 라이트바겐', color: '#7c3aed', active: true, data: pf.reitwagen },
+        { key: 'passo',     title: '3. 파쏘 바이크', color: '#2563eb', active: true, data: pf.passo },
+        { key: 'batumae',   title: '4. 바튜매 (카페)', color: '#059669', active: true, data: pf.batumae },
+        { key: 'kcar',      title: '5. 케이카 (K Car)', color: '#64748b', active: false, data: pf.kcar }
       ];
 
       document.getElementById('portfolioGridContainer').innerHTML = companies.map(c => {
@@ -1137,21 +1146,21 @@
           const oPct = Number(d.over300Ratio || 0);
           subRight = `전체 ${fmt(Number(d.under300Count || 0) + Number(d.over300Count || 0))}대`;
           contentHtml = `
-            <div style="margin-bottom:18px;">
-              <div style="height:28px;border-radius:12px;overflow:hidden;display:flex;margin-bottom:10px;">
-                <div style="width:${uPct}%;background:#64748b;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12.5px;font-weight:800;">${uPct >= 10 ? uPct + '%' : ''}</div>
-                <div style="width:${oPct}%;background:${c.color};display:flex;align-items:center;justify-content:center;color:#fff;font-size:12.5px;font-weight:800;">${oPct >= 10 ? oPct + '%' : ''}</div>
+            <div style="margin-bottom:16px;">
+              <div style="height:26px;border-radius:12px;overflow:hidden;display:flex;margin-bottom:10px;">
+                <div style="width:${uPct}%;background:#64748b;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;">${uPct >= 14 ? uPct + '%' : ''}</div>
+                <div style="width:${oPct}%;background:${c.color};display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;">${oPct >= 14 ? oPct + '%' : ''}</div>
               </div>
             </div>
             <div class="pf-bar-item">
-              <div class="pf-bar-top"><span>300cc 이하 (~299cc)</span><span>${fmt(d.under300Count)}대 (${uPct}%)</span></div>
+              <div class="pf-bar-top"><span>300cc 이하</span><span>${fmt(d.under300Count)}대 (${uPct}%)</span></div>
               <div class="pf-bar-bg"><div class="pf-bar-fg" style="width:${uPct}%;background:#64748b;"></div></div>
             </div>
             <div class="pf-bar-item">
-              <div class="pf-bar-top"><span>300cc 이상 (300cc~)</span><span>${fmt(d.over300Count)}대 (${oPct}%)</span></div>
+              <div class="pf-bar-top"><span>300cc 이상</span><span>${fmt(d.over300Count)}대 (${oPct}%)</span></div>
               <div class="pf-bar-bg"><div class="pf-bar-fg" style="width:${oPct}%;background:${c.color};"></div></div>
             </div>
-            <div class="turnover-box" style="margin-top:18px;">
+            <div class="turnover-box" style="margin-top:16px;">
               <span class="turnover-label">평균 판매가격</span>
               <span class="turnover-val" style="color:${c.color};">${fmt(d.avgPriceManwon)}만원</span>
             </div>
@@ -1190,7 +1199,7 @@
             const pct = ((Number(it.count || 0) / sampleSize) * 100).toFixed(1);
             return `
               <div class="pf-bar-item">
-                <div class="pf-bar-top"><span>${idx + 1}위. ${esc(it.name)}</span><span>${fmt(it.count)}대 (${pct}%)</span></div>
+                <div class="pf-bar-top"><span>${idx + 1}. ${esc(it.name)}</span><span>${fmt(it.count)}대 (${pct}%)</span></div>
                 <div class="pf-bar-bg"><div class="pf-bar-fg" style="width:${Math.min(100, pct * 3)}%;background:${c.color};"></div></div>
               </div>
             `;
@@ -1201,7 +1210,7 @@
             const pct = ((Number(it.count || 0) / sampleSize) * 100).toFixed(1);
             return `
               <div class="pf-bar-item">
-                <div class="pf-bar-top"><span>${idx + 1}위. ${esc(it.name)}</span><span>${fmt(it.count)}대 (${pct}%)</span></div>
+                <div class="pf-bar-top"><span>${idx + 1}. ${esc(it.name)}</span><span>${fmt(it.count)}대 (${pct}%)</span></div>
                 <div class="pf-bar-bg"><div class="pf-bar-fg" style="width:${pct}%;background:${c.color};"></div></div>
               </div>
             `;
@@ -1212,7 +1221,7 @@
           <div class="pf-card">
             <div class="pf-card-head">
               <span style="color:${c.color};">${c.title}</span>
-              <span style="font-size:13px;color:#64748b;">${subRight}</span>
+              <span style="font-size:12px;color:#64748b;">${subRight}</span>
             </div>
             ${contentHtml}
           </div>
@@ -1220,7 +1229,6 @@
       }).join('');
     }
 
-    // Ⅳ. RAW 프리뷰 테이블 렌더링
     function renderRawTable() {
       const allPreview = Array.isArray(window.COMPETITOR_RAW_PREVIEW) ? window.COMPETITOR_RAW_PREVIEW : [];
       const totalRaw = Number(window.COMPETITOR_RAW_TOTAL_COUNT || allPreview.length);
@@ -1230,7 +1238,6 @@
       const ccFilter = document.getElementById('rawCcFilter').value;
       const kw = (document.getElementById('rawKeywordInput').value || '').trim().toLowerCase();
 
-      // Interleave platforms in preview if ALL selected so user sees all 3 platforms immediately
       let pool = allPreview;
       if (pfFilter !== 'ALL') {
         pool = pool.filter(r => r.platform === pfFilter);

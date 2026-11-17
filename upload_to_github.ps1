@@ -16,16 +16,17 @@ $WorkDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not $WorkDir) { $WorkDir = "c:\Users\KCAR24N20051\Desktop\바이크" }
 $TodayDate = ([DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))).ToString("yyyy-MM-dd")
 
+# 1. Sync data, scripts, and dashboard HTML via Git Data API (fast multi-file commit, non-forced)
 $refInfo = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/git/ref/heads/main" -Headers $headers -Method Get
 $baseCommitSha = $refInfo.object.sha
 $commitInfo = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/git/commits/$baseCommitSha" -Headers $headers -Method Get
 $baseTreeSha = $commitInfo.tree.sha
 
 $filesToUpload = @(
-    ".github/workflows/daily_bike_tracker.yml",
     "README.md",
     "collect_bike_trend.ps1",
     "upload_to_github.ps1",
+    "register_windows_task.ps1",
     "index.html",
     "competitor_trend.html",
     "competitor_trend.csv",
@@ -33,6 +34,8 @@ $filesToUpload = @(
     "competitor_trend_data.js",
     "raw_data/raw_bikes_$($TodayDate).csv",
     "raw_data/raw_bikes_latest.csv",
+    "snapshots/daangn_bike_$($TodayDate).json",
+    "snapshots/daangn_bike_latest.json",
     "snapshots/reitwagen_$($TodayDate).json",
     "snapshots/reitwagen_latest.json",
     "snapshots/passo_used_$($TodayDate).json",
@@ -60,13 +63,41 @@ foreach ($relPath in $filesToUpload) {
 $treeBody = @{ base_tree = $baseTreeSha; tree = $treeItems } | ConvertTo-Json -Depth 5 -Compress
 $newTree = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/git/trees" -Headers $headers -Method Post -ContentType "application/json" -Body $treeBody
 
-$commitBody = @{
-    message = "chore(data): sync daily motorcycle competitor trend & RAW data ($TodayDate)"
-    tree    = $newTree.sha
-    parents = @($baseCommitSha)
-} | ConvertTo-Json -Compress
-$newCommit = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/git/commits" -Headers $headers -Method Post -ContentType "application/json" -Body $commitBody
+if ($newTree.sha -ne $baseTreeSha) {
+    $commitBody = @{
+        message = "chore(data): sync 5-platform motorcycle trend & RAW data ($TodayDate)"
+        tree    = $newTree.sha
+        parents = @($baseCommitSha)
+    } | ConvertTo-Json -Compress
+    $newCommit = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/git/commits" -Headers $headers -Method Post -ContentType "application/json" -Body $commitBody
 
-$refUpdateBody = @{ sha = $newCommit.sha; force = $true } | ConvertTo-Json -Compress
-Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/git/refs/heads/main" -Headers $headers -Method Patch -ContentType "application/json" -Body $refUpdateBody | Out-Null
-Write-Host "Successfully synced ($TodayDate) motorcycle data & dashboard to GitHub ($($newCommit.sha))!" -ForegroundColor Green
+    $refUpdateBody = @{ sha = $newCommit.sha; force = $false } | ConvertTo-Json -Compress
+    Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/git/refs/heads/main" -Headers $headers -Method Patch -ContentType "application/json" -Body $refUpdateBody | Out-Null
+    Write-Host "Synced ($TodayDate) data & dashboard to GitHub ($($newCommit.sha))!" -ForegroundColor Green
+}
+
+# 2. Ensure .github/workflows/daily_bike_tracker.yml is committed via Contents API PUT
+#    (Contents API triggers GitHub's push event so Actions Cron Scheduler officially registers cron '0 1 * * *')
+$wfRel = ".github/workflows/daily_bike_tracker.yml"
+$wfFull = Join-Path $WorkDir ($wfRel -replace '/', '\')
+if (Test-Path $wfFull) {
+    $wfBytes = [System.IO.File]::ReadAllBytes($wfFull)
+    $wfB64   = [Convert]::ToBase64String($wfBytes)
+    $remoteWf = $null
+    try {
+        $remoteWf = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/contents/$wfRel" -Headers $headers -Method Get
+    } catch {}
+
+    $remoteCleanB64 = if ($remoteWf -and $remoteWf.content) { ($remoteWf.content -replace '\s+', '') } else { "" }
+    if ($remoteCleanB64 -ne $wfB64) {
+        $putBody = [ordered]@{
+            message = "ci(schedule): register daily 10:00 KST (01:00 UTC) 5-platform cloud cron schedule"
+            content = $wfB64
+            branch  = "main"
+        }
+        if ($remoteWf -and $remoteWf.sha) { $putBody["sha"] = $remoteWf.sha }
+        $putJson = $putBody | ConvertTo-Json -Compress
+        $putRes = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/contents/$wfRel" -Headers $headers -Method Put -ContentType "application/json" -Body $putJson
+        Write-Host "Registered workflow schedule via Contents API ($($putRes.commit.sha))!" -ForegroundColor Cyan
+    }
+}
