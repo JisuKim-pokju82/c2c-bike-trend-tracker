@@ -1,9 +1,9 @@
-name: Daily 5-Platform Used Motorcycle Competitor Tracker (Cloud 10:00 KST)
+name: Daily 5-Platform Used Motorcycle Competitor Tracker (Cloud 08:00 KST)
 
 on:
   schedule:
-    # 한국시간(KST) 매일 오전 10:00 정각 자동 실행 (UTC 01:00)
-    - cron: '0 1 * * *'
+    # 한국시간(KST) 매일 오전 08:00 정각 자동 실행 (전일 UTC 23:00)
+    - cron: '0 23 * * *'
   workflow_dispatch:
 
 permissions:
@@ -36,7 +36,7 @@ jobs:
           git diff --staged --quiet
           if ($LASTEXITCODE -ne 0) {
             $dt = ([DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))).ToString("yyyy-MM-dd")
-            git commit -m "chore(data): daily 10:00 KST 5-platform motorcycle trend & RAW data ($dt)"
+            git commit -m "chore(data): daily 08:00 KST 5-platform motorcycle trend & RAW data ($dt)"
             git push
           } else {
             Write-Host "No staged data changes to commit."
