@@ -345,13 +345,17 @@ $allRawBikes = New-Object System.Collections.Generic.List[object]
 # 1. DAANGN MOTORCYCLES (238 Fine-Grained Keywords + Sitemap - Minimum Verified Floor)
 # ==============================================================================
 $daangnKeywords = @(
-    # General / Category / Displacement / Style (34)
-    "오토바이", "스쿠터", "중고오토바이", "중고스쿠터", "바이크 팝니다", "오토바이 팝니다", "스쿠터 팝니다",
-    "배달오토바이", "배달스쿠터", "배달세팅", "전기스쿠터", "전기오토바이", "메뉴얼바이크", "매뉴얼바이크",
-    "네이키드 바이크", "레플리카 바이크", "투어러 바이크", "아메리칸 바이크", "크루저 바이크", "클래식 바이크",
-    "쿼터급 바이크", "미들급 바이크", "리터급 바이크", "50cc 스쿠터", "100cc 스쿠터", "110cc", "125cc 오토바이",
-    "125cc 스쿠터", "250cc 바이크", "300cc 스쿠터", "350cc 스쿠터", "400cc 바이크", "650cc 바이크", "1000cc 바이크",
-    # Honda Fine-Grained Models & Model-Years (55)
+    # Broad Brand & Core Series Superset (46)
+    "오토바이", "스쿠터", "중고오토바이", "중고스쿠터", "바이크", "오토바이 팝니다", "스쿠터 팝니다", "바이크 팝니다",
+    "배달오토바이", "배달스쿠터", "전기스쿠터", "전기오토바이", "메뉴얼바이크", "125cc", "50cc", "100cc", "110cc", "250cc", "300cc", "350cc", "400cc", "500cc", "600cc", "650cc", "750cc", "800cc", "900cc", "1000cc",
+    "혼다 오토바이", "혼다 스쿠터", "pcx", "포르자", "슈퍼커브", "혼다 cb", "혼다 cbr", "레블", "골드윙", "혼다 adv",
+    "야마하", "nmax", "엔맥스", "xmax", "엑스맥스", "티맥스", "tmax", "야마하 mt", "야마하 r3",
+    "스즈키 오토바이", "스즈키 스쿠터", "스즈키 gsx", "하야부사", "브이스트롬", "버그만", "어드레스",
+    "가와사키", "가와사키 닌자", "가와사키 z", "버시스", "발칸",
+    "할리데이비슨", "할리 오토바이", "스트리트글라이드", "로드글라이드", "아이언883", "브레이크아웃", "팻보이", "로드킹", "스포스터",
+    "bmw 오토바이", "bmw 바이크", "bmw gs", "bmw s1000", "bmw c400", "bmw c650", "알나인티", "bmw r18",
+    "두카티", "베스파", "트라이엄프", "로얄엔필드", "ktm 오토바이", "ktm 듀크", "허스크바나", "sym 오토바이", "보이저", "크루심", "킴코", "대림 오토바이", "효성 오토바이", "kr모터스", "존테스", "cf모토", "아프릴리아", "인디언 바이크", "푸조 장고", "이탈젯", "모토구찌",
+    # Honda Fine-Grained Models & Model-Years (52)
     "혼다 pcx", "pcx 125", "pcx 18년식", "pcx 19년식", "pcx 20년식", "pcx 21년식", "pcx 22년식", "pcx 23년식", "pcx 24년식", "pcx 25년식", "pcx abs",
     "혼다 포르자", "포르자 300", "포르자 350", "포르자 750", "포르자 21년식", "포르자 22년식", "포르자 23년식", "포르자 24년식", "포르자 25년식",
     "슈퍼커브", "슈퍼커브 110", "슈퍼커브 19년식", "슈퍼커브 20년식", "슈퍼커브 21년식", "슈퍼커브 22년식", "슈퍼커브 23년식", "슈퍼커브 24년식",
@@ -407,7 +411,7 @@ $daangnFetchScript = {
         try {
             Start-Sleep -Milliseconds (120 * $attempt)
             $enc = [uri]::EscapeDataString($kw)
-            $req = [System.Net.HttpWebRequest]::Create("https://www.daangn.com/kr/buy-sell/?search=$enc")
+            $req = [System.Net.HttpWebRequest]::Create("https://www.daangn.com/kr/search/buy-sell/?q=$enc")
             $req.Method = "GET"
             $req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
             $req.Timeout = 20000

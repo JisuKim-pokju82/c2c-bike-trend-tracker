@@ -12,13 +12,13 @@
     },
     {
         "date":  "2026-11-17",
-        "updatedAt":  "2026-11-17 12:08:14",
+        "updatedAt":  "2026-11-17 12:29:05",
         "rawCsvPath":  "raw_data/raw_bikes_2026-11-17.csv",
         "daangnUrlPath":  "raw_data/daangn_bike_urls_2026-11-17.csv",
-        "bikeCount":  9893,
-        "daangnCount":  3034,
+        "bikeCount":  14396,
+        "daangnCount":  7536,
         "reitwagenCount":  800,
         "passoCount":  800,
-        "batumaeCount":  5259
+        "batumaeCount":  5260
     }
 ]
