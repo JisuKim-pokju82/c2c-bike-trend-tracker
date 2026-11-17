@@ -1,25 +1,61 @@
-﻿# Register Backup & Local-Sync Windows Scheduled Task for 10:35 AM KST
-# - Primary execution: GitHub Actions Cloud Cron at 10:00 AM KST (runs even when PC is powered off)
-# - Local 10:35 AM task:
-#     1) If GitHub Cloud already updated today -> pulls fresh DB/CSV/JSON/JS down to local folder
-#     2) If GitHub Cloud was delayed/skipped -> runs local collector + uploads to GitHub automatically
+﻿# Register Backup & Local-Sync Windows Scheduled Task for 08:20 AM KST (with WakeToRun, 180s Network-Wait, Cloud Sync, 3x Retry & Audit Log)
+# - Primary execution: GitHub Actions Cloud Cron at 08:00 AM KST (UTC 23:00) — runs automatically even when PC is powered off
+# - Local 08:20 AM task:
+#     1) Wakes PC if asleep, waits up to 180s for network/DNS
+#     2) If GitHub Cloud already updated today -> pulls fresh DB/CSV/JSON/JS down to local folder
+#     3) If GitHub Cloud was delayed/skipped -> runs local collector + uploads to GitHub with 3x retry
 $ErrorActionPreference = 'Stop'
 $TaskName = "CompetitorBikeTrend_DailyCollector"
 $WorkDir  = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not $WorkDir) { $WorkDir = (Get-Location).Path }
 
 $InnerScript = @"
+`$ErrorActionPreference = 'Stop'
 Set-ExecutionPolicy Bypass -Scope Process -Force
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Set-Location -LiteralPath '$WorkDir'
+
+`$logDir = Join-Path '$WorkDir' 'logs'
+if (-not (Test-Path `$logDir)) { New-Item -ItemType Directory -Path `$logDir -Force | Out-Null }
+`$logFile = Join-Path `$logDir 'scheduler.log'
+function Write-SchedLog([string]`$msg) {
+    `$ts = ([DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))).ToString('yyyy-MM-dd HH:mm:ss')
+    Add-Content -LiteralPath `$logFile -Value "[`$ts] `$msg" -Encoding UTF8
+}
+
+Write-SchedLog "Scheduled 08:20 AM check triggered."
+
+# 1. Wait up to 180s for network/DNS after PC boot or sleep wake-up
+`$netReady = `$false
+for (`$w = 1; `$w -le 36; `$w++) {
+    try {
+        `$null = [System.Net.Dns]::GetHostAddresses('api.github.com')
+        `$netReady = `$true
+        break
+    } catch {
+        Start-Sleep -Seconds 5
+    }
+}
+if (-not `$netReady) {
+    Write-SchedLog "ERROR: Network did not become ready within 180 seconds."
+    exit 1
+}
+
+# 2. Check if GitHub Cloud already updated today (08:00 AM KST cron)
 `$today = ([DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))).ToString('yyyy-MM-dd')
 `$baseRaw = 'https://raw.githubusercontent.com/JisuKim-pokju82/c2c-bike-trend-tracker/main'
 `$alreadyUpdatedOnCloud = `$false
 try {
-    `$raw = (Invoke-RestMethod -Uri "`$baseRaw/competitor_trend.json?t=`$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())" -TimeoutSec 15)
-    if (`$raw -and @(`$raw | Where-Object { `$_.date -eq `$today }).Count -gt 0) { `$alreadyUpdatedOnCloud = `$true }
+    `$raw = Invoke-RestMethod -Uri "`$baseRaw/competitor_trend.json?t=`$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())" -TimeoutSec 15
+    foreach (`$r in @(`$raw)) {
+        if (`$null -ne `$r -and `$r.date -eq `$today -and [int]`$r.daangnBikeCount -gt 0 -and [int]`$r.reitwagenCount -gt 0 -and [int]`$r.passoCount -gt 0 -and [int]`$r.batumaeCount -gt 0) {
+            `$alreadyUpdatedOnCloud = `$true
+        }
+    }
 } catch {}
+
 if (`$alreadyUpdatedOnCloud) {
+    Write-SchedLog "Cloud already updated complete 5-platform data for `$today. Syncing fresh files to local folder..."
     foreach (`$rel in @(
         'index.html', 'competitor_trend.html', 'competitor_trend.json', 'competitor_trend.csv', 'competitor_trend_data.js',
         'database/bike_daily_summary_db.csv', 'database/bike_vehicle_master_db.csv', 'database/db_manifest.json', 'database/portfolio_by_date.json',
@@ -32,9 +68,22 @@ if (`$alreadyUpdatedOnCloud) {
             Invoke-WebRequest -Uri "`$baseRaw/`$rel" -OutFile `$dest -UseBasicParsing -TimeoutSec 30
         } catch {}
     }
-} else {
-    & '$WorkDir\collect_bike_trend.ps1'
-    & '$WorkDir\upload_to_github.ps1'
+    Write-SchedLog "SUCCESS: Local folder synced with Cloud (`$today)."
+    exit 0
+}
+
+# 3. Fallback: Run local collection + GitHub upload with up to 3 retries
+for (`$attempt = 1; `$attempt -le 3; `$attempt++) {
+    try {
+        Write-SchedLog "Cloud not yet updated for `$today. Starting local fallback collection & upload (attempt `$attempt/3)..."
+        & '$WorkDir\collect_bike_trend.ps1'
+        & '$WorkDir\upload_to_github.ps1'
+        Write-SchedLog "SUCCESS: Local fallback collection & GitHub sync completed for `$today."
+        exit 0
+    } catch {
+        Write-SchedLog "WARNING (attempt `$attempt/3 failed): `$(`$_.Exception.Message)"
+        if (`$attempt -lt 3) { Start-Sleep -Seconds 30 } else { exit 1 }
+    }
 }
 "@
 
@@ -42,8 +91,8 @@ $EncodedCmd = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes
 $CmdArgs    = "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $EncodedCmd"
 
 $Action       = New-ScheduledTaskAction -Execute "powershell.exe" -Argument $CmdArgs
-$TriggerDaily = New-ScheduledTaskTrigger -Daily -At 10:35AM
-$Settings     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
+$TriggerDaily = New-ScheduledTaskTrigger -Daily -At 8:20AM
+$Settings     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Hours 2)
 
-Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $TriggerDaily -Settings $Settings -Description "10:35 AM sync/backup for Daily 10:00 AM GitHub Cloud 5-Platform Motorcycle Tracker" -Force | Out-Null
-Write-Host "Registered Windows Scheduled Task '$TaskName' (10:35 AM Cloud-to-Local sync & backup fallback)." -ForegroundColor Green
+Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $TriggerDaily -Settings $Settings -Description "08:20 AM WakeToRun sync/backup for Daily 08:00 AM GitHub Cloud 5-Platform Motorcycle Tracker" -Force | Out-Null
+Write-Host "Registered Windows Scheduled Task '$TaskName' (08:20 AM WakeToRun Cloud-to-Local sync & 3x-retry fallback)." -ForegroundColor Green

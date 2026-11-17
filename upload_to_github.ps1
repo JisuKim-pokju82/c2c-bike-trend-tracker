@@ -82,8 +82,8 @@ if ($newTree.sha -ne $baseTreeSha) {
     Write-Host "Synced ($TodayDate) data & dashboard to GitHub ($($newCommit.sha))!" -ForegroundColor Green
 }
 
-# 2. Ensure .github/workflows/daily_bike_tracker.yml is committed via Contents API PUT
-#    (Contents API triggers GitHub's push event so Actions Cron Scheduler officially registers cron '0 1 * * *')
+    # 2. Ensure .github/workflows/daily_bike_tracker.yml is committed via Contents API PUT
+    #    (Contents API triggers GitHub's push event so Actions Cron Scheduler officially registers cron '0 23 * * *' = 08:00 KST)
 $wfRel = ".github/workflows/daily_bike_tracker.yml"
 $wfFull = Join-Path $WorkDir ($wfRel -replace '/', '\')
 if (Test-Path $wfFull) {
@@ -97,7 +97,7 @@ if (Test-Path $wfFull) {
     $remoteCleanB64 = if ($remoteWf -and $remoteWf.content) { ($remoteWf.content -replace '\s+', '') } else { "" }
     if ($remoteCleanB64 -ne $wfB64) {
         $putBody = [ordered]@{
-            message = "ci(schedule): register daily 10:00 KST (01:00 UTC) 5-platform cloud cron schedule"
+            message = "ci(schedule): register daily 08:00 KST (23:00 UTC) 5-platform cloud cron schedule"
             content = $wfB64
             branch  = "main"
         }
