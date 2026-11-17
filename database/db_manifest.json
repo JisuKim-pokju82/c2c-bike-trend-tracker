@@ -1,1 +1,24 @@
-[]
+[
+    {
+        "date":  "2026-11-16",
+        "updatedAt":  "2026-11-16 18:38:19",
+        "rawCsvPath":  "raw_data/raw_bikes_2026-11-16.csv",
+        "daangnUrlPath":  "",
+        "bikeCount":  6797,
+        "daangnCount":  0,
+        "reitwagenCount":  781,
+        "passoCount":  786,
+        "batumaeCount":  5230
+    },
+    {
+        "date":  "2026-11-17",
+        "updatedAt":  "2026-11-17 16:01:04",
+        "rawCsvPath":  "raw_data/raw_bikes_2026-11-17.csv",
+        "daangnUrlPath":  "raw_data/daangn_bike_urls_2026-11-17.csv",
+        "bikeCount":  12512,
+        "daangnCount":  5691,
+        "reitwagenCount":  800,
+        "passoCount":  782,
+        "batumaeCount":  5239
+    }
+]
