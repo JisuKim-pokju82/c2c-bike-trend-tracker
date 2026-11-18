@@ -99,7 +99,7 @@ if (Test-Path $wfFull) {
     $remoteCleanB64 = if ($remoteWf -and $remoteWf.content) { ($remoteWf.content -replace '\s+', '') } else { "" }
     if ($remoteCleanB64 -ne $wfB64) {
         $putBody = [ordered]@{
-            message = "ci(schedule): register ubuntu-latest 10:00 KST multi-cron schedule"
+            message = "ci(schedule): register ubuntu-latest 09:00 KST multi-cron schedule"
             content = $wfB64
             branch  = "main"
         }

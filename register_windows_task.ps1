@@ -8,8 +8,8 @@ if (-not $WorkDir) { $WorkDir = "c:\Users\KCAR24N20051\Desktop\바이크" }
 $VbsPath  = Join-Path $WorkDir "launch_hidden.vbs"
 
 $Action       = New-ScheduledTaskAction -Execute "wscript.exe" -Argument "//B //NoLogo `"$VbsPath`"" -WorkingDirectory $WorkDir
-$TriggerDaily = New-ScheduledTaskTrigger -Daily -At 10:02AM
+$TriggerDaily = New-ScheduledTaskTrigger -Daily -At 9:05AM
 $Settings     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 2)
 
-Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $TriggerDaily -Settings $Settings -Description "Daily 10:02 AM invisible sync/dispatch/backup for 5-Platform Motorcycle Tracker" -Force | Out-Null
-Write-Host "Registered Invisible Windows Scheduled Task '$TaskName' (wscript.exe -> launch_hidden.vbs at 10:02 AM daily)." -ForegroundColor Green
+Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $TriggerDaily -Settings $Settings -Description "Daily 09:05 AM invisible sync/dispatch/backup for 5-Platform Motorcycle Tracker" -Force | Out-Null
+Write-Host "Registered Invisible Windows Scheduled Task '$TaskName' (wscript.exe -> launch_hidden.vbs at 09:05 AM daily)." -ForegroundColor Green

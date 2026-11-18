@@ -1,4 +1,4 @@
-﻿# Standalone Scheduled Sync & Fallback Runner for 5-Platform Motorcycle Tracker (10:02 AM KST)
+﻿# Standalone Scheduled Sync & Fallback Runner for 5-Platform Motorcycle Tracker (09:05 AM KST)
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch {}
@@ -64,7 +64,7 @@ function Sync-CloudToLocal {
     }
 }
 
-# 2. Check if GitHub Cloud already completed today's 10:00 AM update
+# 2. Check if GitHub Cloud already completed today's 09:00 AM update
 if (Test-CloudUpdatedToday) {
     Write-SchedLog "Cloud already updated complete 5-platform data for $today. Syncing fresh files to local folder..."
     Sync-CloudToLocal
