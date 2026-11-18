@@ -27,6 +27,8 @@ $filesToUpload = @(
     "collect_bike_trend.ps1",
     "upload_to_github.ps1",
     "register_windows_task.ps1",
+    "run_scheduled_sync.ps1",
+    "launch_hidden.vbs",
     "index.html",
     "competitor_trend.html",
     "competitor_trend.csv",
@@ -104,6 +106,16 @@ if (Test-Path $wfFull) {
         if ($remoteWf -and $remoteWf.sha) { $putBody["sha"] = $remoteWf.sha }
         $putJson = $putBody | ConvertTo-Json -Compress
         $putRes = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/contents/$wfRel" -Headers $headers -Method Put -ContentType "application/json" -Body $putJson
-        Write-Host "Registered workflow schedule via Contents API ($($putRes.commit.sha))!" -ForegroundColor Cyan
+        Write-Host "Committed workflow via Contents API ($($putRes.commit.sha))!" -ForegroundColor Cyan
+    }
+
+    # Force GitHub's backend Cron Scheduler to re-index 'on: schedule' (Contents API bypasses git-push cron hook unless toggled!)
+    try {
+        Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/actions/workflows/daily_bike_tracker.yml/disable" -Headers $headers -Method Put | Out-Null
+        Start-Sleep -Seconds 2
+        Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repo/actions/workflows/daily_bike_tracker.yml/enable" -Headers $headers -Method Put | Out-Null
+        Write-Host "Toggled workflow disable->enable to bind cron schedule in GitHub backend!" -ForegroundColor Green
+    } catch {
+        Write-Warning "Workflow toggle warning: $_"
     }
 }
