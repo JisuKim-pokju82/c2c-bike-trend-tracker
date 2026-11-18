@@ -1,9 +1,8 @@
-﻿# Register Backup & Local-Sync Windows Scheduled Task for 08:20 AM KST (with WakeToRun, 180s Network-Wait, Cloud Sync, 3x Retry & Audit Log)
-# - Primary execution: GitHub Actions Cloud Cron at 08:00 AM KST (UTC 23:00) — runs automatically even when PC is powered off
-# - Local 08:20 AM task:
-#     1) Wakes PC if asleep, waits up to 180s for network/DNS
-#     2) If GitHub Cloud already updated today -> pulls fresh DB/CSV/JSON/JS down to local folder
-#     3) If GitHub Cloud was delayed/skipped -> runs local collector + uploads to GitHub with 3x retry
+﻿# Register Backup & Local-Sync Windows Scheduled Task for 10:05 AM KST (with WakeToRun, IgnoreNew, 180s Network-Wait, Cloud Sync & 3x Retry)
+# - Primary execution: GitHub Actions ubuntu-latest Cloud Multi-Cron (09:38 / 09:52 / 10:03 / 10:18 / 10:34 / 10:52 KST) — runs even when PC is off
+# - Local 10:05 AM task:
+#     1) If GitHub Cloud already updated today -> pulls fresh DB/CSV/JSON/JS down to local folder
+#     2) If GitHub Cloud was delayed/skipped -> runs local collector + uploads to GitHub with 3x retry
 $ErrorActionPreference = 'Stop'
 $TaskName = "CompetitorBikeTrend_DailyCollector"
 $WorkDir  = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -23,7 +22,7 @@ function Write-SchedLog([string]`$msg) {
     Add-Content -LiteralPath `$logFile -Value "[`$ts] `$msg" -Encoding UTF8
 }
 
-Write-SchedLog "Scheduled 08:20 AM check triggered."
+Write-SchedLog "Scheduled 10:05 AM check triggered."
 
 # 1. Wait up to 180s for network/DNS after PC boot or sleep wake-up
 `$netReady = `$false
@@ -41,7 +40,7 @@ if (-not `$netReady) {
     exit 1
 }
 
-# 2. Check if GitHub Cloud already updated today (08:00 AM KST cron)
+# 2. Check if GitHub Cloud already updated today (10:00 AM KST schedule)
 `$today = ([DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))).ToString('yyyy-MM-dd')
 `$baseRaw = 'https://raw.githubusercontent.com/JisuKim-pokju82/c2c-bike-trend-tracker/main'
 `$alreadyUpdatedOnCloud = `$false
@@ -91,8 +90,8 @@ $EncodedCmd = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes
 $CmdArgs    = "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $EncodedCmd"
 
 $Action       = New-ScheduledTaskAction -Execute "powershell.exe" -Argument $CmdArgs
-$TriggerDaily = New-ScheduledTaskTrigger -Daily -At 8:20AM
-$Settings     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Hours 2)
+$TriggerDaily = New-ScheduledTaskTrigger -Daily -At 10:05AM
+$Settings     = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -WakeToRun -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 2)
 
-Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $TriggerDaily -Settings $Settings -Description "08:20 AM WakeToRun sync/backup for Daily 08:00 AM GitHub Cloud 5-Platform Motorcycle Tracker" -Force | Out-Null
-Write-Host "Registered Windows Scheduled Task '$TaskName' (08:20 AM WakeToRun Cloud-to-Local sync & 3x-retry fallback)." -ForegroundColor Green
+Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $TriggerDaily -Settings $Settings -Description "10:05 AM WakeToRun sync/backup for Daily 10:00 AM GitHub Cloud 5-Platform Motorcycle Tracker" -Force | Out-Null
+Write-Host "Registered Windows Scheduled Task '$TaskName' (10:05 AM WakeToRun Cloud-to-Local sync & 3x-retry fallback)." -ForegroundColor Green

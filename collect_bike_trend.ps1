@@ -6,13 +6,22 @@
 #   4) Batumae Naver Cafe (https://cafe.naver.com/bikecargogo - Personal C2C & Safety-Pay 30-day active listings)
 #   5) K Car (Service not currently active - placeholder slot only, no numeric values recorded)
 
+param(
+    [switch]$Force,
+    [switch]$SmokeTestOnly
+)
+
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-[Net.ServicePointManager]::DefaultConnectionLimit = 48
+try {
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    [Net.ServicePointManager]::DefaultConnectionLimit = 48
+} catch {}
 
 $WorkDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not $WorkDir) { $WorkDir = (Get-Location).Path }
+$TempDir = [System.IO.Path]::GetTempPath()
+$CurlBin = if (Get-Command curl.exe -ErrorAction SilentlyContinue) { "curl.exe" } else { "curl" }
 
 $SnapshotDir = Join-Path $WorkDir "snapshots"
 $RawDir      = Join-Path $WorkDir "raw_data"
@@ -47,6 +56,18 @@ if (Test-Path $JsonPath) {
 }
 $PriorRecords = @($ExistingRecords | Where-Object { $_.date -lt $TodayDate } | Sort-Object date)
 $PrevRec = if ($PriorRecords.Count -gt 0) { $PriorRecords[$PriorRecords.Count - 1] } else { $null }
+
+$TodayRawLockPath = Join-Path $RawDir "raw_bikes_$($TodayDate).csv"
+if (-not $SmokeTestOnly -and -not $Force -and (Test-Path $TodayRawLockPath)) {
+    $todayRec = @($ExistingRecords | Where-Object { $_.date -eq $TodayDate })
+    if ($todayRec.Count -gt 0) {
+        $tr = $todayRec[0]
+        if ([int]$tr.daangnBikeCount -ge 1000 -and [int]$tr.reitwagenCount -ge 1000 -and [int]$tr.passoCount -ge 1000 -and [int]$tr.batumaeCount -ge 500) {
+            Write-Host "[$Timestamp] Today's 5-platform dataset ($TodayDate) is already collected and verified complete. Skipping duplicate run." -ForegroundColor Cyan
+            exit 0
+        }
+    }
+}
 
 $NewSinceCutoff = $NowKst.AddHours(-24)
 if ($PrevRec -and $PrevRec.updatedAt) {
@@ -444,11 +465,12 @@ $daangnKeywords = @(
     "아프릴리아 rs660", "아프릴리아 sr gt", "인디언 스카우트", "모토구찌 v7", "보그 300", "베넬리 tnt125", "슈퍼쏘코", "부캐너 125", "람브레타"
 )
 $daangnKeywords = @($daangnKeywords | Select-Object -Unique)
+if ($SmokeTestOnly) { $daangnKeywords = @("pcx 125", "야마하 오토바이", "포르자 350") }
 Write-Host "1. Collecting Daangn Nationwide C2C Motorcycles ($($daangnKeywords.Count) Purified Keywords + 4-Stage Filter)..." -ForegroundColor Yellow
 
 $daangnFetchScript = {
     param([string]$kw)
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch {}
     for ($attempt = 1; $attempt -le 2; $attempt++) {
         try {
             Start-Sleep -Milliseconds (120 * $attempt)
@@ -572,8 +594,8 @@ $daangnAllUrlLines = New-Object System.Collections.Generic.List[string]
 $daangnAllUrlLines.Add("collectedDate,slugId,decodedSlug,url")
 
 try {
-    $tmpGz = Join-Path $env:TEMP "daangn_bikes_sm_$($PID).xml.gz"
-    curl.exe -s -L -A "Mozilla/5.0" "https://www.daangn.com/kr/buy-sell/sitemap-detail.xml.gz" -o $tmpGz
+    $tmpGz = Join-Path $TempDir "daangn_bikes_sm_$($PID).xml.gz"
+    & $CurlBin -s -L -A "Mozilla/5.0" "https://www.daangn.com/kr/buy-sell/sitemap-detail.xml.gz" -o $tmpGz
     if (Test-Path $tmpGz) {
         $rawBytes = [System.IO.File]::ReadAllBytes($tmpGz)
         Remove-Item $tmpGz -Force -ErrorAction SilentlyContinue
@@ -745,7 +767,8 @@ try {
     $rwUnder300Count  = [Math]::Max(0, $rwTotalCount - $rwOver300Count)
     $rwCertifiedCount = [int](Invoke-ReitwagenOrpc "search/countV2" @{ page=0; skip=0; sourceType=@("BAREE_CERTIFIED") }).count
 
-    for ($pg = 0; $pg -lt 40; $pg++) {
+    $maxRwPg = if ($SmokeTestOnly) { 2 } else { 40 }
+    for ($pg = 0; $pg -lt $maxRwPg; $pg++) {
         $res = Invoke-ReitwagenOrpc "search/list" @{ page = $pg; skip = ($pg * 20); sourceType = @("BAREE"); maxPrice = $RW_MAX_FIXED_PRICE; sort = @{ field = "postedAt"; order = "desc" } }
         if (-not $res.data -or $res.data.Count -eq 0) { break }
         foreach ($entry in $res.data) {
@@ -808,7 +831,8 @@ try {
     $passoUnder300Count = [Math]::Max(0, $passoTotalCount - $passoOver300Count)
     $passoAllUsedCount  = $passoTotalCount
 
-    for ($pg = 0; $pg -lt 40; $pg++) {
+    $maxRwPg = if ($SmokeTestOnly) { 2 } else { 40 }
+    for ($pg = 0; $pg -lt $maxRwPg; $pg++) {
         $res = Invoke-ReitwagenOrpc "search/list" @{ page = $pg; skip = ($pg * 20); sourceType = @("PASSO"); sort = @{ field = "postedAt"; order = "desc" } }
         if (-not $res.data -or $res.data.Count -eq 0) { break }
         foreach ($entry in $res.data) {
@@ -877,7 +901,8 @@ $btNewTodayCount = 0; $btSoldTaggedToday = 0; $btTraded30dCount = 0
 
 foreach ($bm in $batumaeMenus) {
     $reachCutoff = $false
-    for ($pg = 1; $pg -le 85; $pg++) {
+    $maxBtPg = if ($SmokeTestOnly) { 2 } else { 85 }
+    for ($pg = 1; $pg -le $maxBtPg; $pg++) {
         if ($reachCutoff) { break }
         try {
             $u = "https://apis.naver.com/cafe-web/cafe2/ArticleListV2dot1.json?search.clubid=10312966&search.menuid=$($bm.menuId)&search.page=$pg&search.perPage=50"
@@ -990,6 +1015,14 @@ Write-Host "5. K Car Bike Slot: Reserved as placeholder (Service not active, num
 # ==============================================================================
 # 6. 4-PLATFORM COMPLETENESS GUARD & PERSIST SNAPSHOTS + DAILY RAW CSV
 # ==============================================================================
+if ($SmokeTestOnly) {
+    if ($daangnNormItems.Count -le 0 -or $rwTotalCount -le 0 -or $passoTotalCount -le 0 -or $btTotalCount -le 0) {
+        throw "SmokeTest failed: DaangnSample=$($daangnNormItems.Count), RW=$rwTotalCount, Passo=$passoTotalCount, Batumae=$btTotalCount"
+    }
+    Write-Host "[SMOKE TEST OK] All 4 platforms + curl/gzip + regexes verified on $($PSVersionTable.OS) ($($PSVersionTable.PSVersion))!" -ForegroundColor Cyan
+    exit 0
+}
+
 if ($daangnTotalCount -lt 1000 -or $rwTotalCount -lt 1000 -or $passoTotalCount -lt 1000 -or $btTotalCount -lt 500) {
     $guardMsg = "Daangn=$daangnTotalCount, Reitwagen=$rwTotalCount, Passo=$passoTotalCount, Batumae=$btTotalCount"
     throw "[$Timestamp] Incomplete 4-platform motorcycle collection ($guardMsg). Aborting before writing files so clean DB records are preserved."
@@ -1103,8 +1136,8 @@ for ($i = 0; $i -lt $sortedRecords.Count; $i++) {
     }
 }
 
-$jsonOutput = ConvertTo-Json -InputObject $sortedRecords -Depth 6
-if ($sortedRecords.Count -eq 1 -and -not $jsonOutput.TrimStart().StartsWith("[")) {
+$jsonOutput = $sortedRecords | ConvertTo-Json -Depth 6
+if (-not $jsonOutput.TrimStart().StartsWith("[")) {
     $jsonOutput = "[`r`n" + $jsonOutput + "`r`n]"
 }
 [System.IO.File]::WriteAllText($JsonPath, $jsonOutput, $utf8NoBom)
@@ -1465,8 +1498,8 @@ $portfolioByDate["ALL"] = [ordered]@{
 $pfByDateJson = $portfolioByDate | ConvertTo-Json -Depth 7
 [System.IO.File]::WriteAllText($pfCachePath, $pfByDateJson, $utf8NoBom)
 
-$manifestJson = ConvertTo-Json -InputObject @($manifestEntries.ToArray()) -Depth 4
-if ($manifestEntries.Count -eq 1 -and -not $manifestJson.TrimStart().StartsWith("[")) {
+$manifestJson = @($manifestEntries.ToArray()) | ConvertTo-Json -Depth 4
+if (-not $manifestJson.TrimStart().StartsWith("[")) {
     $manifestJson = "[`r`n" + $manifestJson + "`r`n]"
 }
 [System.IO.File]::WriteAllText($manifestPath, $manifestJson, $utf8NoBom)

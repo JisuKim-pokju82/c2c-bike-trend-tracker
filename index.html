@@ -589,7 +589,7 @@
         </div>
 
         <div class="disclaimer-box">
-          * [디스클레이머] 매일 08:00 KST 자동 수집 기준(총등록대수 순위 자동 정렬, 케이카는 미운영 빈칸 유지). 파쏘는 신차 제외 중고전체, <strong>라이트바겐은 자체 개인 직거래 정찰가 매물 전수(외부 연동 및 만료·중복 경매 물량 제외)</strong>, 바튜매는 개인·안전결제 장터 최근 30일 활성 매물 전수이며, <strong>당근바이크는 400여 개 이륜차 전용 키워드 + 4단계 정밀 필터링(비이륜차·4륜ATV·자토바이·부품단품 차단 및 차종별 차등 최저가격제)을 통과한 실측 '최소치(보수적 하한)'</strong>입니다.
+          * [디스클레이머] 매일 10:00 KST 자동 수집 기준(총등록대수 순위 자동 정렬, 케이카는 미운영 빈칸 유지). 파쏘는 신차 제외 중고전체, <strong>라이트바겐은 자체 개인 직거래 정찰가 매물 전수(외부 연동 및 만료·중복 경매 물량 제외)</strong>, 바튜매는 개인·안전결제 장터 최근 30일 활성 매물 전수이며, <strong>당근바이크는 400여 개 이륜차 전용 키워드 + 4단계 정밀 필터링(비이륜차·4륜ATV·자토바이·부품단품 차단 및 차종별 차등 최저가격제)을 통과한 실측 '최소치(보수적 하한)'</strong>입니다.
         </div>
       </section>
     </div>
@@ -764,7 +764,7 @@
       </div>
 
       <div class="disclaimer-box">
-        * [보관 기준] 매일 08:00 수집 시 일자별 원본 CSV 파일(`raw_data/`)은 수정 없이 영구 보존되며, 통합 누적 DB(`database/`)는 외부 GitHub 저장소에 자동 커밋됩니다.
+        * [보관 기준] 매일 10:00 수집 시 일자별 원본 CSV 파일(`raw_data/`)은 수정 없이 영구 보존되며, 통합 누적 DB(`database/`)는 외부 GitHub 저장소에 자동 커밋됩니다.
       </div>
     </section>
 
@@ -871,7 +871,7 @@
       const platforms = getRankedPlatforms(latest);
 
       document.getElementById('lastUpdatedInfo').textContent =
-        `최종 업데이트: ${latest.updatedAt || window.COMPETITOR_TREND_LAST_UPDATED || '-'} (매일 08:00 자동 수집)`;
+        `최종 업데이트: ${latest.updatedAt || window.COMPETITOR_TREND_LAST_UPDATED || '-'} (매일 10:00 자동 수집)`;
 
       document.getElementById('stockCardsContainer').innerHTML = platforms.map(p => {
         if (!p.active) {
