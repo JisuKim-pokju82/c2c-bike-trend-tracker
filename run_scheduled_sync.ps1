@@ -59,7 +59,7 @@ function Sync-CloudToLocal {
             $dest = Join-Path $WorkDir ($rel -replace '/', '\')
             $dir  = Split-Path -Parent $dest
             if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
-            Invoke-WebRequest -Uri "$baseRaw/$rel?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())" -OutFile $dest -UseBasicParsing -TimeoutSec 30
+            Invoke-WebRequest -Uri "$baseRaw/${rel}?t=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())" -OutFile $dest -UseBasicParsing -TimeoutSec 30
         } catch {}
     }
 }
