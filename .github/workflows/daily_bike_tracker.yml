@@ -1,17 +1,36 @@
-name: Daily 5-Platform Used Motorcycle Competitor Tracker (Cloud 08:00 KST)
+name: Daily 5-Platform Used Motorcycle Competitor Tracker (Cloud 10:00 KST)
 
 on:
   schedule:
-    # 한국시간(KST) 매일 오전 08:00 정각 자동 실행 (전일 UTC 23:00)
-    - cron: '0 23 * * *'
+    # ubuntu-latest 고속 러너 + 오전 10:00 정시 완료를 보장하는 6단계 다중 분산 스케줄 (KST 09:38, 09:52, 10:03, 10:18, 10:34, 10:52)
+    # 첫 실행 성공 시 이후 스케줄은 1초 내 자동 스킵되어 중복 수집이나 중복 커밋이 절대 발생하지 않습니다.
+    - cron: '38 0 * * *'
+    - cron: '52 0 * * *'
+    - cron: '3 1 * * *'
+    - cron: '18 1 * * *'
+    - cron: '34 1 * * *'
+    - cron: '52 1 * * *'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force full re-collection even if today already exists'
+        required: false
+        default: 'false'
+      smoke_test:
+        description: 'Run fast 15s Linux compatibility smoke test without writing files'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
 
 jobs:
   collect-and-commit:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+      NAVER_NID_AUT: ${{ secrets.NAVER_NID_AUT }}
+      NAVER_NID_SES: ${{ secrets.NAVER_NID_SES }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,13 +38,15 @@ jobs:
           fetch-depth: 0
 
       - name: Run 5-Platform Used Bike RAW & Portfolio Collector
-        shell: powershell
-        env:
-          NAVER_NID_AUT: ${{ secrets.NAVER_NID_AUT }}
-          NAVER_NID_SES: ${{ secrets.NAVER_NID_SES }}
+        shell: pwsh
         run: |
-          tzutil /s "Korea Standard Time"
-          powershell.exe -NoProfile -ExecutionPolicy Bypass -File "./collect_bike_trend.ps1"
+          if ("${{ github.event.inputs.smoke_test }}" -eq "true") {
+            pwsh -NoProfile -File "./collect_bike_trend.ps1" -SmokeTestOnly
+          } elseif ("${{ github.event.inputs.force }}" -eq "true") {
+            pwsh -NoProfile -File "./collect_bike_trend.ps1" -Force
+          } else {
+            pwsh -NoProfile -File "./collect_bike_trend.ps1"
+          }
 
       - name: Commit & Push Updated RAW Data & Dashboard Bundle
         shell: pwsh
@@ -36,8 +57,15 @@ jobs:
           git diff --staged --quiet
           if ($LASTEXITCODE -ne 0) {
             $dt = ([DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(9))).ToString("yyyy-MM-dd")
-            git commit -m "chore(data): daily 08:00 KST 5-platform motorcycle trend & RAW data ($dt)"
-            git push
+            git commit -m "chore(data): daily 10:00 KST 5-platform motorcycle trend & RAW data ($dt)"
+            git fetch origin main
+            git rebase origin/main
+            if ($LASTEXITCODE -ne 0) {
+              git rebase --abort
+              Write-Host "Remote main already updated simultaneously; keeping newer remote commit."
+              exit 0
+            }
+            git push origin main
           } else {
-            Write-Host "No staged data changes to commit."
+            Write-Host "Today's 5-platform motorcycle data is already up to date."
           }
