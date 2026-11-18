@@ -1504,17 +1504,8 @@ if (-not $manifestJson.TrimStart().StartsWith("[")) {
 }
 [System.IO.File]::WriteAllText($manifestPath, $manifestJson, $utf8NoBom)
 
-# Build snappy browser search preview (latest 2 dates up to 20,000 rows so JS bundle stays ~6-7 MB forever)
-$browserItems = New-Object System.Collections.Generic.List[object]
-if ($rawFiles.Count -ge 2) {
-    $prevRawFile = $rawFiles[$rawFiles.Count - 2]
-    if ($prevRawFile.Name -ne "raw_bikes_$($TodayDate).csv") {
-        foreach ($pi in @(Parse-BikeRawCsvFast $prevRawFile.FullName)) { $browserItems.Add($pi) }
-    }
-}
-foreach ($ti in $allRawBikes) { $browserItems.Add($ti) }
-$rawForBrowser  = @($browserItems.ToArray() | Select-Object -Last 20000)
-$rawBrowserJson = $rawForBrowser | ConvertTo-Json -Depth 4 -Compress
+# Embed strictly the latest update date's RAW items for Section IV (pinned to latest update date)
+$rawBrowserJson = $allRawBikes | ConvertTo-Json -Depth 4 -Compress
 
 $latestPortfolio = $portfolioByDate[$TodayDate]
 $pfLatestJson    = $latestPortfolio | ConvertTo-Json -Depth 6
