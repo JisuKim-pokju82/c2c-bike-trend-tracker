@@ -5362,271 +5362,818 @@
       "sampleSize": 0
     }
   },
-  "ALL": {
-    "updatedAt": "ALL",
+  "2026-11-26": {
+    "updatedAt": "2026-11-26 09:00:16",
     "daangn": {
-      "sampleSize": 53380,
-      "pricedSampleSize": 53380,
-      "under300Count": 23018,
-      "over300Count": 33660,
-      "under300Ratio": 40.6,
-      "over300Ratio": 59.4,
-      "avgPriceManwon": 1104,
+      "sampleSize": 6702,
+      "pricedSampleSize": 6702,
+      "under300Count": 3155,
+      "over300Count": 3793,
+      "under300Ratio": 45.4,
+      "over300Ratio": 54.6,
+      "avgPriceManwon": 1001,
       "priceBands": {
-        "300만원 미만": 6203,
-        "300~600만원": 11839,
-        "600~1,000만원": 12770,
-        "1,000~2,000만원": 14883,
-        "2,000만원 이상": 7685
+        "300만원 미만": 1315,
+        "300~600만원": 1426,
+        "600~1,000만원": 1437,
+        "1,000~2,000만원": 1671,
+        "2,000만원 이상": 853
       },
       "bikeTypes": {
-        "스쿠터 · 커미터": 11832,
-        "네이키드 · 로드스터": 5186,
-        "슈퍼스포츠 · 레플리카": 8666,
-        "투어러 · 어드벤처": 5146,
-        "크루저 · 아메리칸": 12237,
-        "클래식 · 스크램블러": 4428,
-        "기타 이륜차": 5885
+        "스쿠터 · 커미터": 1850,
+        "네이키드 · 로드스터": 607,
+        "슈퍼스포츠 · 레플리카": 1018,
+        "투어러 · 어드벤처": 578,
+        "크루저 · 아메리칸": 1360,
+        "클래식 · 스크램블러": 507,
+        "기타 이륜차": 782
       },
       "topRegions": [
         {
           "name": "서울",
-          "count": 17944
+          "count": 2637
         },
         {
           "name": "경기",
-          "count": 10437
-        },
-        {
-          "name": "부산",
-          "count": 5025
+          "count": 1155
         },
         {
           "name": "인천",
-          "count": 3845
+          "count": 609
+        },
+        {
+          "name": "부산",
+          "count": 564
         },
         {
           "name": "대구",
-          "count": 2938
+          "count": 317
         },
         {
           "name": "충북",
-          "count": 1896
+          "count": 209
         },
         {
           "name": "경남",
-          "count": 1745
+          "count": 182
         },
         {
           "name": "충남",
-          "count": 1242
+          "count": 174
         }
       ],
       "topModels": [
         {
           "name": "스트리트 글라이드",
-          "count": 448
+          "count": 48
         },
         {
-          "name": "s1000rr",
-          "count": 350
-        },
-        {
-          "name": "골드윙 1800cc",
-          "count": 294
+          "name": "슈퍼커브 110",
+          "count": 43
         },
         {
           "name": "포르자 350",
-          "count": 285
+          "count": 40
         },
         {
-          "name": "닌자 400",
-          "count": 193
+          "name": "S1000RR",
+          "count": 40
+        },
+        {
+          "name": "골드윙 1800cc",
+          "count": 32
         },
         {
           "name": "포티에잇",
-          "count": 187
-        },
-        {
-          "name": "브레이크아웃 114",
-          "count": 182
+          "count": 28
         },
         {
           "name": "인터셉터 650",
-          "count": 165
+          "count": 27
         },
         {
-          "name": "TMAX 560",
-          "count": 161
+          "name": "닌자 400",
+          "count": 27
         },
         {
-          "name": "스바르트필렌 401",
-          "count": 149
+          "name": "브레이크아웃 114",
+          "count": 25
+        },
+        {
+          "name": "닌자 650",
+          "count": 25
         }
       ],
       "topBrands": [
         {
           "name": "혼다",
-          "count": 10664
+          "count": 1492
         },
         {
           "name": "할리데이비슨",
-          "count": 9638
+          "count": 1066
         },
         {
           "name": "BMW",
-          "count": 8504
+          "count": 960
         },
         {
           "name": "야마하",
-          "count": 6503
-        },
-        {
-          "name": "가와사키",
-          "count": 3136
+          "count": 874
         },
         {
           "name": "스즈키",
-          "count": 3018
+          "count": 377
+        },
+        {
+          "name": "가와사키",
+          "count": 355
         },
         {
           "name": "두카티",
-          "count": 2307
+          "count": 270
         },
         {
           "name": "베스파",
-          "count": 1976
+          "count": 259
         }
       ]
     },
     "reitwagen": {
-      "sampleSize": 7981,
-      "pricedSampleSize": 7981,
-      "under300Count": 31697,
-      "over300Count": 55649,
+      "sampleSize": 800,
+      "pricedSampleSize": 800,
+      "under300Count": 3202,
+      "over300Count": 5625,
       "under300Ratio": 36.3,
       "over300Ratio": 63.7,
-      "avgPriceManwon": 730,
+      "avgPriceManwon": 725,
       "priceBands": {
-        "300만원 미만": 2068,
-        "300~600만원": 2336,
-        "600~1,000만원": 1766,
-        "1,000~2,000만원": 1418,
-        "2,000만원 이상": 393
+        "300만원 미만": 220,
+        "300~600만원": 222,
+        "600~1,000만원": 174,
+        "1,000~2,000만원": 143,
+        "2,000만원 이상": 41
       },
       "bikeTypes": {
-        "스쿠터 · 커미터": 1975,
-        "네이키드 · 로드스터": 671,
-        "슈퍼스포츠 · 레플리카": 1833,
-        "투어러 · 어드벤처": 347,
-        "크루저 · 아메리칸": 743,
-        "클래식 · 스크램블러": 594,
-        "기타 이륜차": 1818
+        "스쿠터 · 커미터": 193,
+        "네이키드 · 로드스터": 77,
+        "슈퍼스포츠 · 레플리카": 168,
+        "투어러 · 어드벤처": 36,
+        "크루저 · 아메리칸": 86,
+        "클래식 · 스크램블러": 58,
+        "기타 이륜차": 182
       },
       "topRegions": [
         {
           "name": "경기",
-          "count": 2438
+          "count": 247
         },
         {
           "name": "서울",
-          "count": 1527
+          "count": 169
         },
         {
           "name": "인천",
-          "count": 1133
+          "count": 93
         },
         {
           "name": "부산",
-          "count": 421
+          "count": 49
         },
         {
           "name": "경남",
-          "count": 353
+          "count": 42
         },
         {
           "name": "대구",
-          "count": 281
+          "count": 28
+        },
+        {
+          "name": "경북",
+          "count": 27
+        },
+        {
+          "name": "강원",
+          "count": 24
+        }
+      ],
+      "topModels": [
+        {
+          "name": "YZF R3",
+          "count": 35
+        },
+        {
+          "name": "슈퍼 커브",
+          "count": 34
+        },
+        {
+          "name": "PCX 125",
+          "count": 27
+        },
+        {
+          "name": "1000 RR",
+          "count": 23
+        },
+        {
+          "name": "포르자 350",
+          "count": 21
+        },
+        {
+          "name": "XMAX 300",
+          "count": 21
+        },
+        {
+          "name": "CBR 650",
+          "count": 20
+        },
+        {
+          "name": "MT 03",
+          "count": 19
+        },
+        {
+          "name": "NMAX 125",
+          "count": 15
+        },
+        {
+          "name": "390 듀크",
+          "count": 15
+        }
+      ],
+      "topBrands": [
+        {
+          "name": "혼다",
+          "count": 221
+        },
+        {
+          "name": "야마하",
+          "count": 149
+        },
+        {
+          "name": "BMW",
+          "count": 85
+        },
+        {
+          "name": "가와사키",
+          "count": 59
+        },
+        {
+          "name": "할리데이비슨",
+          "count": 53
+        },
+        {
+          "name": "스즈키",
+          "count": 44
+        },
+        {
+          "name": "이탈젯/기타수입",
+          "count": 36
+        },
+        {
+          "name": "아프릴리아",
+          "count": 20
+        }
+      ]
+    },
+    "passo": {
+      "sampleSize": 784,
+      "pricedSampleSize": 784,
+      "under300Count": 2879,
+      "over300Count": 7441,
+      "under300Ratio": 27.9,
+      "over300Ratio": 72.1,
+      "avgPriceManwon": 1318,
+      "priceBands": {
+        "300만원 미만": 123,
+        "300~600만원": 147,
+        "600~1,000만원": 141,
+        "1,000~2,000만원": 210,
+        "2,000만원 이상": 163
+      },
+      "bikeTypes": {
+        "스쿠터 · 커미터": 109,
+        "네이키드 · 로드스터": 41,
+        "슈퍼스포츠 · 레플리카": 93,
+        "투어러 · 어드벤처": 91,
+        "크루저 · 아메리칸": 164,
+        "클래식 · 스크램블러": 40,
+        "기타 이륜차": 246
+      },
+      "topRegions": [
+        {
+          "name": "서울",
+          "count": 220
+        },
+        {
+          "name": "부산",
+          "count": 209
+        },
+        {
+          "name": "경기",
+          "count": 124
+        },
+        {
+          "name": "인천",
+          "count": 54
+        },
+        {
+          "name": "대전",
+          "count": 32
+        },
+        {
+          "name": "경남",
+          "count": 26
+        },
+        {
+          "name": "대구",
+          "count": 24
+        },
+        {
+          "name": "충북",
+          "count": 24
+        }
+      ],
+      "topModels": [
+        {
+          "name": "스즈끼 GSX",
+          "count": 20
+        },
+        {
+          "name": "PCX 125",
+          "count": 19
+        },
+        {
+          "name": "로드 글라이드",
+          "count": 15
+        },
+        {
+          "name": "DNA모터스 대림",
+          "count": 14
+        },
+        {
+          "name": "MAX 125",
+          "count": 13
+        },
+        {
+          "name": "YZF R3",
+          "count": 13
+        },
+        {
+          "name": "1000 RR",
+          "count": 12
+        },
+        {
+          "name": "슈퍼 커브",
+          "count": 11
+        },
+        {
+          "name": "KR S&T",
+          "count": 11
+        },
+        {
+          "name": "스트리트 글라이드",
+          "count": 10
+        }
+      ],
+      "topBrands": [
+        {
+          "name": "혼다",
+          "count": 129
+        },
+        {
+          "name": "할리데이비슨",
+          "count": 123
+        },
+        {
+          "name": "BMW",
+          "count": 114
+        },
+        {
+          "name": "야마하",
+          "count": 94
+        },
+        {
+          "name": "스즈키",
+          "count": 59
+        },
+        {
+          "name": "가와사키",
+          "count": 49
+        },
+        {
+          "name": "두카티",
+          "count": 38
+        },
+        {
+          "name": "이탈젯/기타수입",
+          "count": 22
+        }
+      ]
+    },
+    "batumae": {
+      "sampleSize": 5167,
+      "pricedSampleSize": 1284,
+      "under300Count": 1018,
+      "over300Count": 4149,
+      "under300Ratio": 19.7,
+      "over300Ratio": 80.3,
+      "avgPriceManwon": 1010,
+      "priceBands": {
+        "300만원 미만": 205,
+        "300~600만원": 317,
+        "600~1,000만원": 301,
+        "1,000~2,000만원": 300,
+        "2,000만원 이상": 161
+      },
+      "bikeTypes": {
+        "스쿠터 · 커미터": 918,
+        "네이키드 · 로드스터": 703,
+        "슈퍼스포츠 · 레플리카": 963,
+        "투어러 · 어드벤처": 365,
+        "크루저 · 아메리칸": 658,
+        "클래식 · 스크램블러": 589,
+        "기타 이륜차": 971
+      },
+      "topRegions": [
+        {
+          "name": "경기",
+          "count": 1112
+        },
+        {
+          "name": "서울",
+          "count": 957
+        },
+        {
+          "name": "부산",
+          "count": 508
+        },
+        {
+          "name": "인천",
+          "count": 322
+        },
+        {
+          "name": "충남",
+          "count": 162
+        },
+        {
+          "name": "대구",
+          "count": 148
+        },
+        {
+          "name": "경남",
+          "count": 112
+        },
+        {
+          "name": "울산",
+          "count": 107
+        }
+      ],
+      "topModels": [
+        {
+          "name": "cb650r e클러치",
+          "count": 38
+        },
+        {
+          "name": "슈퍼커브 110",
+          "count": 36
+        },
+        {
+          "name": "YZF- 슈퍼스포츠",
+          "count": 28
+        },
+        {
+          "name": "R3",
+          "count": 27
+        },
+        {
+          "name": "Z900 스포츠",
+          "count": 27
+        },
+        {
+          "name": "CB1000R 스포츠",
+          "count": 25
+        },
+        {
+          "name": "CBR650R",
+          "count": 25
+        },
+        {
+          "name": "F900XR 스포츠",
+          "count": 24
+        },
+        {
+          "name": "S1000R 슈퍼네이키드",
+          "count": 22
+        },
+        {
+          "name": "CBR650R 스포츠레플리카",
+          "count": 22
+        }
+      ],
+      "topBrands": [
+        {
+          "name": "혼다",
+          "count": 1160
+        },
+        {
+          "name": "BMW",
+          "count": 850
+        },
+        {
+          "name": "야마하",
+          "count": 654
+        },
+        {
+          "name": "할리데이비슨",
+          "count": 498
+        },
+        {
+          "name": "가와사키",
+          "count": 351
+        },
+        {
+          "name": "스즈키",
+          "count": 256
+        },
+        {
+          "name": "두카티",
+          "count": 176
+        },
+        {
+          "name": "트라이엄프",
+          "count": 147
+        }
+      ]
+    },
+    "kcar": {
+      "notOperated": true,
+      "sampleSize": 0
+    }
+  },
+  "ALL": {
+    "updatedAt": "ALL",
+    "daangn": {
+      "sampleSize": 60082,
+      "pricedSampleSize": 60082,
+      "under300Count": 26173,
+      "over300Count": 37453,
+      "under300Ratio": 41.1,
+      "over300Ratio": 58.9,
+      "avgPriceManwon": 1092,
+      "priceBands": {
+        "300만원 미만": 7518,
+        "300~600만원": 13265,
+        "600~1,000만원": 14207,
+        "1,000~2,000만원": 16554,
+        "2,000만원 이상": 8538
+      },
+      "bikeTypes": {
+        "스쿠터 · 커미터": 13682,
+        "네이키드 · 로드스터": 5793,
+        "슈퍼스포츠 · 레플리카": 9684,
+        "투어러 · 어드벤처": 5724,
+        "크루저 · 아메리칸": 13597,
+        "클래식 · 스크램블러": 4935,
+        "기타 이륜차": 6667
+      },
+      "topRegions": [
+        {
+          "name": "서울",
+          "count": 20581
+        },
+        {
+          "name": "경기",
+          "count": 11592
+        },
+        {
+          "name": "부산",
+          "count": 5589
+        },
+        {
+          "name": "인천",
+          "count": 4454
+        },
+        {
+          "name": "대구",
+          "count": 3255
+        },
+        {
+          "name": "충북",
+          "count": 2105
+        },
+        {
+          "name": "경남",
+          "count": 1927
+        },
+        {
+          "name": "충남",
+          "count": 1416
+        }
+      ],
+      "topModels": [
+        {
+          "name": "스트리트 글라이드",
+          "count": 496
+        },
+        {
+          "name": "s1000rr",
+          "count": 390
+        },
+        {
+          "name": "골드윙 1800cc",
+          "count": 326
+        },
+        {
+          "name": "포르자 350",
+          "count": 325
+        },
+        {
+          "name": "닌자 400",
+          "count": 220
+        },
+        {
+          "name": "포티에잇",
+          "count": 215
+        },
+        {
+          "name": "브레이크아웃 114",
+          "count": 207
+        },
+        {
+          "name": "인터셉터 650",
+          "count": 192
+        },
+        {
+          "name": "슈퍼커브 110",
+          "count": 188
+        },
+        {
+          "name": "닌자 650",
+          "count": 161
+        }
+      ],
+      "topBrands": [
+        {
+          "name": "혼다",
+          "count": 12156
+        },
+        {
+          "name": "할리데이비슨",
+          "count": 10704
+        },
+        {
+          "name": "BMW",
+          "count": 9464
+        },
+        {
+          "name": "야마하",
+          "count": 7377
+        },
+        {
+          "name": "가와사키",
+          "count": 3491
+        },
+        {
+          "name": "스즈키",
+          "count": 3395
+        },
+        {
+          "name": "두카티",
+          "count": 2577
+        },
+        {
+          "name": "베스파",
+          "count": 2235
+        }
+      ]
+    },
+    "reitwagen": {
+      "sampleSize": 8781,
+      "pricedSampleSize": 8781,
+      "under300Count": 34899,
+      "over300Count": 61274,
+      "under300Ratio": 36.3,
+      "over300Ratio": 63.7,
+      "avgPriceManwon": 729,
+      "priceBands": {
+        "300만원 미만": 2288,
+        "300~600만원": 2558,
+        "600~1,000만원": 1940,
+        "1,000~2,000만원": 1561,
+        "2,000만원 이상": 434
+      },
+      "bikeTypes": {
+        "스쿠터 · 커미터": 2168,
+        "네이키드 · 로드스터": 748,
+        "슈퍼스포츠 · 레플리카": 2001,
+        "투어러 · 어드벤처": 383,
+        "크루저 · 아메리칸": 829,
+        "클래식 · 스크램블러": 652,
+        "기타 이륜차": 2000
+      },
+      "topRegions": [
+        {
+          "name": "경기",
+          "count": 2685
+        },
+        {
+          "name": "서울",
+          "count": 1696
+        },
+        {
+          "name": "인천",
+          "count": 1226
+        },
+        {
+          "name": "부산",
+          "count": 470
+        },
+        {
+          "name": "경남",
+          "count": 395
+        },
+        {
+          "name": "대구",
+          "count": 309
         },
         {
           "name": "충북",
           "count": 159
         },
         {
-          "name": "대전",
-          "count": 132
+          "name": "경북",
+          "count": 142
         }
       ],
       "topModels": [
         {
           "name": "YZF R3",
-          "count": 412
+          "count": 447
         },
         {
           "name": "PCX 125",
-          "count": 322
+          "count": 349
         },
         {
           "name": "슈퍼 커브",
-          "count": 266
+          "count": 300
         },
         {
           "name": "포르자 350",
-          "count": 248
+          "count": 269
         },
         {
           "name": "XMAX 300",
-          "count": 241
+          "count": 262
         },
         {
           "name": "CBR 650",
-          "count": 238
+          "count": 258
         },
         {
           "name": "1000 RR",
-          "count": 214
+          "count": 237
         },
         {
           "name": "NMAX 125",
-          "count": 167
+          "count": 182
+        },
+        {
+          "name": "MT 03",
+          "count": 87
         },
         {
           "name": "레블 500",
           "count": 83
-        },
-        {
-          "name": "MT 03",
-          "count": 68
         }
       ],
       "topBrands": [
         {
           "name": "혼다",
-          "count": 2171
+          "count": 2392
         },
         {
           "name": "야마하",
-          "count": 1549
+          "count": 1698
         },
         {
           "name": "BMW",
-          "count": 818
+          "count": 903
         },
         {
           "name": "가와사키",
-          "count": 601
+          "count": 660
         },
         {
           "name": "스즈키",
-          "count": 501
+          "count": 545
         },
         {
           "name": "할리데이비슨",
-          "count": 487
+          "count": 540
         },
         {
           "name": "이탈젯/기타수입",
-          "count": 295
+          "count": 331
         },
         {
           "name": "로얄엔필드",
@@ -5635,192 +6182,192 @@
       ]
     },
     "passo": {
-      "sampleSize": 7853,
-      "pricedSampleSize": 7853,
-      "under300Count": 28360,
-      "over300Count": 73379,
+      "sampleSize": 8637,
+      "pricedSampleSize": 8637,
+      "under300Count": 31239,
+      "over300Count": 80820,
       "under300Ratio": 27.9,
       "over300Ratio": 72.1,
-      "avgPriceManwon": 1309,
+      "avgPriceManwon": 1310,
       "priceBands": {
-        "300만원 미만": 1252,
-        "300~600만원": 1560,
-        "600~1,000만원": 1308,
-        "1,000~2,000만원": 2069,
-        "2,000만원 이상": 1664
+        "300만원 미만": 1375,
+        "300~600만원": 1707,
+        "600~1,000만원": 1449,
+        "1,000~2,000만원": 2279,
+        "2,000만원 이상": 1827
       },
       "bikeTypes": {
-        "스쿠터 · 커미터": 1088,
-        "네이키드 · 로드스터": 427,
-        "슈퍼스포츠 · 레플리카": 786,
-        "투어러 · 어드벤처": 801,
-        "크루저 · 아메리칸": 1787,
-        "클래식 · 스크램블러": 374,
-        "기타 이륜차": 2590
+        "스쿠터 · 커미터": 1197,
+        "네이키드 · 로드스터": 468,
+        "슈퍼스포츠 · 레플리카": 879,
+        "투어러 · 어드벤처": 892,
+        "크루저 · 아메리칸": 1951,
+        "클래식 · 스크램블러": 414,
+        "기타 이륜차": 2836
       },
       "topRegions": [
         {
           "name": "부산",
-          "count": 2247
+          "count": 2456
         },
         {
           "name": "서울",
-          "count": 2021
+          "count": 2241
         },
         {
           "name": "경기",
-          "count": 1454
+          "count": 1578
         },
         {
           "name": "인천",
-          "count": 551
+          "count": 605
         },
         {
           "name": "경남",
-          "count": 290
+          "count": 316
         },
         {
           "name": "대전",
-          "count": 272
+          "count": 304
         },
         {
           "name": "대구",
-          "count": 206
+          "count": 230
         },
         {
           "name": "충북",
-          "count": 204
+          "count": 228
         }
       ],
       "topModels": [
         {
           "name": "스즈끼 GSX",
-          "count": 204
+          "count": 224
         },
         {
           "name": "PCX 125",
-          "count": 192
+          "count": 211
         },
         {
           "name": "로드 글라이드",
-          "count": 152
+          "count": 167
         },
         {
           "name": "슈퍼 커브",
-          "count": 137
+          "count": 148
         },
         {
           "name": "DNA모터스 대림",
-          "count": 119
+          "count": 133
         },
         {
           "name": "스트리트 글라이드",
-          "count": 109
+          "count": 119
         },
         {
           "name": "MAX 125",
-          "count": 95
+          "count": 108
         },
         {
           "name": "1000 RR",
-          "count": 70
-        },
-        {
-          "name": "스즈끼 버그만",
-          "count": 45
+          "count": 82
         },
         {
           "name": "YZF R3",
-          "count": 40
+          "count": 53
+        },
+        {
+          "name": "KR S&T",
+          "count": 48
         }
       ],
       "topBrands": [
         {
           "name": "혼다",
-          "count": 1381
+          "count": 1510
         },
         {
           "name": "할리데이비슨",
-          "count": 1373
+          "count": 1496
         },
         {
           "name": "BMW",
-          "count": 998
+          "count": 1112
         },
         {
           "name": "야마하",
-          "count": 800
+          "count": 894
         },
         {
           "name": "스즈키",
-          "count": 549
+          "count": 608
         },
         {
           "name": "가와사키",
-          "count": 458
+          "count": 507
         },
         {
           "name": "두카티",
-          "count": 313
+          "count": 351
         },
         {
           "name": "이탈젯/기타수입",
-          "count": 137
+          "count": 159
         }
       ]
     },
     "batumae": {
-      "sampleSize": 52502,
-      "pricedSampleSize": 13233,
-      "under300Count": 10234,
-      "over300Count": 42275,
+      "sampleSize": 57669,
+      "pricedSampleSize": 14517,
+      "under300Count": 11252,
+      "over300Count": 46424,
       "under300Ratio": 19.5,
       "over300Ratio": 80.5,
-      "avgPriceManwon": 1017,
+      "avgPriceManwon": 1016,
       "priceBands": {
-        "300만원 미만": 2065,
-        "300~600만원": 3164,
-        "600~1,000만원": 3177,
-        "1,000~2,000만원": 3142,
-        "2,000만원 이상": 1685
+        "300만원 미만": 2270,
+        "300~600만원": 3481,
+        "600~1,000만원": 3478,
+        "1,000~2,000만원": 3442,
+        "2,000만원 이상": 1846
       },
       "bikeTypes": {
-        "스쿠터 · 커미터": 9447,
-        "네이키드 · 로드스터": 7268,
-        "슈퍼스포츠 · 레플리카": 9708,
-        "투어러 · 어드벤처": 3861,
-        "크루저 · 아메리칸": 6799,
-        "클래식 · 스크램블러": 5642,
-        "기타 이륜차": 9777
+        "스쿠터 · 커미터": 10365,
+        "네이키드 · 로드스터": 7971,
+        "슈퍼스포츠 · 레플리카": 10671,
+        "투어러 · 어드벤처": 4226,
+        "크루저 · 아메리칸": 7457,
+        "클래식 · 스크램블러": 6231,
+        "기타 이륜차": 10748
       },
       "topRegions": [
         {
           "name": "경기",
-          "count": 11161
+          "count": 12273
         },
         {
           "name": "서울",
-          "count": 9749
+          "count": 10706
         },
         {
           "name": "부산",
-          "count": 4425
+          "count": 4933
         },
         {
           "name": "인천",
-          "count": 3372
+          "count": 3694
         },
         {
           "name": "충남",
-          "count": 1610
+          "count": 1772
         },
         {
           "name": "대구",
-          "count": 1477
+          "count": 1625
         },
         {
           "name": "울산",
-          "count": 1054
+          "count": 1161
         },
         {
           "name": "강원",
@@ -5830,77 +6377,77 @@
       "topModels": [
         {
           "name": "CB650r e클러치",
-          "count": 365
+          "count": 403
         },
         {
           "name": "슈퍼커브 110",
-          "count": 339
+          "count": 375
         },
         {
           "name": "r3",
-          "count": 294
+          "count": 321
         },
         {
           "name": "Z900 스포츠",
-          "count": 278
+          "count": 305
         },
         {
           "name": "YZF- 슈퍼스포츠",
-          "count": 270
+          "count": 298
         },
         {
           "name": "F900XR 스포츠",
-          "count": 242
+          "count": 266
+        },
+        {
+          "name": "CB1000R 스포츠",
+          "count": 194
         },
         {
           "name": "테크맥스560 스포츠",
           "count": 179
         },
         {
-          "name": "CB1000R 스포츠",
-          "count": 169
-        },
-        {
           "name": "CB125R",
           "count": 104
         },
         {
-          "name": "R1250RT 스포츠",
-          "count": 99
+          "name": "CBR650R 스포츠레플리카",
+          "count": 104
         }
       ],
       "topBrands": [
         {
           "name": "혼다",
-          "count": 11675
+          "count": 12835
         },
         {
           "name": "BMW",
-          "count": 8596
+          "count": 9446
         },
         {
           "name": "야마하",
-          "count": 6604
+          "count": 7258
         },
         {
           "name": "할리데이비슨",
-          "count": 5145
+          "count": 5643
         },
         {
           "name": "가와사키",
-          "count": 3633
+          "count": 3984
         },
         {
           "name": "스즈키",
-          "count": 2669
+          "count": 2925
         },
         {
           "name": "두카티",
-          "count": 1865
+          "count": 2041
         },
         {
           "name": "트라이엄프",
-          "count": 1064
+          "count": 1211
         }
       ]
     },
