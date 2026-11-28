@@ -130,5 +130,16 @@
     "reitwagenCount": 800,
     "passoCount": 783,
     "batumaeCount": 5096
+  },
+  {
+    "date": "2026-11-28",
+    "updatedAt": "2026-11-28 09:00:17",
+    "rawCsvPath": "raw_data/raw_bikes_2026-11-28.csv",
+    "daangnUrlPath": "raw_data/daangn_bike_urls_2026-11-28.csv",
+    "bikeCount": 12730,
+    "daangnCount": 6125,
+    "reitwagenCount": 800,
+    "passoCount": 785,
+    "batumaeCount": 5020
   }
 ]
